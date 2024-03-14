@@ -1,0 +1,214 @@
+python ./make-wrappers.py --xlate --arch=x86_64 --f77symbol symbol_ mpi.protos.txt make-wrappers.py
+MPI Wrapper Generator ($Revision$)
+-----*----- Parsing input file
+-----*----- Parsing completed:  212  functions found.
+-----*----- Beginning parameter optimization
+-----*----- Generating structure files
+-----*----- Generating profiling wrappers
+   Wrapped MPI_Accumulate
+   Wrapped MPI_Allgather
+   Wrapped MPI_Allgatherv
+   Wrapped MPI_Allreduce
+   Wrapped MPI_Alltoall
+   Wrapped MPI_Alltoallv
+   Wrapped MPI_Barrier
+   Wrapped MPI_Bcast
+   Wrapped MPI_Bsend
+   Wrapped MPI_Bsend_init
+   Wrapped MPI_Buffer_attach
+   Wrapped MPI_Buffer_detach
+   Wrapped MPI_Cancel
+   Wrapped MPI_Cart_coords
+   Wrapped MPI_Cart_create
+   Wrapped MPI_Cart_get
+   Wrapped MPI_Cart_map
+   Wrapped MPI_Cart_rank
+   Wrapped MPI_Cart_shift
+   Wrapped MPI_Cart_sub
+   Wrapped MPI_Cartdim_get
+   Wrapped MPI_Comm_create
+   Wrapped MPI_Comm_create_keyval
+   Wrapped MPI_Comm_delete_attr
+   Wrapped MPI_Comm_dup
+   Wrapped MPI_Comm_free
+   Wrapped MPI_Comm_free_keyval
+   Wrapped MPI_Comm_get_attr
+   Wrapped MPI_Comm_group
+   Wrapped MPI_Comm_remote_group
+   Wrapped MPI_Comm_remote_size
+   Wrapped MPI_Comm_set_attr
+   Wrapped MPI_Comm_split
+   Wrapped MPI_Comm_test_inter
+   Wrapped MPI_Compare_and_swap
+   Wrapped MPI_Dims_create
+   Wrapped MPI_Error_class
+   Wrapped MPI_Fetch_and_op
+   Wrapped MPI_File_close
+   Wrapped MPI_File_delete
+   Wrapped MPI_File_get_amode
+   Wrapped MPI_File_get_byte_offset
+   Wrapped MPI_File_get_group
+   Wrapped MPI_File_get_info
+   Wrapped MPI_File_get_position
+   Wrapped MPI_File_get_size
+   Wrapped MPI_File_get_view
+   Wrapped MPI_File_open
+   Wrapped MPI_File_preallocate
+   Wrapped MPI_File_read
+   Wrapped MPI_File_read_all
+   Wrapped MPI_File_read_at
+   Wrapped MPI_File_read_at_all
+   Wrapped MPI_File_seek
+   Wrapped MPI_File_set_info
+   Wrapped MPI_File_set_size
+   Wrapped MPI_File_set_view
+   Wrapped MPI_File_sync
+   Wrapped MPI_File_write
+   Wrapped MPI_File_write_all
+   Wrapped MPI_File_write_at
+   Wrapped MPI_File_write_at_all
+   Wrapped MPI_Gather
+   Wrapped MPI_Gatherv
+   Wrapped MPI_Get
+   Wrapped MPI_Get_accumulate
+   Wrapped MPI_Graph_create
+   Wrapped MPI_Graph_get
+   Wrapped MPI_Graph_map
+   Wrapped MPI_Graph_neighbors
+   Wrapped MPI_Graph_neighbors_count
+   Wrapped MPI_Graphdims_get
+   Wrapped MPI_Group_compare
+   Wrapped MPI_Group_difference
+   Wrapped MPI_Group_excl
+   Wrapped MPI_Group_free
+   Wrapped MPI_Group_incl
+   Wrapped MPI_Group_intersection
+   Wrapped MPI_Group_translate_ranks
+   Wrapped MPI_Group_union
+   Wrapped MPI_Iallgather
+   Wrapped MPI_Iallgatherv
+   Wrapped MPI_Iallreduce
+   Wrapped MPI_Ialltoall
+   Wrapped MPI_Ialltoallv
+   Wrapped MPI_Ialltoallw
+   Wrapped MPI_Ibarrier
+   Wrapped MPI_Ibcast
+   Wrapped MPI_Ibsend
+   Wrapped MPI_Iexscan
+   Wrapped MPI_Igather
+   Wrapped MPI_Igatherv
+   Wrapped MPI_Intercomm_create
+   Wrapped MPI_Intercomm_merge
+   Wrapped MPI_Iprobe
+   Wrapped MPI_Irecv
+   Wrapped MPI_Ireduce
+   Wrapped MPI_Ireduce_scatter
+   Wrapped MPI_Ireduce_scatter_block
+   Wrapped MPI_Irsend
+   Wrapped MPI_Iscan
+   Wrapped MPI_Iscatter
+   Wrapped MPI_Iscatterv
+   Wrapped MPI_Isend
+   Wrapped MPI_Issend
+   Wrapped MPI_Pack
+   Wrapped MPI_Probe
+   Wrapped MPI_Put
+   Wrapped MPI_Raccumulate
+   Wrapped MPI_Recv
+   Wrapped MPI_Recv_init
+   Wrapped MPI_Reduce
+   Wrapped MPI_Reduce_scatter
+   Wrapped MPI_Request_free
+   Wrapped MPI_Rget
+   Wrapped MPI_Rget_accumulate
+   Wrapped MPI_Rput
+   Wrapped MPI_Rsend
+   Wrapped MPI_Rsend_init
+   Wrapped MPI_Scan
+   Wrapped MPI_Scatter
+   Wrapped MPI_Scatterv
+   Wrapped MPI_Send
+   Wrapped MPI_Send_init
+   Wrapped MPI_Sendrecv
+   Wrapped MPI_Sendrecv_replace
+   Wrapped MPI_Ssend
+   Wrapped MPI_Ssend_init
+   Wrapped MPI_Start
+   Wrapped MPI_Startall
+   Wrapped MPI_Test
+   Wrapped MPI_Testall
+   Wrapped MPI_Testany
+   Wrapped MPI_Testsome
+   Wrapped MPI_Topo_test
+   Wrapped MPI_Type_commit
+   Wrapped MPI_Type_free
+   Wrapped MPI_Type_get_contents
+   Wrapped MPI_Type_get_envelope
+   Wrapped MPI_Unpack
+   Wrapped MPI_Wait
+   Wrapped MPI_Waitall
+   Wrapped MPI_Waitany
+   Wrapped MPI_Waitsome
+   Wrapped MPI_Win_allocate
+   Wrapped MPI_Win_allocate_shared
+   Wrapped MPI_Win_attach
+   Wrapped MPI_Win_complete
+   Wrapped MPI_Win_create
+   Wrapped MPI_Win_create_dynamic
+   Wrapped MPI_Win_detach
+   Wrapped MPI_Win_fence
+   Wrapped MPI_Win_flush
+   Wrapped MPI_Win_flush_all
+   Wrapped MPI_Win_flush_local
+   Wrapped MPI_Win_flush_local_all
+   Wrapped MPI_Win_free
+   Wrapped MPI_Win_get_group
+   Wrapped MPI_Win_get_info
+   Wrapped MPI_Win_lock
+   Wrapped MPI_Win_lock_all
+   Wrapped MPI_Win_post
+   Wrapped MPI_Win_set_info
+   Wrapped MPI_Win_shared_query
+   Wrapped MPI_Win_start
+   Wrapped MPI_Win_sync
+   Wrapped MPI_Win_test
+   Wrapped MPI_Win_unlock
+   Wrapped MPI_Win_unlock_all
+   Wrapped MPI_Win_wait
+-----*----- Generating the lookup table
+mpicc -g -O2 -fpic -DPIC -I. -DX86_64 -DLinux -c diag_msgs.c -o diag_msgs.o
+mpicc -g -O2 -fpic -DPIC -I. -DX86_64 -DLinux -c mpiP-hash.c -o mpiP-hash.o
+mpicc -g -O2 -fpic -DPIC -I. -DX86_64 -DLinux -c mpiP-callsites.c -o mpiP-callsites.o
+mpiP-callsites.c: In function ‘mpiPi_backtrace’:
+mpiP-callsites.c:108:12: warning: assignment discards ‘const’ qualifier from pointer target type [-Wdiscarded-qualifiers]
+  108 |       path = dwfl_lineinfo(line, &addr, &Lineid, NULL,NULL,NULL);
+      |            ^
+mpicc -g -O2 -fpic -DPIC -I. -DX86_64 -DLinux -c mpiP-stats.c -o mpiP-stats.o
+mpicc -g -O2 -fpic -DPIC -I. -DX86_64 -DLinux -c mpiP-mt-stats.c -o mpiP-mt-stats.o
+mpicc -g -O2 -fpic -DPIC -I. -DX86_64 -DLinux -c mpiP-tslist.c -o mpiP-tslist.o
+mpicc -g -O2 -fpic -DPIC -I. -DX86_64 -DLinux -c glob.c -o glob.o
+mpicc -g -O2 -fpic -DPIC -I. -DX86_64 -DLinux -c mpiP-wrappers.c -o mpiP-wrappers.o
+mpicc -g -O2 -fpic -DPIC -I. -DX86_64 -DLinux -c wrappers_special.c -o wrappers_special.o
+mpicc -g -O2 -fpic -DPIC -I. -DX86_64 -DLinux -c mpiPi.c -o mpiPi.o
+mpicc -g -O2 -fpic -DPIC -I. -DX86_64 -DLinux -c util.c -o util.o
+mpicc -g -O2 -fpic -DPIC -I. -DX86_64 -DLinux -c lookup.c -o lookup.o
+mpicc -g -O2 -fpic -DPIC -I. -DX86_64 -DLinux -c report.c -o report.o
+mpicc -g -O2 -fpic -DPIC -I. -DX86_64 -DLinux -c pcontrol.c -o pcontrol.o
+mpicc -g -O2 -fpic -DPIC -I. -DX86_64 -DLinux -c mpiP-API.c -o mpiP-API.o
+mpicc -g -O2 -fpic -DPIC -I. -DX86_64 -DLinux -c record_stack.c -o record_stack.o
+mpicc -g -O2 -fpic -DPIC -I. -DX86_64 -DLinux -c pc_lookup.c -o pc_lookup.o
+mpicc -shared -o libmpiP.so diag_msgs.o mpiP-hash.o mpiP-callsites.o mpiP-stats.o mpiP-mt-stats.o mpiP-tslist.o glob.o mpiP-wrappers.o wrappers_special.o mpiPi.o util.o lookup.o report.o pcontrol.o mpiP-API.o record_stack.o pc_lookup.o -v  -lm  -lbfd  -lz -liberty -lunwind -ldw
+mpicc for MPICH version 4.1
+Using built-in specs.
+COLLECT_GCC=gcc
+COLLECT_LTO_WRAPPER=/usr/lib/gcc/x86_64-linux-gnu/10/lto-wrapper
+Target: x86_64-linux-gnu
+Configured with: ../src/configure -v --with-pkgversion='Ubuntu 10.5.0-1ubuntu1~22.04' --with-bugurl=file:///usr/share/doc/gcc-10/README.Bugs --enable-languages=c,ada,c++,go,brig,d,fortran,objc,obj-c++,m2 --prefix=/usr --with-gcc-major-version-only --program-suffix=-10 --program-prefix=x86_64-linux-gnu- --enable-shared --enable-linker-build-id --libexecdir=/usr/lib --without-included-gettext --enable-threads=posix --libdir=/usr/lib --enable-nls --enable-bootstrap --enable-clocale=gnu --enable-libstdcxx-debug --enable-libstdcxx-time=yes --with-default-libstdcxx-abi=new --enable-gnu-unique-object --disable-vtable-verify --enable-plugin --enable-default-pie --with-system-zlib --enable-libphobos-checking=release --with-target-system-zlib=auto --enable-objc-gc=auto --enable-multiarch --disable-werror --with-arch-32=i686 --with-abi=m64 --with-multilib-list=m32,m64,mx32 --enable-multilib --with-tune=generic --enable-offload-targets=hsa --without-cuda-driver --enable-checking=release --build=x86_64-linux-gnu --host=x86_64-linux-gnu --target=x86_64-linux-gnu --with-build-config=bootstrap-lto-lean --enable-link-mutex
+Thread model: posix
+Supported LTO compression algorithms: zlib zstd
+gcc version 10.5.0 (Ubuntu 10.5.0-1ubuntu1~22.04) 
+COMPILER_PATH=/usr/lib/gcc/x86_64-linux-gnu/10/:/usr/lib/gcc/x86_64-linux-gnu/10/:/usr/lib/gcc/x86_64-linux-gnu/:/usr/lib/gcc/x86_64-linux-gnu/10/:/usr/lib/gcc/x86_64-linux-gnu/
+LIBRARY_PATH=/usr/lib/gcc/x86_64-linux-gnu/10/:/usr/lib/gcc/x86_64-linux-gnu/10/../../../x86_64-linux-gnu/:/usr/lib/gcc/x86_64-linux-gnu/10/../../../../lib/:/lib/x86_64-linux-gnu/:/lib/../lib/:/usr/lib/x86_64-linux-gnu/:/usr/lib/../lib/:/usr/lib/gcc/x86_64-linux-gnu/10/../../../:/lib/:/usr/lib/
+COLLECT_GCC_OPTIONS='-shared' '-o' 'libmpiP.so' '-v' '-I' '/usr/local/mpich-4.1/include' '-L/usr/local/mpich-4.1/lib' '-mtune=generic' '-march=x86-64'
+ /usr/lib/gcc/x86_64-linux-gnu/10/collect2 -plugin /usr/lib/gcc/x86_64-linux-gnu/10/liblto_plugin.so -plugin-opt=/usr/lib/gcc/x86_64-linux-gnu/10/lto-wrapper -plugin-opt=-fresolution=/tmp/ccGsUbti.res -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lc -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lgcc_s --build-id --eh-frame-hdr -m elf_x86_64 --hash-style=gnu --as-needed -shared -z relro -o libmpiP.so /usr/lib/gcc/x86_64-linux-gnu/10/../../../x86_64-linux-gnu/crti.o /usr/lib/gcc/x86_64-linux-gnu/10/crtbeginS.o -L/usr/local/mpich-4.1/lib -L/usr/lib/gcc/x86_64-linux-gnu/10 -L/usr/lib/gcc/x86_64-linux-gnu/10/../../../x86_64-linux-gnu -L/usr/lib/gcc/x86_64-linux-gnu/10/../../../../lib -L/lib/x86_64-linux-gnu -L/lib/../lib -L/usr/lib/x86_64-linux-gnu -L/usr/lib/../lib -L/usr/lib/gcc/x86_64-linux-gnu/10/../../.. diag_msgs.o mpiP-hash.o mpiP-callsites.o mpiP-stats.o mpiP-mt-stats.o mpiP-tslist.o glob.o mpiP-wrappers.o wrappers_special.o mpiPi.o util.o lookup.o report.o pcontrol.o mpiP-API.o record_stack.o pc_lookup.o -lm -lbfd -lz -liberty -lunwind -ldw -rpath /usr/local/mpich-4.1/lib --enable-new-dtags -lmpi -lgcc --push-state --as-needed -lgcc_s --pop-state -lc -lgcc --push-state --as-needed -lgcc_s --pop-state /usr/lib/gcc/x86_64-linux-gnu/10/crtendS.o /usr/lib/gcc/x86_64-linux-gnu/10/../../../x86_64-linux-gnu/crtn.o
+COLLECT_GCC_OPTIONS='-shared' '-o' 'libmpiP.so' '-v' '-I' '/usr/local/mpich-4.1/include' '-L/usr/local/mpich-4.1/lib' '-mtune=generic' '-march=x86-64'

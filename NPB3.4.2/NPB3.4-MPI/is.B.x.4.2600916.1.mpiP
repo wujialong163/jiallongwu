@@ -1,0 +1,187 @@
+@ mpiP
+@ Command : ./bin/is.B.x 
+@ Version                  : 3.5.0
+@ MPIP Build date          : Aug 29 2023, 03:05:48
+@ Start time               : 2023 08 29 03:07:45
+@ Stop time                : 2023 08 29 03:07:47
+@ Timer Used               : PMPI_Wtime
+@ MPIP env var             : [null]
+@ Collector Rank           : 0
+@ Collector PID            : 2600916
+@ Final Output Dir         : .
+@ Report generation        : Single collector task
+@ MPI Task Assignment      : 0 X33
+@ MPI Task Assignment      : 1 X33
+@ MPI Task Assignment      : 2 X33
+@ MPI Task Assignment      : 3 X33
+
+---------------------------------------------------------------------------
+@--- MPI Time (seconds) ---------------------------------------------------
+---------------------------------------------------------------------------
+Task    AppTime    MPITime     MPI%
+   0       2.27          0     0.00
+   1       2.27          0     0.00
+   2       2.27          0     0.00
+   3       2.26          0     0.00
+   *       9.08          0     0.00
+---------------------------------------------------------------------------
+@--- Callsites: 49 --------------------------------------------------------
+---------------------------------------------------------------------------
+ ID Lev File/Address        Line Parent_Funct             MPI_Call
+  1   0 0x7f398beca368           [unknown]                Send
+  2   0 0x7f398bebd5f8           [unknown]                Alltoallv
+  3   0 0x7f398bebd148           [unknown]                Allreduce
+  4   0 0x7f398bebd3b8           [unknown]                Alltoall
+  5   0 0x7f398bebf36f           [unknown]                Comm_dup
+  6   0 0x7f398bebd3b8           [unknown]                Alltoall
+  7   0 0x7f398bec8d28           [unknown]                Reduce
+  8   0 0x7f398bebd148           [unknown]                Allreduce
+  9   0 0x7f398bebd5f8           [unknown]                Alltoallv
+ 10   0 0x7f398bebd9a8           [unknown]                Bcast
+ 11   0 0x7f398bec8d28           [unknown]                Reduce
+ 12   0 0x7f81601e1a88           [unknown]                Irecv
+ 13   0 0x7f81601e5368           [unknown]                Send
+ 14   0 0x7f81601d8148           [unknown]                Allreduce
+ 15   0 0x7f81601d85f8           [unknown]                Alltoallv
+ 16   0 0x7f81601d83b8           [unknown]                Alltoall
+ 17   0 0x7f81601da36f           [unknown]                Comm_dup
+ 18   0 0x7f81601e714f           [unknown]                Wait
+ 19   0 0x7f81601e3d28           [unknown]                Reduce
+ 20   0 0x7f81601d8148           [unknown]                Allreduce
+ 21   0 0x7f81601d83b8           [unknown]                Alltoall
+ 22   0 0x7f81601d85f8           [unknown]                Alltoallv
+ 23   0 0x7f81601d89a8           [unknown]                Bcast
+ 24   0 0x7f81601e3d28           [unknown]                Reduce
+ 25   0 0x7f7b879ffa88           [unknown]                Irecv
+ 26   0 0x7f7b879f6148           [unknown]                Allreduce
+ 27   0 0x7f7b879f65f8           [unknown]                Alltoallv
+ 28   0 0x7f7b879f63b8           [unknown]                Alltoall
+ 29   0 0x7f7b879f836f           [unknown]                Comm_dup
+ 30   0 0x7f7b87a0514f           [unknown]                Wait
+ 31   0 0x7f7b87a01d28           [unknown]                Reduce
+ 32   0 0x7f7b879f6148           [unknown]                Allreduce
+ 33   0 0x7f7b879f63b8           [unknown]                Alltoall
+ 34   0 0x7f7b879f65f8           [unknown]                Alltoallv
+ 35   0 0x7f7b879f69a8           [unknown]                Bcast
+ 36   0 0x7f7b87a01d28           [unknown]                Reduce
+ 37   0 0x7f58b61efa88           [unknown]                Irecv
+ 38   0 0x7f58b61f3368           [unknown]                Send
+ 39   0 0x7f58b61e6148           [unknown]                Allreduce
+ 40   0 0x7f58b61e63b8           [unknown]                Alltoall
+ 41   0 0x7f58b61e65f8           [unknown]                Alltoallv
+ 42   0 0x7f58b61e836f           [unknown]                Comm_dup
+ 43   0 0x7f58b61f514f           [unknown]                Wait
+ 44   0 0x7f58b61f1d28           [unknown]                Reduce
+ 45   0 0x7f58b61e6148           [unknown]                Allreduce
+ 46   0 0x7f58b61e65f8           [unknown]                Alltoallv
+ 47   0 0x7f58b61e63b8           [unknown]                Alltoall
+ 48   0 0x7f58b61e69a8           [unknown]                Bcast
+ 49   0 0x7f58b61f1d28           [unknown]                Reduce
+---------------------------------------------------------------------------
+@--- Aggregate Time (top twenty, descending, milliseconds) ----------------
+---------------------------------------------------------------------------
+Call                 Site       Time    App%    MPI%      Count    COV
+---------------------------------------------------------------------------
+@--- Callsite Time statistics (all, milliseconds): 49 ---------------------
+---------------------------------------------------------------------------
+Name              Site Rank  Count      Max     Mean      Min   App%   MPI%
+Allreduce            3    *      0        0     -nan 1.8e+305   0.00   0.00
+
+Allreduce            8    *      0        0     -nan 1.8e+305   0.00   0.00
+
+Allreduce           14    *      0        0     -nan 1.8e+305   0.00   0.00
+
+Allreduce           20    *      0        0     -nan 1.8e+305   0.00   0.00
+
+Allreduce           26    *      0        0     -nan 1.8e+305   0.00   0.00
+
+Allreduce           32    *      0        0     -nan 1.8e+305   0.00   0.00
+
+Allreduce           39    *      0        0     -nan 1.8e+305   0.00   0.00
+
+Allreduce           45    *      0        0     -nan 1.8e+305   0.00   0.00
+
+Alltoall             4    *      0        0     -nan 1.8e+305   0.00   0.00
+
+Alltoall             6    *      0        0     -nan 1.8e+305   0.00   0.00
+
+Alltoall            16    *      0        0     -nan 1.8e+305   0.00   0.00
+
+Alltoall            21    *      0        0     -nan 1.8e+305   0.00   0.00
+
+Alltoall            28    *      0        0     -nan 1.8e+305   0.00   0.00
+
+Alltoall            33    *      0        0     -nan 1.8e+305   0.00   0.00
+
+Alltoall            40    *      0        0     -nan 1.8e+305   0.00   0.00
+
+Alltoall            47    *      0        0     -nan 1.8e+305   0.00   0.00
+
+Alltoallv            2    *      0        0     -nan 1.8e+305   0.00   0.00
+
+Alltoallv            9    *      0        0     -nan 1.8e+305   0.00   0.00
+
+Alltoallv           15    *      0        0     -nan 1.8e+305   0.00   0.00
+
+Alltoallv           22    *      0        0     -nan 1.8e+305   0.00   0.00
+
+Alltoallv           27    *      0        0     -nan 1.8e+305   0.00   0.00
+
+Alltoallv           34    *      0        0     -nan 1.8e+305   0.00   0.00
+
+Alltoallv           41    *      0        0     -nan 1.8e+305   0.00   0.00
+
+Alltoallv           46    *      0        0     -nan 1.8e+305   0.00   0.00
+
+Bcast               10    *      0        0     -nan 1.8e+305   0.00   0.00
+
+Bcast               23    *      0        0     -nan 1.8e+305   0.00   0.00
+
+Bcast               35    *      0        0     -nan 1.8e+305   0.00   0.00
+
+Bcast               48    *      0        0     -nan 1.8e+305   0.00   0.00
+
+Comm_dup             5    *      0        0     -nan 1.8e+305   0.00   0.00
+
+Comm_dup            17    *      0        0     -nan 1.8e+305   0.00   0.00
+
+Comm_dup            29    *      0        0     -nan 1.8e+305   0.00   0.00
+
+Comm_dup            42    *      0        0     -nan 1.8e+305   0.00   0.00
+
+Irecv               12    *      0        0     -nan 1.8e+305   0.00   0.00
+
+Irecv               25    *      0        0     -nan 1.8e+305   0.00   0.00
+
+Irecv               37    *      0        0     -nan 1.8e+305   0.00   0.00
+
+Reduce               7    *      0        0     -nan 1.8e+305   0.00   0.00
+
+Reduce              11    *      0        0     -nan 1.8e+305   0.00   0.00
+
+Reduce              19    *      0        0     -nan 1.8e+305   0.00   0.00
+
+Reduce              24    *      0        0     -nan 1.8e+305   0.00   0.00
+
+Reduce              31    *      0        0     -nan 1.8e+305   0.00   0.00
+
+Reduce              36    *      0        0     -nan 1.8e+305   0.00   0.00
+
+Reduce              44    *      0        0     -nan 1.8e+305   0.00   0.00
+
+Reduce              49    *      0        0     -nan 1.8e+305   0.00   0.00
+
+Send                 1    *      0        0     -nan 1.8e+305   0.00   0.00
+
+Send                13    *      0        0     -nan 1.8e+305   0.00   0.00
+
+Send                38    *      0        0     -nan 1.8e+305   0.00   0.00
+
+Wait                18    *      0        0     -nan 1.8e+305   0.00   0.00
+
+Wait                30    *      0        0     -nan 1.8e+305   0.00   0.00
+
+Wait                43    *      0        0     -nan 1.8e+305   0.00   0.00
+---------------------------------------------------------------------------
+@--- End of Report --------------------------------------------------------
+---------------------------------------------------------------------------

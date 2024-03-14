@@ -1,0 +1,9 @@
+{
+    "files.associations": {
+        "cstdio": "c",
+        "0-simple-c++.C": "cpp",
+        "mpipi.h": "c",
+        "typeinfo": "c",
+        "hash_proto.h": "c"
+    }
+}

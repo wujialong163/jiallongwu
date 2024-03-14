@@ -1,0 +1,15 @@
+NAME                 COUNT       RANK  send_rank  recv_rank       starttime         endtime            TIME        DATASIZE         BW   callsite
+MPI_Reduce              1          1          1          0      3576.273807     3576.294721        0.020914        4.000000   0.191259   7f4a2ce90ff6 |7f4a2ce81058 |7f4a2ce8ca8a |5598e7cc4aee |7f4a2cb5b1c9 |
+MPI_Wait                1          1         -2         -2      3544.107315     3544.123362        0.016047        0.000000   0.000000   7f4a2ce90ff6 |7f4a2ce84877 |7f4a2ce8e4c7 |5598e7cc3ac9 |5598e7cc4aaa |
+MPI_Send                1          1          1          2      3537.176540     3537.192741        0.016201        4.000000   0.246898   7f4a2ce90ff6 |7f4a2ce82832 |7f4a2ce8d55b |5598e7cc3aac |5598e7cc4aaa |
+MPI_Irecv               1          1          0          1      3530.035451     3530.039886        0.004435        4.000000   0.901917   7f4a2ce90ff6 |7f4a2ce7ead3 |7f4a2ce8b9cd |5598e7cc3a52 |5598e7cc4aaa |
+MPI_Reduce              1          1          1          0      3416.854817     3416.927342        0.072525        8.000000   0.110307   7f4a2ce90ff6 |7f4a2ce81058 |7f4a2ce8ca8a |5598e7cc4aa1 |7f4a2cb5b1c9 |
+MPI_Alltoallv          10          1         -2         -2      2309.481946     3390.254122       62.156309        0.000000   0.000000   7f4a2ce90ff6 |7f4a2ce74a48 |7f4a2ce87a14 |5598e7cc41c0 |5598e7cc4a42 |
+MPI_Alltoall           10          1         -2         -2      2302.577811     3383.647705        0.110942        4.000000   0.662032   7f4a2ce90ff6 |7f4a2ce747e6 |7f4a2ce8792f |5598e7cc40fd |5598e7cc4a42 |
+MPI_Allreduce          10          1         -2         -2      2291.860332     3383.636859       10.279273     4116.000000 149.721727   7f4a2ce90ff6 |7f4a2ce74546 |7f4a2ce87845 |5598e7cc3eca |5598e7cc4a42 |
+MPI_Alltoallv           1          1         -2         -2      2161.414188     2173.465289       12.051101        0.000000   0.000000   7f4a2ce90ff6 |7f4a2ce74a48 |7f4a2ce87a14 |5598e7cc41c0 |5598e7cc49b8 |
+MPI_Alltoall            1          1         -2         -2      2154.407837     2154.444927        0.037090        4.000000   0.107846   7f4a2ce90ff6 |7f4a2ce747e6 |7f4a2ce8792f |5598e7cc40fd |5598e7cc49b8 |
+MPI_Allreduce           1          1         -2         -2      2133.201285     2146.533098       13.331813     4116.000000   0.308735   7f4a2ce90ff6 |7f4a2ce74546 |7f4a2ce87845 |5598e7cc3eca |5598e7cc49b8 |
+MPI_Bcast               1          1          0          1        73.919305       73.953437        0.034132        4.000000   0.117192   7f4a2ce90ff6 |7f4a2ce74e5a |7f4a2ce87b6c |5598e7cc493f |7f4a2cb5b1c9 |
+MPI_Comm_dup            1          1         -2         -2         1.896031        4.098433        2.202402        0.000000   0.000000   7f4a2ce90ff6 |7f4a2ce76a27 |7f4a2ce8856d |5598e7cc47e3 |7f4a2cb5b1c9 |
+start_time=0.000000        report_end_time=3638.774233    

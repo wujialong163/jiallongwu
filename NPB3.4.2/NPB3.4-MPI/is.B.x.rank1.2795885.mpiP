@@ -1,0 +1,14 @@
+NAME=MPI_Comm_dup    count=1     RANK=1     send_rank=-2    recv_rank=-2    starttime=2.973832        endtime=3.400670        TIME=0.426838        DATASIZE=0.000000        BW=0.000000 
+NAME=MPI_Bcast       count=1     RANK=1     send_rank=0     recv_rank=1     starttime=3.436614        endtime=3.491030        TIME=0.054416        DATASIZE=4.000000        BW=0.073508 
+NAME=MPI_Allreduce   count=1     RANK=1     send_rank=-2    recv_rank=-2    starttime=1404.989247     endtime=1405.193506     TIME=0.204259        DATASIZE=4116.000000     BW=20.150887 
+NAME=MPI_Alltoall    count=1     RANK=1     send_rank=-2    recv_rank=-2    starttime=1405.201341     endtime=1405.254949     TIME=0.053608        DATASIZE=4.000000        BW=0.074616 
+NAME=MPI_Alltoallv   count=1     RANK=1     send_rank=-2    recv_rank=-2    starttime=1405.256441     endtime=1426.212562     TIME=20.956121       DATASIZE=0.000000        BW=0.000000 
+NAME=MPI_Allreduce   count=10    RANK=1     send_rank=-2    recv_rank=-2    starttime=1520.790454     endtime=2170.219891     TIME=1.204681        DATASIZE=4116.000000     BW=109.142978 
+NAME=MPI_Alltoall    count=10    RANK=1     send_rank=-2    recv_rank=-2    starttime=1520.887844     endtime=2170.231134     TIME=0.112118        DATASIZE=4.000000        BW=0.465766 
+NAME=MPI_Alltoallv   count=10    RANK=1     send_rank=-2    recv_rank=-2    starttime=1520.910366     endtime=2176.823648     TIME=75.873303       DATASIZE=0.000000        BW=0.000000 
+NAME=MPI_Reduce      count=1     RANK=1     send_rank=1     recv_rank=0     starttime=2182.582383     endtime=2182.629276     TIME=0.046893        DATASIZE=8.000000        BW=0.170601 
+NAME=MPI_Irecv       count=1     RANK=1     send_rank=0     recv_rank=1     starttime=2224.235012     endtime=2224.252811     TIME=0.017799        DATASIZE=4.000000        BW=0.224732 
+NAME=MPI_Send        count=1     RANK=1     send_rank=1     recv_rank=2     starttime=2224.268733     endtime=2224.292144     TIME=0.023411        DATASIZE=4.000000        BW=0.170860 
+NAME=MPI_Wait        count=1     RANK=1     send_rank=-2    recv_rank=-2    starttime=2224.901431     endtime=2227.937002     TIME=3.035571        DATASIZE=0.000000        BW=0.000000 
+NAME=MPI_Reduce      count=1     RANK=1     send_rank=1     recv_rank=0     starttime=2229.986445     endtime=2230.001843     TIME=0.015398        DATASIZE=4.000000        BW=0.259774 
+start_time=273598.146061   report_end_time=275829.630969  

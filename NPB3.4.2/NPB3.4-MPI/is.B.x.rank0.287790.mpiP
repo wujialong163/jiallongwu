@@ -1,0 +1,2027 @@
+Creator 'igraph version 0.10.6 Thu Nov  9 15:41:49 2023'
+Version 1
+graph
+[
+  directed 1
+  node
+  [
+    id 0
+    NAME 'MPI_Bcast'
+    TIME 0.013558 
+    send_rank 0
+    recv_rank 0
+  ]
+  node
+  [
+    id 1
+    NAME 'MPI_Send'
+    TIME 0.019461 
+    send_rank 0
+    recv_rank 1
+  ]
+  edge
+  [
+    source 0
+    target 1
+  ]
+  node
+  [
+    id 2
+    NAME 'MPI_Alltoallv'
+    TIME 12.583965 
+    send_rank -2
+    recv_rank -2
+  ]
+  edge
+  [
+    source 1
+    target 2
+  ]
+  node
+  [
+    id 3
+    NAME 'MPI_Alltoall'
+    TIME 0.015954 
+    send_rank -2
+    recv_rank -2
+  ]
+  edge
+  [
+    source 2
+    target 3
+  ]
+  node
+  [
+    id 4
+    NAME 'MPI_Alltoall'
+    TIME 0.011121 
+    send_rank -2
+    recv_rank -2
+  ]
+  edge
+  [
+    source 3
+    target 4
+  ]
+  node
+  [
+    id 5
+    NAME 'MPI_Alltoall'
+    TIME 0.006962 
+    send_rank -2
+    recv_rank -2
+  ]
+  edge
+  [
+    source 4
+    target 5
+  ]
+  node
+  [
+    id 6
+    NAME 'MPI_Alltoall'
+    TIME 0.009007 
+    send_rank -2
+    recv_rank -2
+  ]
+  edge
+  [
+    source 5
+    target 6
+  ]
+  node
+  [
+    id 7
+    NAME 'MPI_Alltoall'
+    TIME 0.008408 
+    send_rank -2
+    recv_rank -2
+  ]
+  edge
+  [
+    source 6
+    target 7
+  ]
+  node
+  [
+    id 8
+    NAME 'MPI_Alltoall'
+    TIME 0.007779 
+    send_rank -2
+    recv_rank -2
+  ]
+  edge
+  [
+    source 7
+    target 8
+  ]
+  node
+  [
+    id 9
+    NAME 'MPI_Alltoall'
+    TIME 0.014234 
+    send_rank -2
+    recv_rank -2
+  ]
+  edge
+  [
+    source 8
+    target 9
+  ]
+  node
+  [
+    id 10
+    NAME 'MPI_Alltoall'
+    TIME 0.008406 
+    send_rank -2
+    recv_rank -2
+  ]
+  edge
+  [
+    source 9
+    target 10
+  ]
+  node
+  [
+    id 11
+    NAME 'MPI_Alltoall'
+    TIME 0.045801 
+    send_rank -2
+    recv_rank -2
+  ]
+  edge
+  [
+    source 10
+    target 11
+  ]
+  node
+  [
+    id 12
+    NAME 'MPI_Alltoall'
+    TIME 0.009313 
+    send_rank -2
+    recv_rank -2
+  ]
+  edge
+  [
+    source 11
+    target 12
+  ]
+  node
+  [
+    id 13
+    NAME 'MPI_Allreduce'
+    TIME 1.704143 
+    send_rank -2
+    recv_rank -2
+  ]
+  edge
+  [
+    source 12
+    target 13
+  ]
+  node
+  [
+    id 14
+    NAME 'MPI_Allreduce'
+    TIME 0.882437 
+    send_rank -2
+    recv_rank -2
+  ]
+  edge
+  [
+    source 13
+    target 14
+  ]
+  node
+  [
+    id 15
+    NAME 'MPI_Allreduce'
+    TIME 0.899701 
+    send_rank -2
+    recv_rank -2
+  ]
+  edge
+  [
+    source 14
+    target 15
+  ]
+  node
+  [
+    id 16
+    NAME 'MPI_Allreduce'
+    TIME 0.778077 
+    send_rank -2
+    recv_rank -2
+  ]
+  edge
+  [
+    source 15
+    target 16
+  ]
+  node
+  [
+    id 17
+    NAME 'MPI_Allreduce'
+    TIME 0.780541 
+    send_rank -2
+    recv_rank -2
+  ]
+  edge
+  [
+    source 16
+    target 17
+  ]
+  node
+  [
+    id 18
+    NAME 'MPI_Allreduce'
+    TIME 0.861579 
+    send_rank -2
+    recv_rank -2
+  ]
+  edge
+  [
+    source 17
+    target 18
+  ]
+  node
+  [
+    id 19
+    NAME 'MPI_Allreduce'
+    TIME 0.885352 
+    send_rank -2
+    recv_rank -2
+  ]
+  edge
+  [
+    source 18
+    target 19
+  ]
+  node
+  [
+    id 20
+    NAME 'MPI_Allreduce'
+    TIME 0.694638 
+    send_rank -2
+    recv_rank -2
+  ]
+  edge
+  [
+    source 19
+    target 20
+  ]
+  node
+  [
+    id 21
+    NAME 'MPI_Allreduce'
+    TIME 0.786940 
+    send_rank -2
+    recv_rank -2
+  ]
+  edge
+  [
+    source 20
+    target 21
+  ]
+  node
+  [
+    id 22
+    NAME 'MPI_Allreduce'
+    TIME 0.578027 
+    send_rank -2
+    recv_rank -2
+  ]
+  edge
+  [
+    source 21
+    target 22
+  ]
+  node
+  [
+    id 23
+    NAME 'MPI_Allreduce'
+    TIME 0.586777 
+    send_rank -2
+    recv_rank -2
+  ]
+  edge
+  [
+    source 22
+    target 23
+  ]
+  node
+  [
+    id 24
+    NAME 'MPI_Reduce'
+    TIME 0.140698 
+    send_rank 0
+    recv_rank 0
+  ]
+  edge
+  [
+    source 23
+    target 24
+  ]
+  node
+  [
+    id 25
+    NAME 'MPI_Alltoall'
+    TIME 0.157865 
+    send_rank -2
+    recv_rank -2
+  ]
+  edge
+  [
+    source 24
+    target 25
+  ]
+  node
+  [
+    id 26
+    NAME 'MPI_Alltoallv'
+    TIME 6.307136 
+    send_rank -2
+    recv_rank -2
+  ]
+  edge
+  [
+    source 25
+    target 26
+  ]
+  node
+  [
+    id 27
+    NAME 'MPI_Alltoallv'
+    TIME 6.134902 
+    send_rank -2
+    recv_rank -2
+  ]
+  edge
+  [
+    source 26
+    target 27
+  ]
+  node
+  [
+    id 28
+    NAME 'MPI_Alltoallv'
+    TIME 6.337139 
+    send_rank -2
+    recv_rank -2
+  ]
+  edge
+  [
+    source 27
+    target 28
+  ]
+  node
+  [
+    id 29
+    NAME 'MPI_Alltoallv'
+    TIME 6.334896 
+    send_rank -2
+    recv_rank -2
+  ]
+  edge
+  [
+    source 28
+    target 29
+  ]
+  node
+  [
+    id 30
+    NAME 'MPI_Alltoallv'
+    TIME 6.213282 
+    send_rank -2
+    recv_rank -2
+  ]
+  edge
+  [
+    source 29
+    target 30
+  ]
+  node
+  [
+    id 31
+    NAME 'MPI_Alltoallv'
+    TIME 6.284887 
+    send_rank -2
+    recv_rank -2
+  ]
+  edge
+  [
+    source 30
+    target 31
+  ]
+  node
+  [
+    id 32
+    NAME 'MPI_Alltoallv'
+    TIME 6.161620 
+    send_rank -2
+    recv_rank -2
+  ]
+  edge
+  [
+    source 31
+    target 32
+  ]
+  node
+  [
+    id 33
+    NAME 'MPI_Alltoallv'
+    TIME 6.247669 
+    send_rank -2
+    recv_rank -2
+  ]
+  edge
+  [
+    source 32
+    target 33
+  ]
+  node
+  [
+    id 34
+    NAME 'MPI_Alltoallv'
+    TIME 6.451882 
+    send_rank -2
+    recv_rank -2
+  ]
+  edge
+  [
+    source 33
+    target 34
+  ]
+  node
+  [
+    id 35
+    NAME 'MPI_Alltoallv'
+    TIME 6.897325 
+    send_rank -2
+    recv_rank -2
+  ]
+  edge
+  [
+    source 34
+    target 35
+  ]
+  node
+  [
+    id 36
+    NAME 'MPI_Comm_dup'
+    TIME 0.486537 
+    send_rank -2
+    recv_rank -2
+  ]
+  edge
+  [
+    source 35
+    target 36
+  ]
+  node
+  [
+    id 37
+    NAME 'MPI_Reduce'
+    TIME 0.307046 
+    send_rank 0
+    recv_rank 0
+  ]
+  edge
+  [
+    source 36
+    target 37
+  ]
+  node
+  [
+    id 38
+    NAME 'MPI_Bcast'
+    TIME 0.048270 
+    send_rank 0
+    recv_rank 1
+  ]
+  node
+  [
+    id 39
+    NAME 'MPI_Alltoall'
+    TIME 0.015103 
+    send_rank -2
+    recv_rank -2
+  ]
+  edge
+  [
+    source 38
+    target 39
+  ]
+  node
+  [
+    id 40
+    NAME 'MPI_Alltoall'
+    TIME 0.010442 
+    send_rank -2
+    recv_rank -2
+  ]
+  edge
+  [
+    source 39
+    target 40
+  ]
+  node
+  [
+    id 41
+    NAME 'MPI_Alltoall'
+    TIME 0.009266 
+    send_rank -2
+    recv_rank -2
+  ]
+  edge
+  [
+    source 40
+    target 41
+  ]
+  node
+  [
+    id 42
+    NAME 'MPI_Alltoall'
+    TIME 0.009232 
+    send_rank -2
+    recv_rank -2
+  ]
+  edge
+  [
+    source 41
+    target 42
+  ]
+  node
+  [
+    id 43
+    NAME 'MPI_Alltoall'
+    TIME 0.009670 
+    send_rank -2
+    recv_rank -2
+  ]
+  edge
+  [
+    source 42
+    target 43
+  ]
+  node
+  [
+    id 44
+    NAME 'MPI_Alltoall'
+    TIME 0.008784 
+    send_rank -2
+    recv_rank -2
+  ]
+  edge
+  [
+    source 43
+    target 44
+  ]
+  node
+  [
+    id 45
+    NAME 'MPI_Alltoall'
+    TIME 0.013144 
+    send_rank -2
+    recv_rank -2
+  ]
+  edge
+  [
+    source 44
+    target 45
+  ]
+  node
+  [
+    id 46
+    NAME 'MPI_Alltoall'
+    TIME 0.009323 
+    send_rank -2
+    recv_rank -2
+  ]
+  edge
+  [
+    source 45
+    target 46
+  ]
+  node
+  [
+    id 47
+    NAME 'MPI_Alltoall'
+    TIME 0.041262 
+    send_rank -2
+    recv_rank -2
+  ]
+  edge
+  [
+    source 46
+    target 47
+  ]
+  node
+  [
+    id 48
+    NAME 'MPI_Alltoall'
+    TIME 0.010135 
+    send_rank -2
+    recv_rank -2
+  ]
+  edge
+  [
+    source 47
+    target 48
+  ]
+  node
+  [
+    id 49
+    NAME 'MPI_Alltoallv'
+    TIME 12.756136 
+    send_rank -2
+    recv_rank -2
+  ]
+  edge
+  [
+    source 48
+    target 49
+  ]
+  node
+  [
+    id 50
+    NAME 'MPI_Send'
+    TIME 0.651469 
+    send_rank 1
+    recv_rank 2
+  ]
+  edge
+  [
+    source 49
+    target 50
+  ]
+  node
+  [
+    id 51
+    NAME 'MPI_Allreduce'
+    TIME 230.438212 
+    send_rank -2
+    recv_rank -2
+  ]
+  edge
+  [
+    source 50
+    target 51
+  ]
+  node
+  [
+    id 52
+    NAME 'MPI_Alltoall'
+    TIME 0.149457 
+    send_rank -2
+    recv_rank -2
+  ]
+  edge
+  [
+    source 51
+    target 52
+  ]
+  node
+  [
+    id 53
+    NAME 'MPI_Reduce'
+    TIME 0.777355 
+    send_rank 1
+    recv_rank 0
+  ]
+  edge
+  [
+    source 52
+    target 53
+  ]
+  node
+  [
+    id 54
+    NAME 'MPI_Allreduce'
+    TIME 5.101106 
+    send_rank -2
+    recv_rank -2
+  ]
+  edge
+  [
+    source 53
+    target 54
+  ]
+  node
+  [
+    id 55
+    NAME 'MPI_Allreduce'
+    TIME 6.188966 
+    send_rank -2
+    recv_rank -2
+  ]
+  edge
+  [
+    source 54
+    target 55
+  ]
+  node
+  [
+    id 56
+    NAME 'MPI_Allreduce'
+    TIME 6.324189 
+    send_rank -2
+    recv_rank -2
+  ]
+  edge
+  [
+    source 55
+    target 56
+  ]
+  node
+  [
+    id 57
+    NAME 'MPI_Allreduce'
+    TIME 6.093669 
+    send_rank -2
+    recv_rank -2
+  ]
+  edge
+  [
+    source 56
+    target 57
+  ]
+  node
+  [
+    id 58
+    NAME 'MPI_Allreduce'
+    TIME 6.228472 
+    send_rank -2
+    recv_rank -2
+  ]
+  edge
+  [
+    source 57
+    target 58
+  ]
+  node
+  [
+    id 59
+    NAME 'MPI_Allreduce'
+    TIME 6.119259 
+    send_rank -2
+    recv_rank -2
+  ]
+  edge
+  [
+    source 58
+    target 59
+  ]
+  node
+  [
+    id 60
+    NAME 'MPI_Allreduce'
+    TIME 4.673828 
+    send_rank -2
+    recv_rank -2
+  ]
+  edge
+  [
+    source 59
+    target 60
+  ]
+  node
+  [
+    id 61
+    NAME 'MPI_Allreduce'
+    TIME 4.783127 
+    send_rank -2
+    recv_rank -2
+  ]
+  edge
+  [
+    source 60
+    target 61
+  ]
+  node
+  [
+    id 62
+    NAME 'MPI_Allreduce'
+    TIME 4.557203 
+    send_rank -2
+    recv_rank -2
+  ]
+  edge
+  [
+    source 61
+    target 62
+  ]
+  node
+  [
+    id 63
+    NAME 'MPI_Allreduce'
+    TIME 1.741239 
+    send_rank -2
+    recv_rank -2
+  ]
+  edge
+  [
+    source 62
+    target 63
+  ]
+  node
+  [
+    id 64
+    NAME 'MPI_Irecv'
+    TIME 0.023295 
+    send_rank 0
+    recv_rank 1
+  ]
+  edge
+  [
+    source 63
+    target 64
+  ]
+  node
+  [
+    id 65
+    NAME 'MPI_Comm_dup'
+    TIME 0.204996 
+    send_rank -2
+    recv_rank -2
+  ]
+  edge
+  [
+    source 64
+    target 65
+  ]
+  node
+  [
+    id 66
+    NAME 'MPI_Reduce'
+    TIME 0.016139 
+    send_rank 1
+    recv_rank 0
+  ]
+  edge
+  [
+    source 65
+    target 66
+  ]
+  node
+  [
+    id 67
+    NAME 'MPI_Alltoallv'
+    TIME 6.305070 
+    send_rank -2
+    recv_rank -2
+  ]
+  edge
+  [
+    source 66
+    target 67
+  ]
+  node
+  [
+    id 68
+    NAME 'MPI_Alltoallv'
+    TIME 6.152370 
+    send_rank -2
+    recv_rank -2
+  ]
+  edge
+  [
+    source 67
+    target 68
+  ]
+  node
+  [
+    id 69
+    NAME 'MPI_Alltoallv'
+    TIME 6.336801 
+    send_rank -2
+    recv_rank -2
+  ]
+  edge
+  [
+    source 68
+    target 69
+  ]
+  node
+  [
+    id 70
+    NAME 'MPI_Alltoallv'
+    TIME 6.428066 
+    send_rank -2
+    recv_rank -2
+  ]
+  edge
+  [
+    source 69
+    target 70
+  ]
+  node
+  [
+    id 71
+    NAME 'MPI_Alltoallv'
+    TIME 6.308944 
+    send_rank -2
+    recv_rank -2
+  ]
+  edge
+  [
+    source 70
+    target 71
+  ]
+  node
+  [
+    id 72
+    NAME 'MPI_Alltoallv'
+    TIME 6.334500 
+    send_rank -2
+    recv_rank -2
+  ]
+  edge
+  [
+    source 71
+    target 72
+  ]
+  node
+  [
+    id 73
+    NAME 'MPI_Alltoallv'
+    TIME 6.160480 
+    send_rank -2
+    recv_rank -2
+  ]
+  edge
+  [
+    source 72
+    target 73
+  ]
+  node
+  [
+    id 74
+    NAME 'MPI_Alltoallv'
+    TIME 6.246930 
+    send_rank -2
+    recv_rank -2
+  ]
+  edge
+  [
+    source 73
+    target 74
+  ]
+  node
+  [
+    id 75
+    NAME 'MPI_Alltoallv'
+    TIME 6.452347 
+    send_rank -2
+    recv_rank -2
+  ]
+  edge
+  [
+    source 74
+    target 75
+  ]
+  node
+  [
+    id 76
+    NAME 'MPI_Alltoallv'
+    TIME 6.896578 
+    send_rank -2
+    recv_rank -2
+  ]
+  edge
+  [
+    source 75
+    target 76
+  ]
+  node
+  [
+    id 77
+    NAME 'MPI_Wait'
+    TIME 8.075557 
+    send_rank -2
+    recv_rank -2
+  ]
+  edge
+  [
+    source 76
+    target 77
+  ]
+  node
+  [
+    id 78
+    NAME 'MPI_Bcast'
+    TIME 0.051602 
+    send_rank 0
+    recv_rank 2
+  ]
+  node
+  [
+    id 79
+    NAME 'MPI_Alltoall'
+    TIME 0.015629 
+    send_rank -2
+    recv_rank -2
+  ]
+  edge
+  [
+    source 78
+    target 79
+  ]
+  node
+  [
+    id 80
+    NAME 'MPI_Alltoall'
+    TIME 0.007735 
+    send_rank -2
+    recv_rank -2
+  ]
+  edge
+  [
+    source 79
+    target 80
+  ]
+  node
+  [
+    id 81
+    NAME 'MPI_Alltoall'
+    TIME 0.009884 
+    send_rank -2
+    recv_rank -2
+  ]
+  edge
+  [
+    source 80
+    target 81
+  ]
+  node
+  [
+    id 82
+    NAME 'MPI_Alltoall'
+    TIME 0.009827 
+    send_rank -2
+    recv_rank -2
+  ]
+  edge
+  [
+    source 81
+    target 82
+  ]
+  node
+  [
+    id 83
+    NAME 'MPI_Alltoall'
+    TIME 0.008261 
+    send_rank -2
+    recv_rank -2
+  ]
+  edge
+  [
+    source 82
+    target 83
+  ]
+  node
+  [
+    id 84
+    NAME 'MPI_Alltoall'
+    TIME 0.012873 
+    send_rank -2
+    recv_rank -2
+  ]
+  edge
+  [
+    source 83
+    target 84
+  ]
+  node
+  [
+    id 85
+    NAME 'MPI_Alltoall'
+    TIME 0.014427 
+    send_rank -2
+    recv_rank -2
+  ]
+  edge
+  [
+    source 84
+    target 85
+  ]
+  node
+  [
+    id 86
+    NAME 'MPI_Alltoall'
+    TIME 0.009282 
+    send_rank -2
+    recv_rank -2
+  ]
+  edge
+  [
+    source 85
+    target 86
+  ]
+  node
+  [
+    id 87
+    NAME 'MPI_Alltoall'
+    TIME 0.051111 
+    send_rank -2
+    recv_rank -2
+  ]
+  edge
+  [
+    source 86
+    target 87
+  ]
+  node
+  [
+    id 88
+    NAME 'MPI_Alltoall'
+    TIME 0.009836 
+    send_rank -2
+    recv_rank -2
+  ]
+  edge
+  [
+    source 87
+    target 88
+  ]
+  node
+  [
+    id 89
+    NAME 'MPI_Send'
+    TIME 0.013788 
+    send_rank 2
+    recv_rank 3
+  ]
+  edge
+  [
+    source 88
+    target 89
+  ]
+  node
+  [
+    id 90
+    NAME 'MPI_Alltoallv'
+    TIME 12.740579 
+    send_rank -2
+    recv_rank -2
+  ]
+  edge
+  [
+    source 89
+    target 90
+  ]
+  node
+  [
+    id 91
+    NAME 'MPI_Allreduce'
+    TIME 0.076742 
+    send_rank -2
+    recv_rank -2
+  ]
+  edge
+  [
+    source 90
+    target 91
+  ]
+  node
+  [
+    id 92
+    NAME 'MPI_Reduce'
+    TIME 2.025701 
+    send_rank 2
+    recv_rank 0
+  ]
+  edge
+  [
+    source 91
+    target 92
+  ]
+  node
+  [
+    id 93
+    NAME 'MPI_Alltoall'
+    TIME 0.159662 
+    send_rank -2
+    recv_rank -2
+  ]
+  edge
+  [
+    source 92
+    target 93
+  ]
+  node
+  [
+    id 94
+    NAME 'MPI_Allreduce'
+    TIME 0.208493 
+    send_rank -2
+    recv_rank -2
+  ]
+  edge
+  [
+    source 93
+    target 94
+  ]
+  node
+  [
+    id 95
+    NAME 'MPI_Allreduce'
+    TIME 0.074884 
+    send_rank -2
+    recv_rank -2
+  ]
+  edge
+  [
+    source 94
+    target 95
+  ]
+  node
+  [
+    id 96
+    NAME 'MPI_Allreduce'
+    TIME 0.102107 
+    send_rank -2
+    recv_rank -2
+  ]
+  edge
+  [
+    source 95
+    target 96
+  ]
+  node
+  [
+    id 97
+    NAME 'MPI_Allreduce'
+    TIME 0.045923 
+    send_rank -2
+    recv_rank -2
+  ]
+  edge
+  [
+    source 96
+    target 97
+  ]
+  node
+  [
+    id 98
+    NAME 'MPI_Allreduce'
+    TIME 0.025613 
+    send_rank -2
+    recv_rank -2
+  ]
+  edge
+  [
+    source 97
+    target 98
+  ]
+  node
+  [
+    id 99
+    NAME 'MPI_Allreduce'
+    TIME 0.677510 
+    send_rank -2
+    recv_rank -2
+  ]
+  edge
+  [
+    source 98
+    target 99
+  ]
+  node
+  [
+    id 100
+    NAME 'MPI_Allreduce'
+    TIME 5.385575 
+    send_rank -2
+    recv_rank -2
+  ]
+  edge
+  [
+    source 99
+    target 100
+  ]
+  node
+  [
+    id 101
+    NAME 'MPI_Allreduce'
+    TIME 5.500884 
+    send_rank -2
+    recv_rank -2
+  ]
+  edge
+  [
+    source 100
+    target 101
+  ]
+  node
+  [
+    id 102
+    NAME 'MPI_Allreduce'
+    TIME 5.352144 
+    send_rank -2
+    recv_rank -2
+  ]
+  edge
+  [
+    source 101
+    target 102
+  ]
+  node
+  [
+    id 103
+    NAME 'MPI_Allreduce'
+    TIME 5.415020 
+    send_rank -2
+    recv_rank -2
+  ]
+  edge
+  [
+    source 102
+    target 103
+  ]
+  node
+  [
+    id 104
+    NAME 'MPI_Irecv'
+    TIME 0.006263 
+    send_rank 1
+    recv_rank 2
+  ]
+  edge
+  [
+    source 103
+    target 104
+  ]
+  node
+  [
+    id 105
+    NAME 'MPI_Reduce'
+    TIME 1.142816 
+    send_rank 2
+    recv_rank 0
+  ]
+  edge
+  [
+    source 104
+    target 105
+  ]
+  node
+  [
+    id 106
+    NAME 'MPI_Comm_dup'
+    TIME 0.489181 
+    send_rank -2
+    recv_rank -2
+  ]
+  edge
+  [
+    source 105
+    target 106
+  ]
+  node
+  [
+    id 107
+    NAME 'MPI_Alltoallv'
+    TIME 6.226335 
+    send_rank -2
+    recv_rank -2
+  ]
+  edge
+  [
+    source 106
+    target 107
+  ]
+  node
+  [
+    id 108
+    NAME 'MPI_Alltoallv'
+    TIME 6.152950 
+    send_rank -2
+    recv_rank -2
+  ]
+  edge
+  [
+    source 107
+    target 108
+  ]
+  node
+  [
+    id 109
+    NAME 'MPI_Alltoallv'
+    TIME 6.327075 
+    send_rank -2
+    recv_rank -2
+  ]
+  edge
+  [
+    source 108
+    target 109
+  ]
+  node
+  [
+    id 110
+    NAME 'MPI_Alltoallv'
+    TIME 6.429621 
+    send_rank -2
+    recv_rank -2
+  ]
+  edge
+  [
+    source 109
+    target 110
+  ]
+  node
+  [
+    id 111
+    NAME 'MPI_Alltoallv'
+    TIME 6.220337 
+    send_rank -2
+    recv_rank -2
+  ]
+  edge
+  [
+    source 110
+    target 111
+  ]
+  node
+  [
+    id 112
+    NAME 'MPI_Alltoallv'
+    TIME 6.276361 
+    send_rank -2
+    recv_rank -2
+  ]
+  edge
+  [
+    source 111
+    target 112
+  ]
+  node
+  [
+    id 113
+    NAME 'MPI_Alltoallv'
+    TIME 6.151849 
+    send_rank -2
+    recv_rank -2
+  ]
+  edge
+  [
+    source 112
+    target 113
+  ]
+  node
+  [
+    id 114
+    NAME 'MPI_Alltoallv'
+    TIME 6.240112 
+    send_rank -2
+    recv_rank -2
+  ]
+  edge
+  [
+    source 113
+    target 114
+  ]
+  node
+  [
+    id 115
+    NAME 'MPI_Alltoallv'
+    TIME 6.451440 
+    send_rank -2
+    recv_rank -2
+  ]
+  edge
+  [
+    source 114
+    target 115
+  ]
+  node
+  [
+    id 116
+    NAME 'MPI_Alltoallv'
+    TIME 6.775434 
+    send_rank -2
+    recv_rank -2
+  ]
+  edge
+  [
+    source 115
+    target 116
+  ]
+  node
+  [
+    id 117
+    NAME 'MPI_Wait'
+    TIME 0.011342 
+    send_rank -2
+    recv_rank -2
+  ]
+  edge
+  [
+    source 116
+    target 117
+  ]
+  node
+  [
+    id 118
+    NAME 'MPI_Bcast'
+    TIME 0.050285 
+    send_rank 0
+    recv_rank 3
+  ]
+  node
+  [
+    id 119
+    NAME 'MPI_Alltoall'
+    TIME 0.013734 
+    send_rank -2
+    recv_rank -2
+  ]
+  edge
+  [
+    source 118
+    target 119
+  ]
+  node
+  [
+    id 120
+    NAME 'MPI_Alltoall'
+    TIME 0.007881 
+    send_rank -2
+    recv_rank -2
+  ]
+  edge
+  [
+    source 119
+    target 120
+  ]
+  node
+  [
+    id 121
+    NAME 'MPI_Alltoall'
+    TIME 0.010077 
+    send_rank -2
+    recv_rank -2
+  ]
+  edge
+  [
+    source 120
+    target 121
+  ]
+  node
+  [
+    id 122
+    NAME 'MPI_Alltoall'
+    TIME 0.009501 
+    send_rank -2
+    recv_rank -2
+  ]
+  edge
+  [
+    source 121
+    target 122
+  ]
+  node
+  [
+    id 123
+    NAME 'MPI_Alltoall'
+    TIME 0.008118 
+    send_rank -2
+    recv_rank -2
+  ]
+  edge
+  [
+    source 122
+    target 123
+  ]
+  node
+  [
+    id 124
+    NAME 'MPI_Alltoall'
+    TIME 0.012459 
+    send_rank -2
+    recv_rank -2
+  ]
+  edge
+  [
+    source 123
+    target 124
+  ]
+  node
+  [
+    id 125
+    NAME 'MPI_Alltoall'
+    TIME 0.013442 
+    send_rank -2
+    recv_rank -2
+  ]
+  edge
+  [
+    source 124
+    target 125
+  ]
+  node
+  [
+    id 126
+    NAME 'MPI_Alltoall'
+    TIME 0.008516 
+    send_rank -2
+    recv_rank -2
+  ]
+  edge
+  [
+    source 125
+    target 126
+  ]
+  node
+  [
+    id 127
+    NAME 'MPI_Alltoall'
+    TIME 0.045119 
+    send_rank -2
+    recv_rank -2
+  ]
+  edge
+  [
+    source 126
+    target 127
+  ]
+  node
+  [
+    id 128
+    NAME 'MPI_Alltoall'
+    TIME 0.009195 
+    send_rank -2
+    recv_rank -2
+  ]
+  edge
+  [
+    source 127
+    target 128
+  ]
+  node
+  [
+    id 129
+    NAME 'MPI_Alltoallv'
+    TIME 12.752812 
+    send_rank -2
+    recv_rank -2
+  ]
+  edge
+  [
+    source 128
+    target 129
+  ]
+  node
+  [
+    id 130
+    NAME 'MPI_Allreduce'
+    TIME 0.420300 
+    send_rank -2
+    recv_rank -2
+  ]
+  edge
+  [
+    source 129
+    target 130
+  ]
+  node
+  [
+    id 131
+    NAME 'MPI_Alltoall'
+    TIME 0.158130 
+    send_rank -2
+    recv_rank -2
+  ]
+  edge
+  [
+    source 130
+    target 131
+  ]
+  node
+  [
+    id 132
+    NAME 'MPI_Reduce'
+    TIME 0.032266 
+    send_rank 3
+    recv_rank 0
+  ]
+  edge
+  [
+    source 131
+    target 132
+  ]
+  node
+  [
+    id 133
+    NAME 'MPI_Allreduce'
+    TIME 0.052648 
+    send_rank -2
+    recv_rank -2
+  ]
+  edge
+  [
+    source 132
+    target 133
+  ]
+  node
+  [
+    id 134
+    NAME 'MPI_Allreduce'
+    TIME 0.037415 
+    send_rank -2
+    recv_rank -2
+  ]
+  edge
+  [
+    source 133
+    target 134
+  ]
+  node
+  [
+    id 135
+    NAME 'MPI_Allreduce'
+    TIME 0.025708 
+    send_rank -2
+    recv_rank -2
+  ]
+  edge
+  [
+    source 134
+    target 135
+  ]
+  node
+  [
+    id 136
+    NAME 'MPI_Allreduce'
+    TIME 0.108627 
+    send_rank -2
+    recv_rank -2
+  ]
+  edge
+  [
+    source 135
+    target 136
+  ]
+  node
+  [
+    id 137
+    NAME 'MPI_Allreduce'
+    TIME 0.031699 
+    send_rank -2
+    recv_rank -2
+  ]
+  edge
+  [
+    source 136
+    target 137
+  ]
+  node
+  [
+    id 138
+    NAME 'MPI_Allreduce'
+    TIME 0.029227 
+    send_rank -2
+    recv_rank -2
+  ]
+  edge
+  [
+    source 137
+    target 138
+  ]
+  node
+  [
+    id 139
+    NAME 'MPI_Allreduce'
+    TIME 0.030318 
+    send_rank -2
+    recv_rank -2
+  ]
+  edge
+  [
+    source 138
+    target 139
+  ]
+  node
+  [
+    id 140
+    NAME 'MPI_Allreduce'
+    TIME 0.023927 
+    send_rank -2
+    recv_rank -2
+  ]
+  edge
+  [
+    source 139
+    target 140
+  ]
+  node
+  [
+    id 141
+    NAME 'MPI_Allreduce'
+    TIME 0.081378 
+    send_rank -2
+    recv_rank -2
+  ]
+  edge
+  [
+    source 140
+    target 141
+  ]
+  node
+  [
+    id 142
+    NAME 'MPI_Allreduce'
+    TIME 0.024792 
+    send_rank -2
+    recv_rank -2
+  ]
+  edge
+  [
+    source 141
+    target 142
+  ]
+  node
+  [
+    id 143
+    NAME 'MPI_Irecv'
+    TIME 0.004350 
+    send_rank 2
+    recv_rank 3
+  ]
+  edge
+  [
+    source 142
+    target 143
+  ]
+  node
+  [
+    id 144
+    NAME 'MPI_Reduce'
+    TIME 0.009544 
+    send_rank 3
+    recv_rank 0
+  ]
+  edge
+  [
+    source 143
+    target 144
+  ]
+  node
+  [
+    id 145
+    NAME 'MPI_Comm_dup'
+    TIME 0.299865 
+    send_rank -2
+    recv_rank -2
+  ]
+  edge
+  [
+    source 144
+    target 145
+  ]
+  node
+  [
+    id 146
+    NAME 'MPI_Alltoallv'
+    TIME 6.304413 
+    send_rank -2
+    recv_rank -2
+  ]
+  edge
+  [
+    source 145
+    target 146
+  ]
+  node
+  [
+    id 147
+    NAME 'MPI_Alltoallv'
+    TIME 6.151793 
+    send_rank -2
+    recv_rank -2
+  ]
+  edge
+  [
+    source 146
+    target 147
+  ]
+  node
+  [
+    id 148
+    NAME 'MPI_Alltoallv'
+    TIME 6.329355 
+    send_rank -2
+    recv_rank -2
+  ]
+  edge
+  [
+    source 147
+    target 148
+  ]
+  node
+  [
+    id 149
+    NAME 'MPI_Alltoallv'
+    TIME 6.387837 
+    send_rank -2
+    recv_rank -2
+  ]
+  edge
+  [
+    source 148
+    target 149
+  ]
+  node
+  [
+    id 150
+    NAME 'MPI_Alltoallv'
+    TIME 6.311146 
+    send_rank -2
+    recv_rank -2
+  ]
+  edge
+  [
+    source 149
+    target 150
+  ]
+  node
+  [
+    id 151
+    NAME 'MPI_Alltoallv'
+    TIME 6.330016 
+    send_rank -2
+    recv_rank -2
+  ]
+  edge
+  [
+    source 150
+    target 151
+  ]
+  node
+  [
+    id 152
+    NAME 'MPI_Alltoallv'
+    TIME 6.161149 
+    send_rank -2
+    recv_rank -2
+  ]
+  edge
+  [
+    source 151
+    target 152
+  ]
+  node
+  [
+    id 153
+    NAME 'MPI_Alltoallv'
+    TIME 6.247868 
+    send_rank -2
+    recv_rank -2
+  ]
+  edge
+  [
+    source 152
+    target 153
+  ]
+  node
+  [
+    id 154
+    NAME 'MPI_Alltoallv'
+    TIME 6.344968 
+    send_rank -2
+    recv_rank -2
+  ]
+  edge
+  [
+    source 153
+    target 154
+  ]
+  node
+  [
+    id 155
+    NAME 'MPI_Alltoallv'
+    TIME 6.881554 
+    send_rank -2
+    recv_rank -2
+  ]
+  edge
+  [
+    source 154
+    target 155
+  ]
+  node
+  [
+    id 156
+    NAME 'MPI_Wait'
+    TIME 0.014958 
+    send_rank -2
+    recv_rank -2
+  ]
+  edge
+  [
+    source 155
+    target 156
+  ]
+]
