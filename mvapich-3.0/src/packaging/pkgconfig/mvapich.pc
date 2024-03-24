@@ -1,0 +1,20 @@
+# this gives access to the mvapich header files
+prefix=/home/wujialong/software/mvapich-install-pvar
+exec_prefix=${prefix}
+libdir=${exec_prefix}/lib
+includedir=${prefix}/include
+
+Name: mvapich
+Description: High Performance and portable MPI
+Version: 3.0
+URL: http://mvapich.cse.ohio-state.edu
+Requires:
+Libs: -Wl,-rpath -Wl,${exec_prefix}/lib -Wl,--enable-new-dtags   -L${libdir} -lmpi  -lm  -lxml2   -lpthread  -lucp -lucs -lm 
+Cflags:   -I${includedir}
+
+# pkg-config does not understand Cxxflags, etc. So we allow users to
+# query them using the --variable option
+
+cxxflags=  -I${includedir}
+fflags=-fallow-argument-mismatch -I${includedir}
+fcflags=-fallow-argument-mismatch -I${includedir}

@@ -1,0 +1,241 @@
+#define GEN2__AMD_EPYC_7742_128__MLX_CX_HDR__8PPN                              \
+    {                                                                          \
+        {8,                                                                    \
+         0,                                                                    \
+         {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},            \
+         19,                                                                   \
+         {                                                                     \
+             {4, &MPIR_Allreduce_socket_aware_two_level_MVP},                  \
+             {8, &MPIR_Allreduce_socket_aware_two_level_MVP},                  \
+             {16, &MPIR_Allreduce_socket_aware_two_level_MVP},                 \
+             {32, &MPIR_Allreduce_socket_aware_two_level_MVP},                 \
+             {64, &MPIR_Allreduce_socket_aware_two_level_MVP},                 \
+             {128, &MPIR_Allreduce_socket_aware_two_level_MVP},                \
+             {256, &MPIR_Allreduce_socket_aware_two_level_MVP},                \
+             {512, &MPIR_Allreduce_socket_aware_two_level_MVP},                \
+             {1024, &MPIR_Allreduce_socket_aware_two_level_MVP},               \
+             {2048, &MPIR_Allreduce_socket_aware_two_level_MVP},               \
+             {4096, &MPIR_Allreduce_socket_aware_two_level_MVP},               \
+             {8192, &MPIR_Allreduce_pt2pt_rs_MVP},                             \
+             {16384, &MPIR_Allreduce_pt2pt_rs_MVP},                            \
+             {32768, &MPIR_Allreduce_pt2pt_rs_MVP},                            \
+             {65536, &MPIR_Allreduce_pt2pt_ring_wrapper_MVP},                  \
+             {131072, &MPIR_Allreduce_pt2pt_rs_MVP},                           \
+             {262144, &MPIR_Allreduce_pt2pt_rs_MVP},                           \
+             {524288, &MPIR_Allreduce_pt2pt_ring_wrapper_MVP},                 \
+             {1048576, &MPIR_Allreduce_pt2pt_ring_wrapper_MVP},                \
+         },                                                                    \
+         19,                                                                   \
+         {                                                                     \
+             {4, &MPIR_Allreduce_socket_aware_two_level_MVP},                  \
+             {8, &MPIR_Allreduce_socket_aware_two_level_MVP},                  \
+             {16, &MPIR_Allreduce_socket_aware_two_level_MVP},                 \
+             {32, &MPIR_Allreduce_socket_aware_two_level_MVP},                 \
+             {64, &MPIR_Allreduce_socket_aware_two_level_MVP},                 \
+             {128, &MPIR_Allreduce_socket_aware_two_level_MVP},                \
+             {256, &MPIR_Allreduce_socket_aware_two_level_MVP},                \
+             {512, &MPIR_Allreduce_socket_aware_two_level_MVP},                \
+             {1024, &MPIR_Allreduce_socket_aware_two_level_MVP},               \
+             {2048, &MPIR_Allreduce_socket_aware_two_level_MVP},               \
+             {4096, &MPIR_Allreduce_socket_aware_two_level_MVP},               \
+             {8192, &MPIR_Allreduce_reduce_p2p_MVP},                           \
+             {16384, &MPIR_Allreduce_reduce_p2p_MVP},                          \
+             {32768, &MPIR_Allreduce_reduce_p2p_MVP},                          \
+             {65536, &MPIR_Allreduce_pt2pt_ring_wrapper_MVP},                  \
+             {131072, &MPIR_Allreduce_reduce_p2p_MVP},                         \
+             {262144, &MPIR_Allreduce_reduce_p2p_MVP},                         \
+             {524288, &MPIR_Allreduce_pt2pt_ring_wrapper_MVP},                 \
+             {1048576, &MPIR_Allreduce_pt2pt_ring_wrapper_MVP},                \
+         }},                                                                   \
+            {16,                                                               \
+             0,                                                                \
+             {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},        \
+             19,                                                               \
+             {                                                                 \
+                 {4, &MPIR_Allreduce_socket_aware_two_level_MVP},              \
+                 {8, &MPIR_Allreduce_socket_aware_two_level_MVP},              \
+                 {16, &MPIR_Allreduce_socket_aware_two_level_MVP},             \
+                 {32, &MPIR_Allreduce_socket_aware_two_level_MVP},             \
+                 {64, &MPIR_Allreduce_socket_aware_two_level_MVP},             \
+                 {128, &MPIR_Allreduce_socket_aware_two_level_MVP},            \
+                 {256, &MPIR_Allreduce_socket_aware_two_level_MVP},            \
+                 {512, &MPIR_Allreduce_socket_aware_two_level_MVP},            \
+                 {1024, &MPIR_Allreduce_socket_aware_two_level_MVP},           \
+                 {2048, &MPIR_Allreduce_socket_aware_two_level_MVP},           \
+                 {4096, &MPIR_Allreduce_socket_aware_two_level_MVP},           \
+                 {8192, &MPIR_Allreduce_pt2pt_rs_MVP},                         \
+                 {16384, &MPIR_Allreduce_pt2pt_rs_MVP},                        \
+                 {32768, &MPIR_Allreduce_pt2pt_rs_MVP},                        \
+                 {65536, &MPIR_Allreduce_pt2pt_rs_MVP},                        \
+                 {131072, &MPIR_Allreduce_pt2pt_ring_wrapper_MVP},             \
+                 {262144, &MPIR_Allreduce_pt2pt_rs_MVP},                       \
+                 {524288, &MPIR_Allreduce_pt2pt_ring_wrapper_MVP},             \
+                 {1048576, &MPIR_Allreduce_pt2pt_ring_wrapper_MVP},            \
+             },                                                                \
+             19,                                                               \
+             {                                                                 \
+                 {4, &MPIR_Allreduce_socket_aware_two_level_MVP},              \
+                 {8, &MPIR_Allreduce_socket_aware_two_level_MVP},              \
+                 {16, &MPIR_Allreduce_socket_aware_two_level_MVP},             \
+                 {32, &MPIR_Allreduce_socket_aware_two_level_MVP},             \
+                 {64, &MPIR_Allreduce_socket_aware_two_level_MVP},             \
+                 {128, &MPIR_Allreduce_socket_aware_two_level_MVP},            \
+                 {256, &MPIR_Allreduce_socket_aware_two_level_MVP},            \
+                 {512, &MPIR_Allreduce_socket_aware_two_level_MVP},            \
+                 {1024, &MPIR_Allreduce_socket_aware_two_level_MVP},           \
+                 {2048, &MPIR_Allreduce_socket_aware_two_level_MVP},           \
+                 {4096, &MPIR_Allreduce_socket_aware_two_level_MVP},           \
+                 {8192, &MPIR_Allreduce_reduce_p2p_MVP},                       \
+                 {16384, &MPIR_Allreduce_reduce_p2p_MVP},                      \
+                 {32768, &MPIR_Allreduce_reduce_p2p_MVP},                      \
+                 {65536, &MPIR_Allreduce_reduce_p2p_MVP},                      \
+                 {131072, &MPIR_Allreduce_pt2pt_ring_wrapper_MVP},             \
+                 {262144, &MPIR_Allreduce_reduce_p2p_MVP},                     \
+                 {524288, &MPIR_Allreduce_pt2pt_ring_wrapper_MVP},             \
+                 {1048576, &MPIR_Allreduce_pt2pt_ring_wrapper_MVP},            \
+             }},                                                               \
+            {32,                                                               \
+             0,                                                                \
+             {0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},        \
+             19,                                                               \
+             {                                                                 \
+                 {4, &MPIR_Allreduce_socket_aware_two_level_MVP},              \
+                 {8, &MPIR_Allreduce_socket_aware_two_level_MVP},              \
+                 {16, &MPIR_Allreduce_socket_aware_two_level_MVP},             \
+                 {32, &MPIR_Allreduce_socket_aware_two_level_MVP},             \
+                 {64, &MPIR_Allreduce_socket_aware_two_level_MVP},             \
+                 {128, &MPIR_Allreduce_socket_aware_two_level_MVP},            \
+                 {256, &MPIR_Allreduce_pt2pt_rd_MVP},                          \
+                 {512, &MPIR_Allreduce_pt2pt_rd_MVP},                          \
+                 {1024, &MPIR_Allreduce_socket_aware_two_level_MVP},           \
+                 {2048, &MPIR_Allreduce_socket_aware_two_level_MVP},           \
+                 {4096, &MPIR_Allreduce_socket_aware_two_level_MVP},           \
+                 {8192, &MPIR_Allreduce_pt2pt_rs_MVP},                         \
+                 {16384, &MPIR_Allreduce_pt2pt_rs_MVP},                        \
+                 {32768, &MPIR_Allreduce_pt2pt_rs_MVP},                        \
+                 {65536, &MPIR_Allreduce_pt2pt_rs_MVP},                        \
+                 {131072, &MPIR_Allreduce_pt2pt_ring_wrapper_MVP},             \
+                 {262144, &MPIR_Allreduce_pt2pt_ring_wrapper_MVP},             \
+                 {524288, &MPIR_Allreduce_pt2pt_rs_MVP},                       \
+                 {1048576, &MPIR_Allreduce_pt2pt_ring_wrapper_MVP},            \
+             },                                                                \
+             19,                                                               \
+             {                                                                 \
+                 {4, &MPIR_Allreduce_socket_aware_two_level_MVP},              \
+                 {8, &MPIR_Allreduce_socket_aware_two_level_MVP},              \
+                 {16, &MPIR_Allreduce_socket_aware_two_level_MVP},             \
+                 {32, &MPIR_Allreduce_socket_aware_two_level_MVP},             \
+                 {64, &MPIR_Allreduce_socket_aware_two_level_MVP},             \
+                 {128, &MPIR_Allreduce_socket_aware_two_level_MVP},            \
+                 {256, &MPIR_Allreduce_reduce_shmem_MVP},                      \
+                 {512, &MPIR_Allreduce_reduce_shmem_MVP},                      \
+                 {1024, &MPIR_Allreduce_socket_aware_two_level_MVP},           \
+                 {2048, &MPIR_Allreduce_socket_aware_two_level_MVP},           \
+                 {4096, &MPIR_Allreduce_socket_aware_two_level_MVP},           \
+                 {8192, &MPIR_Allreduce_reduce_p2p_MVP},                       \
+                 {16384, &MPIR_Allreduce_reduce_p2p_MVP},                      \
+                 {32768, &MPIR_Allreduce_reduce_p2p_MVP},                      \
+                 {65536, &MPIR_Allreduce_reduce_p2p_MVP},                      \
+                 {131072, &MPIR_Allreduce_pt2pt_ring_wrapper_MVP},             \
+                 {262144, &MPIR_Allreduce_pt2pt_ring_wrapper_MVP},             \
+                 {524288, &MPIR_Allreduce_reduce_p2p_MVP},                     \
+                 {1048576, &MPIR_Allreduce_pt2pt_ring_wrapper_MVP},            \
+             }},                                                               \
+            {64,                                                               \
+             0,                                                                \
+             {0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},        \
+             19,                                                               \
+             {                                                                 \
+                 {4, &MPIR_Allreduce_socket_aware_two_level_MVP},              \
+                 {8, &MPIR_Allreduce_socket_aware_two_level_MVP},              \
+                 {16, &MPIR_Allreduce_socket_aware_two_level_MVP},             \
+                 {32, &MPIR_Allreduce_socket_aware_two_level_MVP},             \
+                 {64, &MPIR_Allreduce_socket_aware_two_level_MVP},             \
+                 {128, &MPIR_Allreduce_socket_aware_two_level_MVP},            \
+                 {256, &MPIR_Allreduce_pt2pt_rd_MVP},                          \
+                 {512, &MPIR_Allreduce_pt2pt_rd_MVP},                          \
+                 {1024, &MPIR_Allreduce_pt2pt_rd_MVP},                         \
+                 {2048, &MPIR_Allreduce_socket_aware_two_level_MVP},           \
+                 {4096, &MPIR_Allreduce_socket_aware_two_level_MVP},           \
+                 {8192, &MPIR_Allreduce_pt2pt_rs_MVP},                         \
+                 {16384, &MPIR_Allreduce_pt2pt_rs_MVP},                        \
+                 {32768, &MPIR_Allreduce_pt2pt_rs_MVP},                        \
+                 {65536, &MPIR_Allreduce_pt2pt_rs_MVP},                        \
+                 {131072, &MPIR_Allreduce_pt2pt_rs_MVP},                       \
+                 {262144, &MPIR_Allreduce_pt2pt_ring_wrapper_MVP},             \
+                 {524288, &MPIR_Allreduce_pt2pt_ring_wrapper_MVP},             \
+                 {1048576, &MPIR_Allreduce_pt2pt_rs_MVP},                      \
+             },                                                                \
+             19,                                                               \
+             {                                                                 \
+                 {4, &MPIR_Allreduce_socket_aware_two_level_MVP},              \
+                 {8, &MPIR_Allreduce_socket_aware_two_level_MVP},              \
+                 {16, &MPIR_Allreduce_socket_aware_two_level_MVP},             \
+                 {32, &MPIR_Allreduce_socket_aware_two_level_MVP},             \
+                 {64, &MPIR_Allreduce_socket_aware_two_level_MVP},             \
+                 {128, &MPIR_Allreduce_socket_aware_two_level_MVP},            \
+                 {256, &MPIR_Allreduce_reduce_shmem_MVP},                      \
+                 {512, &MPIR_Allreduce_reduce_shmem_MVP},                      \
+                 {1024, &MPIR_Allreduce_reduce_shmem_MVP},                     \
+                 {2048, &MPIR_Allreduce_socket_aware_two_level_MVP},           \
+                 {4096, &MPIR_Allreduce_socket_aware_two_level_MVP},           \
+                 {8192, &MPIR_Allreduce_reduce_p2p_MVP},                       \
+                 {16384, &MPIR_Allreduce_reduce_p2p_MVP},                      \
+                 {32768, &MPIR_Allreduce_reduce_p2p_MVP},                      \
+                 {65536, &MPIR_Allreduce_reduce_p2p_MVP},                      \
+                 {131072, &MPIR_Allreduce_reduce_p2p_MVP},                     \
+                 {262144, &MPIR_Allreduce_pt2pt_ring_wrapper_MVP},             \
+                 {524288, &MPIR_Allreduce_pt2pt_ring_wrapper_MVP},             \
+                 {1048576, &MPIR_Allreduce_reduce_p2p_MVP},                    \
+             }},                                                               \
+        {                                                                      \
+            128, 0, {1, 0, 0, 1, 0, 0, 1, 1, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0}, \
+                19,                                                            \
+                {                                                              \
+                    {4, &MPIR_Allreduce_pt2pt_rs_MVP},                         \
+                    {8, &MPIR_Allreduce_socket_aware_two_level_MVP},           \
+                    {16, &MPIR_Allreduce_socket_aware_two_level_MVP},          \
+                    {32, &MPIR_Allreduce_pt2pt_rs_MVP},                        \
+                    {64, &MPIR_Allreduce_socket_aware_two_level_MVP},          \
+                    {128, &MPIR_Allreduce_socket_aware_two_level_MVP},         \
+                    {256, &MPIR_Allreduce_pt2pt_rd_MVP},                       \
+                    {512, &MPIR_Allreduce_pt2pt_rd_MVP},                       \
+                    {1024, &MPIR_Allreduce_pt2pt_rd_MVP},                      \
+                    {2048, &MPIR_Allreduce_socket_aware_two_level_MVP},        \
+                    {4096, &MPIR_Allreduce_pt2pt_rd_MVP},                      \
+                    {8192, &MPIR_Allreduce_pt2pt_rs_MVP},                      \
+                    {16384, &MPIR_Allreduce_pt2pt_rs_MVP},                     \
+                    {32768, &MPIR_Allreduce_pt2pt_rs_MVP},                     \
+                    {65536, &MPIR_Allreduce_pt2pt_rs_MVP},                     \
+                    {131072, &MPIR_Allreduce_pt2pt_rs_MVP},                    \
+                    {262144, &MPIR_Allreduce_pt2pt_rs_MVP},                    \
+                    {524288, &MPIR_Allreduce_pt2pt_rs_MVP},                    \
+                    {1048576, &MPIR_Allreduce_pt2pt_ring_wrapper_MVP},         \
+                },                                                             \
+                19,                                                            \
+            {                                                                  \
+                {4, &MPIR_Allreduce_reduce_p2p_MVP},                           \
+                    {8, &MPIR_Allreduce_socket_aware_two_level_MVP},           \
+                    {16, &MPIR_Allreduce_socket_aware_two_level_MVP},          \
+                    {32, &MPIR_Allreduce_reduce_shmem_MVP},                    \
+                    {64, &MPIR_Allreduce_socket_aware_two_level_MVP},          \
+                    {128, &MPIR_Allreduce_socket_aware_two_level_MVP},         \
+                    {256, &MPIR_Allreduce_reduce_shmem_MVP},                   \
+                    {512, &MPIR_Allreduce_reduce_shmem_MVP},                   \
+                    {1024, &MPIR_Allreduce_reduce_shmem_MVP},                  \
+                    {2048, &MPIR_Allreduce_socket_aware_two_level_MVP},        \
+                    {4096, &MPIR_Allreduce_pt2pt_rs_MVP},                      \
+                    {8192, &MPIR_Allreduce_reduce_p2p_MVP},                    \
+                    {16384, &MPIR_Allreduce_reduce_p2p_MVP},                   \
+                    {32768, &MPIR_Allreduce_reduce_p2p_MVP},                   \
+                    {65536, &MPIR_Allreduce_reduce_p2p_MVP},                   \
+                    {131072, &MPIR_Allreduce_reduce_p2p_MVP},                  \
+                    {262144, &MPIR_Allreduce_reduce_p2p_MVP},                  \
+                    {524288, &MPIR_Allreduce_reduce_p2p_MVP},                  \
+                    {1048576, &MPIR_Allreduce_pt2pt_ring_wrapper_MVP},         \
+            }                                                                  \
+        }                                                                      \
+    }
+#define GEN2__AMD_EPYC_7742_128__MLX_CX_HDR__8PPN_CNT 5
+#define GEN2__AMD_EPYC_7742_128__MLX_CX_HDR__8PPN_MAX 128
+#define GEN2__AMD_EPYC_7742_128__MLX_CX_HDR__8PPN_CNT 5

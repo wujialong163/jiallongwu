@@ -1,0 +1,34 @@
+/* Copyright (c) 2001-2024, The Ohio State University. All rights
+ * reserved.
+ *
+ * This file is part of the MVAPICH software package developed by the
+ * team members of The Ohio State University's Network-Based Computing
+ * Laboratory (NBCL), headed by Professor Dhabaleswar K. (DK) Panda.
+ *
+ * For detailed copyright and licensing information, please refer to the
+ * copyright file COPYRIGHT in the top level MVAPICH directory.
+ *
+ * Copyright (C) by Argonne National Laboratory
+ *     See COPYRIGHT in top-level directory
+ */
+
+/* This file creates strings for the most important configuration options.
+   These are then used in the file src/mpi/init/initthread.c to initialize
+   global variables that will then be included in both the library and
+   executables, providing a way to determine what version and features of
+   MVAPICH were used with a particular library or executable. 
+*/
+#ifndef MPICHINFO_H_INCLUDED
+#define MPICHINFO_H_INCLUDED
+
+#define MVAPICH_CONFIGURE_ARGS_CLEAN "@CONFIGURE_ARGS_CLEAN@"
+#define MVAPICH_VERSION_DATE "@MVAPICH_RELEASE_DATE@"
+#define MVAPICH_DEVICE "@DEVICE@"
+#define MVAPICH_COMPILER_CC "@CC@ @CFLAGS@"
+#define MVAPICH_COMPILER_CXX "@CXX@ @CXXFLAGS@"
+#define MVAPICH_COMPILER_F77 "@F77@ @FFLAGS@"
+#define MVAPICH_COMPILER_FC "@FC@ @FCFLAGS@"
+#define MVAPICH_CUSTOM_STRING "@MVAPICH_CUSTOM_STRING@"
+#define MVAPICH_ABIVERSION "@ABIVERSION@"
+
+#endif
