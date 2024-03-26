@@ -5,7 +5,7 @@
 
 #include "mpiimpl.h"
 #include "mpitimpl.h"
-
+#include "mvp_pvars.h"
 /* -- Begin Profiling Symbol Block for routine MPI_T_pvar_read */
 #if defined(HAVE_PRAGMA_WEAK)
 #pragma weak MPI_T_pvar_read = PMPI_T_pvar_read
@@ -29,8 +29,7 @@ int MPI_T_pvar_read(MPI_T_pvar_session session, MPI_T_pvar_handle handle, void *
 
 int MPIR_T_pvar_read_impl(MPI_T_pvar_session session, MPI_T_pvar_handle handle, void *restrict buf)
 {
-    int i, mpi_errno = MPI_SUCCESS;
- 
+    int i, mpi_errno = MPI_SUCCESS; 
     /* Reading a never started pvar, or a stopped and then reset wartermark,
      * will run into this nasty situation. MPI-3.0 did not define what error
      * code should be returned. We returned a generic MPI error code. With MPI-3.1
@@ -40,11 +39,19 @@ int MPIR_T_pvar_read_impl(MPI_T_pvar_session session, MPI_T_pvar_handle handle, 
         mpi_errno = MPI_T_ERR_INVALID;
         goto fn_fail;
     }
-
+    
+    MPI_T_PVAR_detail_info_t *info_t;
+    info_t=&(PVAR_INFO_mvp_coll_allreduce_pt2pt_rs_send);
+    if (info_t)
+    {
+        for(int i=1;i<info_t->count;i++){
+            printf("send=%d recv=%d time=%lf \n",info_t->send_rank,info_t->recv_rank,info_t->timer);
+        }
+    }
+    
     /* For SUM pvars, return accum value + current value - offset value */
     if (MPIR_T_pvar_is_sum(handle) && MPIR_T_pvar_is_started(handle)) {
         if (handle->get_value == NULL) {
-            printf("handle_name(get_value==null)=%s  handle->count=%d \n",handle->info->name,handle->count);
             //printf("current(get_value==null)=%llu accum(get_value==null)=%llu\n",((unsigned long long *)handle->current)[0],((unsigned long long *)handle->accum)[0]);
             /* A running SUM without callback. Read its current value directly */
             switch (handle->datatype) {
@@ -54,8 +61,6 @@ int MPIR_T_pvar_read_impl(MPI_T_pvar_session session, MPI_T_pvar_handle handle, 
                         ((unsigned long long *) buf)[i] = ((unsigned long long *) handle->accum)[i]
                             + ((unsigned long long *) handle->addr)[i]
                             - ((unsigned long long *) handle->offset)[i];
-                        printf("current(get_value==null)=%llu  accum(get_value==null)=%llu addr(get_value==null)=%llu offset(get_value==null)=%llu\n",((unsigned long long *)handle->current)[i],((unsigned long long *) handle->accum)[i]
-                        , ((unsigned long long *) handle->addr)[i],((unsigned long long *) handle->offset)[i]);
                     }
                     break;
                 case MPI_DOUBLE:
@@ -63,7 +68,8 @@ int MPIR_T_pvar_read_impl(MPI_T_pvar_session session, MPI_T_pvar_handle handle, 
                         ((double *) buf)[i] = ((double *) handle->accum)[i]
                             + ((double *) handle->addr)[i]
                             - ((double *) handle->offset)[i];
-                            printf("current(get_value==null)=%lf  accum(get_value==null)=%lf  addr(get_value==null)=%lf  offset(get_value==null)=%lf \n",((double *)handle->current)[i],((double *) handle->accum)[i]
+                            // printf("handle_name(get_value==null)=%s \n",handle->info->name);
+                            printf("handle_name(get_value==null)=%s current(get_value==null)=%lf  accum(get_value==null)=%lf  addr(get_value==null)=%lf  offset(get_value==null)=%lf \n",handle->info->name,((double *)handle->current)[i],((double *) handle->accum)[i]
                         , ((double *) handle->addr)[i],((double *) handle->offset)[i]);
                     }
                     break;
@@ -90,11 +96,11 @@ int MPIR_T_pvar_read_impl(MPI_T_pvar_session session, MPI_T_pvar_handle handle, 
         } else {
             /* A running SUM with callback. Read its current value into handle */
             handle->get_value(handle->addr, handle->obj_handle, handle->count, handle->current);
-            double d;
-            MPIR_T_pvar_timer_t *ptr_=handle->addr;
-            MPL_wtime_todouble(&(ptr_->total),&d);
-            printf("total=%lf \n",d);
-            
+            // double d;
+            // MPIR_T_pvar_timer_t *ptr=handle->addr;
+            // MPL_wtime_todouble(&(ptr->total),&d);
+            // printf("total=%lf \n",d);
+
             switch (handle->datatype) {
                 case MPI_UNSIGNED_LONG_LONG:
                     for (i = 0; i < handle->count; i++) {
@@ -108,9 +114,9 @@ int MPIR_T_pvar_read_impl(MPI_T_pvar_session session, MPI_T_pvar_handle handle, 
                         ((double *) buf)[i] = ((double *) handle->accum)[i]
                             + ((double *) handle->current)[i]
                             - ((double *) handle->offset)[i];
-                        printf("current(get_value!=null)=%lf  accum(get_value==null)=%lf  addr(get_value==null)=%lf  offset(get_value==null)=%lf \n",((double *)handle->current)[i],((double *) handle->accum)[i]
+                        printf("handle_name=%s current(get_value!=null)=%lf  accum(get_value!=null)=%lf  addr(get_value!=null)=%lf  offset(get_value!=null)=%lf \n",handle->info->name,((double *)handle->current)[i],((double *) handle->accum)[i]
                         , ((double *) handle->addr)[i],((double *) handle->offset)[i]);
-                        printf("handle_name=%s\n",handle->info->name);
+                        // printf("handle_name=%s\n",handle->info->name);
                     }
                     break;
                 case MPI_UNSIGNED:
@@ -137,7 +143,8 @@ int MPIR_T_pvar_read_impl(MPI_T_pvar_session session, MPI_T_pvar_handle handle, 
     } else if (MPIR_T_pvar_is_sum(handle) && !MPIR_T_pvar_is_started(handle)) {
         /* A SUM is stopped. Return accum directly */
         for (i = 0; i < handle->count; i++){
-            printf("handle_name(no start)=%s  handle->accum=%lf \n",handle->info->name,((double *) handle->accum)[i]);
+            printf("handle_name=%s current(no start)=%lf  accum(no start)=%lf  addr(no start)=%lf  offset(no start)=%lf \n",handle->info->name,((double *)handle->current)[i],((double *) handle->accum)[i]
+            , ((double *) handle->addr)[i],((double *) handle->offset)[i]);
         }
         MPIR_Memcpy(buf, handle->accum, handle->bytes * handle->count);
     } else if (MPIR_T_pvar_is_watermark(handle)) {

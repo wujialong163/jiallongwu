@@ -187,6 +187,7 @@ unsigned long long PVAR_COUNTER_mvp_coll_allreduce_pt2pt_ring;
 unsigned long long PVAR_COUNTER_mvp_coll_allreduce_pt2pt_ring_inplace;
 unsigned long long PVAR_COUNTER_mvp_coll_allreduce_pt2pt_rd_bytes_send;
 unsigned long long PVAR_COUNTER_mvp_coll_allreduce_pt2pt_rs_bytes_send;
+MPI_T_PVAR_detail_info_t PVAR_INFO_mvp_coll_allreduce_pt2pt_rs_send;
 unsigned long long PVAR_COUNTER_mvp_coll_allreduce_pt2pt_ring_bytes_send;
 unsigned long long PVAR_COUNTER_mvp_coll_allreduce_pt2pt_ring_wrapper_bytes_send;
 unsigned long long PVAR_COUNTER_mvp_coll_allreduce_pt2pt_ring_inplace_bytes_send;
@@ -909,6 +910,7 @@ unsigned long long PVAR_COUNTER_mvp_coll_ireduce_scatter_block_inter_count_recv;
 void initialize_mvp_cats(void)
 {
     /* MPIR_T_cat_add_subcat(const char *parent_name, const char *child_name) */
+     MPIR_T_cat_add_subcat("DETAIL_INFO","Allreduce info");
      MPIR_T_cat_add_subcat("CH3", "RDMA_FP");
      MPIR_T_cat_add_subcat("CH3", "Vbuf");
      MPIR_T_cat_add_subcat("CH3", "SMP Memory Usage");
@@ -9014,6 +9016,15 @@ void MPIT_REGISTER_MVP_VARIABLES(void)
          (MPIR_T_PVAR_FLAG_READONLY | MPIR_T_PVAR_FLAG_SUM), /* Flags */
          "Ireduce_scatter Algorithms", /* Category Name */
          "Number of messages recv via ireduce_scatter_block_inter" /* Description */);
+     MPIR_T_PVAR_INFO_REGISTER_STATIC(
+         MVP, /* Module */
+         MPI_DOUBLE, /* Datatype */
+         mvp_coll_allreduce_pt2pt_rs_send, /* Name */
+         MPI_T_VERBOSITY_USER_BASIC, /* Verbosity */
+         MPI_T_BIND_NO_OBJECT, /* Bind */
+         MPIR_T_PVAR_FLAG_SUM, /* Flags */
+         "Allreduce Timers", /* Category Name */
+         "detail info the MVP allreduce_shm_rs algorithm" /* Description */);
 
 }
 

@@ -229,7 +229,6 @@ static inline cvar_table_entry_t *LOOKUP_CVAR_BY_NAME(const char *cvar_name)
 /*       PVAR_GATED_DECL(MODULE, MPIR_T_PVAR_COUNTER_BUCKET_DECL_impl(name_))            */
 /* #define MPIR_T_PVAR_COUNTER_BUCKET_DECL_EXTERN(MODULE, name_) \                       */
 /*       PVAR_GATED_DECL(MODULE, MPIR_T_PVAR_COUNTER_BUCKET_DECL_EXTERN_impl(name_))  \  */
-
 #define MPIR_T_PVAR_COUNTER_INIT_VAR(MODULE, ptr_) \
     PVAR_GATED_ACTION(MODULE, MPIR_T_PVAR_COUNTER_INIT_VAR_impl(ptr_))
 #define MPIR_T_PVAR_COUNTER_GET_VAR(ptr_) \
@@ -246,6 +245,9 @@ static inline cvar_table_entry_t *LOOKUP_CVAR_BY_NAME(const char *cvar_name)
 #define MPIR_T_PVAR_COMM_COUNTER_INC(MODULE,name_,inc_,comm) \
     PVAR_GATED_ACTION(MODULE, MPIR_T_PVAR_COMM_COUNTER_INC_impl(name_, inc_,comm))
 
+#define MPI_PVAR_DETAIL_INFO_INC(MODULE,name,send,recv,count,time,op)\
+    PVAR_GATED_ACTION(MODULE,MPI_detail_info_impl(&(PVAR_INFO_##name##_##op),send,recv,count,time))
+
 #define MPIR_T_PVAR_COUNTER_ADDR(name_) \
     MPIR_T_PVAR_COUNTER_ADDR_impl(name_)
 
@@ -256,6 +258,7 @@ static inline cvar_table_entry_t *LOOKUP_CVAR_BY_NAME(const char *cvar_name)
             verb_, bind_, flags_, cat_, desc_) \
     PVAR_GATED_ACTION(MODULE, MPIR_T_PVAR_COUNTER_REGISTER_STATIC_impl(dtype_, name_, \
             verb_, bind_, flags_, cat_, desc_))
+
 
 #define MPIR_T_PVAR_COUNTER_BUCKET_REGISTER_DYNAMIC(MODULE, dtype_, name_, count_, \
             verb_, bind_, flags_, cat_, desc_) \
@@ -351,6 +354,10 @@ static inline cvar_table_entry_t *LOOKUP_CVAR_BY_NAME(const char *cvar_name)
     PVAR_GATED_ACTION(MODULE, MPIR_T_PVAR_TIMER_REGISTER_STATIC_impl(dtype_, name_, \
             verb_, bind_, flags_, cat_, desc_))
 
+#define MPIR_T_PVAR_INFO_REGISTER_STATIC(MODULE, dtype_, name_, \
+            verb_, bind_, flags_, cat_, desc_) \
+    PVAR_GATED_ACTION(MODULE, MPIR_T_PVAR_INFO_REGISTER_STATIC_impl(dtype_, name_, \
+            verb_, bind_, flags_, cat_, desc_))
 /* HIGHWATERMARK */
 
 /* Embed type names in watermark operations because these operations need to

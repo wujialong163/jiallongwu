@@ -370,6 +370,7 @@ extern unsigned long long PVAR_COUNTER_mvp_coll_allreduce_pt2pt_ring_inplace;
 extern unsigned long long PVAR_COUNTER_mvp_coll_allreduce_pt2pt_rd_bytes_send;
 /* declared in /tmp/XiCjhDXj0Y/mvapich-3.0/maint/../src/mpi_t/mvp_pvars_list.txt */
 extern unsigned long long PVAR_COUNTER_mvp_coll_allreduce_pt2pt_rs_bytes_send;
+extern MPI_T_PVAR_detail_info_t PVAR_INFO_mvp_coll_allreduce_pt2pt_rs_send;
 /* declared in /tmp/XiCjhDXj0Y/mvapich-3.0/maint/../src/mpi_t/mvp_pvars_list.txt */
 extern unsigned long long PVAR_COUNTER_mvp_coll_allreduce_pt2pt_ring_bytes_send;
 /* declared in /tmp/XiCjhDXj0Y/mvapich-3.0/maint/../src/mpi_t/mvp_pvars_list.txt */

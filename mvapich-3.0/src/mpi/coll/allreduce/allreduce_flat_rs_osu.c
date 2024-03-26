@@ -14,6 +14,8 @@ int MPIR_Allreduce_pt2pt_rs_MVP(const void *sendbuf, void *recvbuf, int count,
 {
     MPIR_TIMER_START(coll, allreduce, shm_rs);
     MPIR_T_PVAR_COUNTER_INC(MVP, mvp_coll_allreduce_shm_rs, 1);     //算法调用次数统计
+    double start=0,end=0,time;
+    int s_r_count=0;
     int comm_size, rank;
     int mpi_errno = MPI_SUCCESS;
     int mpi_errno_ret = MPI_SUCCESS;
@@ -87,9 +89,19 @@ int MPIR_Allreduce_pt2pt_rs_MVP(const void *sendbuf, void *recvbuf, int count,
         if (rank % 2 == 0) {
             /* even */
             MPIR_PVAR_INC(allreduce, pt2pt_rs, send, count, datatype);
+            printf("send_rank=%d recv_rank=%d \n",
+            MPIR_Rank_list_mapper(comm_ptr, rank - 1),MPIR_Rank_list_mapper(comm_ptr, rank + 1));
+            start=MPI_Wtime();
             mpi_errno = MPIC_Send(recvbuf, count, datatype,
                                   MPIR_Rank_list_mapper(comm_ptr, rank + 1),
                                   MPIR_ALLREDUCE_TAG, comm_ptr, errflag);
+            end=MPI_Wtime();
+            time=end-start;
+            printf("time=%lf \n",end-start);
+            MPI_PVAR_DETAIL_INFO_INC(MVP,mvp_coll_allreduce_pt2pt_rs,MPIR_Rank_list_mapper(comm_ptr, rank - 1),MPIR_Rank_list_mapper(comm_ptr, rank + 1)
+            ,1,time,send);
+            //save rank;data;time;
+
             if (mpi_errno) {
                 /* for communication errors,
                  * just record the error but continue */
@@ -105,6 +117,7 @@ int MPIR_Allreduce_pt2pt_rs_MVP(const void *sendbuf, void *recvbuf, int count,
         } else {
             /* odd */
             MPIR_PVAR_INC(allreduce, pt2pt_rs, recv, count, datatype);
+            s_r_count++;
             mpi_errno = MPIC_Recv(tmp_buf, count, datatype,
                                   MPIR_Rank_list_mapper(comm_ptr, rank - 1),
                                   MPIR_ALLREDUCE_TAG, comm_ptr,
@@ -156,13 +169,17 @@ int MPIR_Allreduce_pt2pt_rs_MVP(const void *sendbuf, void *recvbuf, int count,
                  * into tmp_buf */
                 MPIR_PVAR_INC(allreduce, pt2pt_rs, send, count, datatype);
                 MPIR_PVAR_INC(allreduce, pt2pt_rs, recv, count, datatype);
+                start=MPI_Wtime();
                 mpi_errno = MPIC_Sendrecv(
                     recvbuf, count, datatype,
                     MPIR_Rank_list_mapper(comm_ptr, dst), MPIR_ALLREDUCE_TAG,
                     tmp_buf, count, datatype,
                     MPIR_Rank_list_mapper(comm_ptr, dst), MPIR_ALLREDUCE_TAG,
                     comm_ptr, MPI_STATUS_IGNORE, errflag);
-
+                end=MPI_Wtime();
+                time=end-start;
+                MPI_PVAR_DETAIL_INFO_INC(MVP,mvp_coll_allreduce_pt2pt_rs,MPIR_Rank_list_mapper(comm_ptr, dst),MPIR_Rank_list_mapper(comm_ptr, dst)
+            ,1,time,send);
                 if (mpi_errno) {
                     /* for communication errors,
                      * just record the error but continue */
@@ -249,6 +266,7 @@ int MPIR_Allreduce_pt2pt_rs_MVP(const void *sendbuf, void *recvbuf, int count,
                 /* Send data from recvbuf. Recv into tmp_buf */
                 MPIR_PVAR_INC(allreduce, pt2pt_rs, send, send_cnt, datatype);
                 MPIR_PVAR_INC(allreduce, pt2pt_rs, recv, recv_cnt, datatype);
+                start=MPI_Wtime();
                 mpi_errno = MPIC_Sendrecv(
                     (char *)recvbuf + disps[send_idx] * extent, send_cnt,
                     datatype, MPIR_Rank_list_mapper(comm_ptr, dst),
@@ -256,6 +274,10 @@ int MPIR_Allreduce_pt2pt_rs_MVP(const void *sendbuf, void *recvbuf, int count,
                     (char *)tmp_buf + disps[recv_idx] * extent, recv_cnt,
                     datatype, MPIR_Rank_list_mapper(comm_ptr, dst),
                     MPIR_ALLREDUCE_TAG, comm_ptr, MPI_STATUS_IGNORE, errflag);
+                end=MPI_Wtime();
+                time=end-start;
+                MPI_PVAR_DETAIL_INFO_INC(MVP,mvp_coll_allreduce_pt2pt_rs,MPIR_Rank_list_mapper(comm_ptr, dst),MPIR_Rank_list_mapper(comm_ptr, dst)
+            ,1,time,send);
                 if (mpi_errno) {
                     /* for communication errors,
                      * just record the error but  continue */
@@ -318,6 +340,7 @@ int MPIR_Allreduce_pt2pt_rs_MVP(const void *sendbuf, void *recvbuf, int count,
                 }
                 MPIR_PVAR_INC(allreduce, pt2pt_rs, send, send_cnt, datatype);
                 MPIR_PVAR_INC(allreduce, pt2pt_rs, recv, recv_cnt, datatype);
+                start=MPI_Wtime();
                 mpi_errno = MPIC_Sendrecv(
                     (char *)recvbuf + disps[send_idx] * extent, send_cnt,
                     datatype, MPIR_Rank_list_mapper(comm_ptr, dst),
@@ -325,6 +348,10 @@ int MPIR_Allreduce_pt2pt_rs_MVP(const void *sendbuf, void *recvbuf, int count,
                     (char *)recvbuf + disps[recv_idx] * extent, recv_cnt,
                     datatype, MPIR_Rank_list_mapper(comm_ptr, dst),
                     MPIR_ALLREDUCE_TAG, comm_ptr, MPI_STATUS_IGNORE, errflag);
+                end=MPI_Wtime();
+                time=end-start;
+                MPI_PVAR_DETAIL_INFO_INC(MVP,mvp_coll_allreduce_pt2pt_rs,MPIR_Rank_list_mapper(comm_ptr, dst),MPIR_Rank_list_mapper(comm_ptr, dst)
+            ,1,time,send);
                 if (mpi_errno) {
                     /* for communication errors,
                      * just record the error but continue */
@@ -348,9 +375,14 @@ int MPIR_Allreduce_pt2pt_rs_MVP(const void *sendbuf, void *recvbuf, int count,
     if (rank < 2 * rem) {
         if (rank % 2) { /* odd */
             MPIR_PVAR_INC(allreduce, pt2pt_rs, send, count, datatype);
+            start=MPI_Wtime();
             mpi_errno = MPIC_Send(recvbuf, count, datatype,
                                   MPIR_Rank_list_mapper(comm_ptr, rank - 1),
                                   MPIR_ALLREDUCE_TAG, comm_ptr, errflag);
+            end=MPI_Wtime();
+            time=end-start;
+            MPI_PVAR_DETAIL_INFO_INC(MVP,mvp_coll_allreduce_pt2pt_rs,MPIR_Rank_list_mapper(comm_ptr,rank + 1),MPIR_Rank_list_mapper(comm_ptr,rank - 1)
+            ,1,time,send);
         } else { /* even */
             MPIR_PVAR_INC(allreduce, pt2pt_rs, recv, count, datatype);
             mpi_errno = MPIC_Recv(recvbuf, count, datatype,

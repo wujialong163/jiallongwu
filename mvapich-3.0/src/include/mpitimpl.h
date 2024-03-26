@@ -259,6 +259,23 @@ typedef struct {
     unsigned long long count;
 } MPIR_T_pvar_timer_t;
 
+/*Aggregating communication details type */
+typedef struct 
+{
+    /*rank*/
+    int *send_rank;
+    int *recv_rank;
+
+    /*count*/
+    int count;
+
+    /*time*/
+    double *timer;
+
+    /* data */
+    double data_size;
+}MPI_T_PVAR_detail_info_t;
+
 /* An union to represent a watermark value */
 typedef union {
     double f;
@@ -676,15 +693,6 @@ typedef struct pvar_bucket
                         &((comm->dev.ch                                        \
                                .sub_comm_timers[pvar->sub_comm_timer_index])   \
                               .total));                                        \
-                    MPL_wtime_acc(                                             \
-                        &((comm->dev.ch                                        \
-                               .sub_comm_timers[pvar->sub_comm_timer_index])   \
-                              .curstart),                                      \
-                        &tmp,                                                  \
-                        &((PVAR_TIMER_##name_).total));                         \
-                    MPL_wtime_todouble(&(tmp),&s);\
-                    MPL_wtime_todouble(&((PVAR_TIMER_##name_).total),&d);\
-                    printf("end=%lf total=%lf name=%s \n",s,d,name);\
                 }                                                              \
             }                                                                  \
         }                                                                      \
@@ -693,6 +701,19 @@ typedef struct pvar_bucket
    #define MPIR_T_PVAR_COMM_TIMER_START_impl(name_,comm)
    #define MPIR_T_PVAR_COMM_TIMER_END_impl(name_,comm)
 #endif
+
+// MPL_wtime_todouble(&((PVAR_TIMER_##name_).total),&d);\
+// printf("befor wtime_acc=%lf name=%s \n",d,name);\
+// MPL_wtime_acc(                                             \
+//     &((comm->dev.ch                                        \
+//            .sub_comm_timers[pvar->sub_comm_timer_index])   \
+//           .curstart),                                      \
+//     &tmp,                                                  \
+//     &((PVAR_TIMER_##name_).total));                         \
+// MPL_wtime_todouble(&(tmp),&s);\
+// MPL_wtime_todouble(&((PVAR_TIMER_##name_).total),&d);\
+// printf("end=%lf total=%lf name=%s \n",s,d,name);\
+
 
 #define MPIR_T_PVAR_COUNTER_ADDR_impl(name_) \
     (&PVAR_COUNTER_##name_)
@@ -877,13 +898,13 @@ typedef struct pvar_bucket
 #define MPIR_T_PVAR_TIMER_END_VAR_impl(ptr_) \
     do { \
         MPL_time_t tmp_; \
-        double d,e,s;\
         MPL_wtime(&tmp_); \
         MPL_wtime_acc(&((ptr_)->curstart), &tmp_, &((ptr_)->total)); \
+        /*double d,e,s;\
         MPL_wtime_todouble(&((ptr_)->curstart),&s);\
         MPL_wtime_todouble(&tmp_,&e);\
         MPL_wtime_todouble(&((ptr_)->total),&d);\
-        printf("start=%lf ptr_time=%lf end=%lf \n",s,d,e);\
+        printf("start=%lf ptr_time=%lf end=%lf \n",s,d,e);*/\
     } while (0)
 
 #define MPIR_T_PVAR_TIMER_INIT_impl(name_) \
@@ -893,9 +914,23 @@ typedef struct pvar_bucket
 #define MPIR_T_PVAR_TIMER_START_impl(name_) \
     MPIR_T_PVAR_TIMER_START_VAR_impl(&PVAR_TIMER_##name_)
 #define MPIR_T_PVAR_TIMER_END_impl(name_) \
-    MPIR_T_PVAR_TIMER_END_VAR_impl(&PVAR_TIMER_##name_)
+    do{\
+    /*char *name=QUOTE(name_);\
+    printf("name=%s\n",name);*/\
+    MPIR_T_PVAR_TIMER_END_VAR_impl(&PVAR_TIMER_##name_);\
+    }while(0);
 #define MPIR_T_PVAR_TIMER_ADDR_impl(name_) \
     (&PVAR_TIMER_##name_)
+
+#define MPIR_T_PVAR_INFO_INIT_VAR_impl(ptr_)\
+    do{\
+        (ptr_)->count=0;\
+        (ptr_)->timer=0;\
+    }while(0)
+
+
+#define MPIR_T_PVAR_INFO_INIT_impl(name_) \
+    MPIR_T_PVAR_INFO_INIT_VAR_impl(&PVAR_INFO_##name_)
 
 /* Customized get_value() for MPIR_T_pvar_timer_t */
 static inline
@@ -926,7 +961,28 @@ static inline
             NULL, NULL, cat_, desc_); \
     } while (0)
 
+#define MPIR_T_PVAR_INFO_REGISTER_STATIC_impl(dtype_, name_, \
+            verb_, bind_, flags_, cat_, desc_) \
+    do { \
+        void *addr_; \
+        void *count_addr_; \
+        /* Allowable datatypes only */ \
+        MPIR_Assert((dtype_) == MPI_DOUBLE); \
+        MPIR_T_PVAR_INFO_INIT_impl(name_); \
+        addr_ = &PVAR_INFO_##name_; \
+        count_addr_ = &(PVAR_INFO_##name_.count); \
+        MPIR_T_PVAR_REGISTER_impl(MPI_T_PVAR_CLASS_INFO, dtype_, #name_, \
+            addr_, 1, MPI_T_ENUM_NULL, verb_, bind_, flags_, \
+            NULL, NULL, cat_, desc_); \
+    } while (0)
 
+#define MPI_detail_info_impl(ptr_,send, recv, count_,time)\
+    do{\
+        (ptr_)->count+=count_;\
+        ((ptr_)->send_rank)[(ptr_)->count]=send;\
+        ((ptr_)->recv_rank)[(ptr_)->count]=recv;\
+        ((ptr_)->timer)[(ptr_)->count]=time;\
+    }while(0)
 /* MPI_T_PVAR_CLASS_HIGHWATERMARK (continuous or not)
  */
 
@@ -1368,7 +1424,6 @@ static inline int MPIR_T_is_initialized(void)
 #else /*ENABLE_PVAR_MVP*/
     #define MPIR_PVAR_INC(_mpicoll, _algo, _operation, _count, _datatype)
 #endif /*ENABLE_PVAR_MVP*/
-
 
 /* Helper functions to start/end MVP PVAR timers */
 

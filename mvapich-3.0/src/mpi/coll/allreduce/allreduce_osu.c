@@ -1377,6 +1377,8 @@ int MPIR_Allreduce_MVP(const void *sendbuf, void *recvbuf, int count,
                        MPI_Datatype datatype, MPI_Op op, MPIR_Comm *comm_ptr,
                        MPIR_Errflag_t *errflag)
 {
+    
+    MPIR_TIMER_START(coll, allreduce, subcomm);
     MPIR_T_PVAR_COMM_COUNTER_INC(MVP, mvp_coll_allreduce_subcomm, 1, comm_ptr);
     MPIR_T_PVAR_COMM_TIMER_START(MVP, mvp_coll_timer_allreduce_subcomm,
                                  comm_ptr);
@@ -1401,6 +1403,7 @@ int MPIR_Allreduce_MVP(const void *sendbuf, void *recvbuf, int count,
     }
 
     MPIR_T_PVAR_COMM_TIMER_END(MVP, mvp_coll_timer_allreduce_subcomm, comm_ptr);
+    MPIR_TIMER_END(coll, allreduce, subcomm);
 
 fn_exit:
     return (mpi_errno);
