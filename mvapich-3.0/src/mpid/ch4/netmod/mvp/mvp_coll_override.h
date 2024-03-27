@@ -32,7 +32,6 @@
  */
 #include "mvp_mpir.h"
 #include "mvp_offload_coll_init.h"
-#include <stdio.h>
 
 /*
  * probably need to include a ch4_shmem_coll.h file to disable
@@ -111,7 +110,6 @@ MPL_STATIC_INLINE_PREFIX int MPIDI_NM_MVP_mpi_allreduce(
     const void *sendbuf, void *recvbuf, int count, MPI_Datatype datatype,
     MPI_Op op, MPIR_Comm *comm, MPIR_Errflag_t *errflag)
 {
-    
     int mpi_errno = 0;
     if (MVP_USE_OSU_COLLECTIVES &&
         comm->comm_kind == MPIR_COMM_KIND__INTRACOMM) {

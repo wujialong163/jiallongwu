@@ -263,14 +263,14 @@ typedef struct {
 typedef struct 
 {
     /*rank*/
-    int *send_rank;
-    int *recv_rank;
+    int send_rank[256];
+    int recv_rank[256];
 
     /*count*/
     int count;
 
     /*time*/
-    double *timer;
+    double timer[256];
 
     /* data */
     double data_size;
@@ -925,6 +925,8 @@ typedef struct pvar_bucket
 #define MPIR_T_PVAR_INFO_INIT_VAR_impl(ptr_)\
     do{\
         (ptr_)->count=0;\
+        (ptr_)->send_rank=0;\
+        (ptr_)->recv_rank=0;\
         (ptr_)->timer=0;\
     }while(0)
 
@@ -968,7 +970,7 @@ static inline
         void *count_addr_; \
         /* Allowable datatypes only */ \
         MPIR_Assert((dtype_) == MPI_DOUBLE); \
-        MPIR_T_PVAR_INFO_INIT_impl(name_); \
+        /*MPIR_T_PVAR_INFO_INIT_impl(name_); */\
         addr_ = &PVAR_INFO_##name_; \
         count_addr_ = &(PVAR_INFO_##name_.count); \
         MPIR_T_PVAR_REGISTER_impl(MPI_T_PVAR_CLASS_INFO, dtype_, #name_, \
@@ -978,10 +980,12 @@ static inline
 
 #define MPI_detail_info_impl(ptr_,send, recv, count_,time)\
     do{\
-        (ptr_)->count+=count_;\
+        ((ptr_)->count)+=(count_);\
         ((ptr_)->send_rank)[(ptr_)->count]=send;\
+        printf("send=%d ptr_send rank=%d\n",send,((ptr_)->send_rank)[(ptr_)->count]);\
         ((ptr_)->recv_rank)[(ptr_)->count]=recv;\
         ((ptr_)->timer)[(ptr_)->count]=time;\
+        printf("time=%lf ptr_time=%lf \n",time,((ptr_)->timer)[(ptr_)->count]);\
     }while(0)
 /* MPI_T_PVAR_CLASS_HIGHWATERMARK (continuous or not)
  */
