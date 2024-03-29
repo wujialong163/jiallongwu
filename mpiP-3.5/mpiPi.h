@@ -131,6 +131,8 @@ typedef struct _mpiPi_t
 {
   int ac;
   char *av[MPIP_COPIED_ARGS_MAX];
+  MPI_T_pvar_session session;
+  MPI_T_pvar_handle handle[32];
   char *toolname;
   char *appName;
   char *appFullName;

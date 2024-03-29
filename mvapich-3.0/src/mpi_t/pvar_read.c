@@ -44,12 +44,22 @@ int MPIR_T_pvar_read_impl(MPI_T_pvar_session session, MPI_T_pvar_handle handle, 
     info_t=&(PVAR_INFO_mvp_coll_allreduce_pt2pt_rs_send);
     if (info_t)
     {
-        printf("count%d\n",info_t->count);
+        int rank;
+        FILE *fp;
+        char file[128];
+        PMPI_Comm_rank(MPI_COMM_WORLD,&rank);
+        snprintf(file,128,"./mpi_allreduce_rs-%d.txt",rank);
+        fp=fopen(file,"w");
+
         for(int i=1;i<info_t->count;i++){
-            printf("send=%d recv=%d time=%lf \n",((info_t)->send_rank)[i],
-            ((info_t)->recv_rank)[i],
+            // printf("send=%d recv=%d time=%lf \n",((info_t)->send_rank)[i],
+            // ((info_t)->recv_rank)[i],
+            // ((info_t)->timer)[i]);
+            fprintf(fp,"send=%d recv=%d data_size=%d time=%lf \n",((info_t)->send_rank)[i],((info_t)->recv_rank)[i],
+            ((info_t)->data_size)[i],
             ((info_t)->timer)[i]);
         }
+        fclose(fp);
     }
     /* For SUM pvars, return accum value + current value - offset value */
     if (MPIR_T_pvar_is_sum(handle) && MPIR_T_pvar_is_started(handle)) {
@@ -63,9 +73,9 @@ int MPIR_T_pvar_read_impl(MPI_T_pvar_session session, MPI_T_pvar_handle handle, 
                         ((unsigned long long *) buf)[i] = ((unsigned long long *) handle->accum)[i]
                             + ((unsigned long long *) handle->addr)[i]
                             - ((unsigned long long *) handle->offset)[i];
-                        printf("handle_name(get_value==null)=%s current(get_value==null)=%llu  accum(get_value==null)=%llu  addr(get_value==null)=%llu  offset(get_value==null)=%llu \n",
-                            handle->info->name,((unsigned long long *)handle->current)[i],((unsigned long long *) handle->accum)[i]
-                        , ((unsigned long long *) handle->addr)[i],((unsigned long long *) handle->offset)[i]);
+                        // printf("handle_name(get_value==null)=%s current(get_value==null)=%llu  accum(get_value==null)=%llu  addr(get_value==null)=%llu  offset(get_value==null)=%llu \n",
+                        //     handle->info->name,((unsigned long long *)handle->current)[i],((unsigned long long *) handle->accum)[i]
+                        // , ((unsigned long long *) handle->addr)[i],((unsigned long long *) handle->offset)[i]);
                     }
                     break;
                 case MPI_DOUBLE:
@@ -100,6 +110,7 @@ int MPIR_T_pvar_read_impl(MPI_T_pvar_session session, MPI_T_pvar_handle handle, 
             }
         } else {
             /* A running SUM with callback. Read its current value into handle */
+            printf("handle->get_value\n");
             handle->get_value(handle->addr, handle->obj_handle, handle->count, handle->current);
             // double d;
             // MPIR_T_pvar_timer_t *ptr=handle->addr;

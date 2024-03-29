@@ -1380,13 +1380,13 @@ int MPIR_Allreduce_MVP(const void *sendbuf, void *recvbuf, int count,
     
     MPIR_TIMER_START(coll, allreduce, subcomm);
     MPIR_T_PVAR_COMM_COUNTER_INC(MVP, mvp_coll_allreduce_subcomm, 1, comm_ptr);
-    MPIR_T_PVAR_COMM_TIMER_START(MVP, mvp_coll_timer_allreduce_subcomm,
-                                 comm_ptr);
+    // MPIR_T_PVAR_COMM_TIMER_START(MVP, mvp_coll_timer_allreduce_subcomm,
+    //                              comm_ptr);
     
     int mpi_errno = MPI_SUCCESS;
     if (count == 0) {
-        MPIR_T_PVAR_COMM_TIMER_END(MVP, mvp_coll_timer_allreduce_subcomm,
-                                   comm_ptr);
+        // MPIR_T_PVAR_COMM_TIMER_END(MVP, mvp_coll_timer_allreduce_subcomm,
+        //                            comm_ptr);
         return MPI_SUCCESS;
     }
 
@@ -1402,7 +1402,7 @@ int MPIR_Allreduce_MVP(const void *sendbuf, void *recvbuf, int count,
                 sendbuf, recvbuf, count, datatype, op, comm_ptr, errflag);
     }
 
-    MPIR_T_PVAR_COMM_TIMER_END(MVP, mvp_coll_timer_allreduce_subcomm, comm_ptr);
+    // MPIR_T_PVAR_COMM_TIMER_END(MVP, mvp_coll_timer_allreduce_subcomm, comm_ptr);
     MPIR_TIMER_END(coll, allreduce, subcomm);
 
 fn_exit:

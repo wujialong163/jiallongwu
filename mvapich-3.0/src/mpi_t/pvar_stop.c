@@ -40,7 +40,7 @@ int MPIR_T_pvar_stop_impl(MPI_T_pvar_session session, MPI_T_pvar_handle handle)
         if (handle->get_value == NULL) {
             MPIR_Memcpy(handle->current, handle->addr, handle->bytes * handle->count);
         } else {
-            handle->get_value(handle->addr, handle->obj_handle, handle->count, handle->current);
+            handle->get_value(handle->addr, handle->obj_handle, handle->count, handle->current);    //获取最近的一次算法的累计执行时间。
         }
 
         /* Substract offset from current, and accumulate the result to accum */
@@ -56,6 +56,9 @@ int MPIR_T_pvar_stop_impl(MPI_T_pvar_session session, MPI_T_pvar_handle handle)
                 for (i = 0; i < handle->count; i++) {
                     ((double *) handle->accum)[i] += ((double *) handle->current)[i]
                         - ((double *) handle->offset)[i];
+                    printf("handle_name=%s current(pvar_stop)=%lf  accum(pvar_stop)=%lf  addr(pvar_stop)=%lf  offset(pvar_stop)=%lf \n",
+                    handle->info->name,((double *)handle->current)[i],((double *) handle->accum)[i]
+                        , ((double *) handle->addr)[i],((double *) handle->offset)[i]);
                 }
                 break;
             case MPI_UNSIGNED:

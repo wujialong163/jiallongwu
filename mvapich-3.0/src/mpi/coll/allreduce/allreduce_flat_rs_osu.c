@@ -14,7 +14,7 @@ int MPIR_Allreduce_pt2pt_rs_MVP(const void *sendbuf, void *recvbuf, int count,
 {
     MPIR_TIMER_START(coll, allreduce, shm_rs);
     MPIR_T_PVAR_COUNTER_INC(MVP, mvp_coll_allreduce_shm_rs, 1);     //算法调用次数统计
-    printf("mvp_coll_allreduce_shm_rs=%llu  %llu\n",PVAR_COUNTER_mvp_coll_allreduce_shm_rs,(unsigned long long *)(&(PVAR_COUNTER_mvp_coll_allreduce_shm_rs)));
+    //printf("mvp_coll_allreduce_shm_rs=%llu  %llu\n",PVAR_COUNTER_mvp_coll_allreduce_shm_rs,(unsigned long long *)(&(PVAR_COUNTER_mvp_coll_allreduce_shm_rs)));
     double start=0,end=0,time;
     int s_r_count=0;
     int comm_size, rank;
@@ -90,18 +90,19 @@ int MPIR_Allreduce_pt2pt_rs_MVP(const void *sendbuf, void *recvbuf, int count,
         if (rank % 2 == 0) {
             /* even */
             MPIR_PVAR_INC(allreduce, pt2pt_rs, send, count, datatype);
-            printf("(rank%2==0)send_rank=%d recv_rank=%d \n",
-            MPIR_Rank_list_mapper(comm_ptr, rank - 1),MPIR_Rank_list_mapper(comm_ptr, rank + 1));
+            // printf("(rank%2==0)send_rank=%d recv_rank=%d \n",
+            // MPIR_Rank_list_mapper(comm_ptr, rank - 1),MPIR_Rank_list_mapper(comm_ptr, rank + 1));
             start=MPI_Wtime();
             mpi_errno = MPIC_Send(recvbuf, count, datatype,
                                   MPIR_Rank_list_mapper(comm_ptr, rank + 1),
                                   MPIR_ALLREDUCE_TAG, comm_ptr, errflag);
             end=MPI_Wtime();
             time=end-start;
-            printf("timer=%lf\n",time);
-            MPI_PVAR_DETAIL_INFO_INC(MVP,mvp_coll_allreduce_pt2pt_rs,MPIR_Rank_list_mapper(comm_ptr, rank - 1),MPIR_Rank_list_mapper(comm_ptr, rank + 1)
-            ,1,time,send);
+            // printf("timer=%lf\n",time);
             //save rank;data;time;
+            MPI_PVAR_DETAIL_INFO_INC(MVP,mvp_coll_allreduce_pt2pt_rs,MPIR_Rank_list_mapper(comm_ptr, rank - 1),MPIR_Rank_list_mapper(comm_ptr, rank + 1)
+            ,1,time,send,count,datatype);
+
 
             if (mpi_errno) {
                 /* for communication errors,
@@ -179,10 +180,10 @@ int MPIR_Allreduce_pt2pt_rs_MVP(const void *sendbuf, void *recvbuf, int count,
                     comm_ptr, MPI_STATUS_IGNORE, errflag);
                 end=MPI_Wtime();
                 time=end-start;
-                printf("timer=%lf\n",time);
-                printf("send=%d recv=%d \n", MPIR_Rank_list_mapper(comm_ptr, dst),MPIR_Rank_list_mapper(comm_ptr, dst));
+                // printf("timer=%lf\n",time);
+                // printf("send=%d recv=%d \n", MPIR_Rank_list_mapper(comm_ptr, dst),MPIR_Rank_list_mapper(comm_ptr, dst));
                 MPI_PVAR_DETAIL_INFO_INC(MVP,mvp_coll_allreduce_pt2pt_rs,MPIR_Rank_list_mapper(comm_ptr, dst),MPIR_Rank_list_mapper(comm_ptr, dst)
-            ,1,time,send);
+            ,1,time,send,count,datatype);
                 if (mpi_errno) {
                     /* for communication errors,
                      * just record the error but continue */
@@ -279,10 +280,10 @@ int MPIR_Allreduce_pt2pt_rs_MVP(const void *sendbuf, void *recvbuf, int count,
                     MPIR_ALLREDUCE_TAG, comm_ptr, MPI_STATUS_IGNORE, errflag);
                 end=MPI_Wtime();
                 time=end-start;
-                printf("timer=%lf\n",time);
-                printf("send=%d recv=%d \n", MPIR_Rank_list_mapper(comm_ptr, dst),MPIR_Rank_list_mapper(comm_ptr, dst));
+                // printf("timer=%lf\n",time);
+                // printf("send=%d recv=%d \n", MPIR_Rank_list_mapper(comm_ptr, dst),MPIR_Rank_list_mapper(comm_ptr, dst));
                 MPI_PVAR_DETAIL_INFO_INC(MVP,mvp_coll_allreduce_pt2pt_rs,MPIR_Rank_list_mapper(comm_ptr, dst),MPIR_Rank_list_mapper(comm_ptr, dst)
-            ,1,time,send);
+            ,1,time,send,count,datatype);
                 if (mpi_errno) {
                     /* for communication errors,
                      * just record the error but  continue */
@@ -355,10 +356,10 @@ int MPIR_Allreduce_pt2pt_rs_MVP(const void *sendbuf, void *recvbuf, int count,
                     MPIR_ALLREDUCE_TAG, comm_ptr, MPI_STATUS_IGNORE, errflag);
                 end=MPI_Wtime();
                 time=end-start;
-                printf("timer=%lf\n",time);
-                printf("send=%d recv=%d \n", MPIR_Rank_list_mapper(comm_ptr, dst),MPIR_Rank_list_mapper(comm_ptr, dst));
+                // printf("timer=%lf\n",time);
+                // printf("send=%d recv=%d \n", MPIR_Rank_list_mapper(comm_ptr, dst),MPIR_Rank_list_mapper(comm_ptr, dst));
                 MPI_PVAR_DETAIL_INFO_INC(MVP,mvp_coll_allreduce_pt2pt_rs,MPIR_Rank_list_mapper(comm_ptr, dst),MPIR_Rank_list_mapper(comm_ptr, dst)
-            ,1,time,send);
+            ,1,time,send,count,datatype);
                 if (mpi_errno) {
                     /* for communication errors,
                      * just record the error but continue */
@@ -388,16 +389,16 @@ int MPIR_Allreduce_pt2pt_rs_MVP(const void *sendbuf, void *recvbuf, int count,
                                   MPIR_ALLREDUCE_TAG, comm_ptr, errflag);
             end=MPI_Wtime();
             time=end-start;
-            printf("send=%d timer=%lf\n",MPIR_Rank_list_mapper(comm_ptr, rank - 1),time);
+            // printf("send=%d timer=%lf\n",MPIR_Rank_list_mapper(comm_ptr, rank - 1),time);
             MPI_PVAR_DETAIL_INFO_INC(MVP,mvp_coll_allreduce_pt2pt_rs,MPIR_Rank_list_mapper(comm_ptr,rank + 1),MPIR_Rank_list_mapper(comm_ptr,rank - 1)
-            ,1,time,send);
+            ,1,time,send,count,datatype);
         } else { /* even */
             MPIR_PVAR_INC(allreduce, pt2pt_rs, recv, count, datatype);
             mpi_errno = MPIC_Recv(recvbuf, count, datatype,
                                   MPIR_Rank_list_mapper(comm_ptr, rank + 1),
                                   MPIR_ALLREDUCE_TAG, comm_ptr,
                                   MPI_STATUS_IGNORE, errflag);
-            printf("recv=%d \n",MPIR_Rank_list_mapper(comm_ptr, rank + 1));
+            // printf("recv=%d \n",MPIR_Rank_list_mapper(comm_ptr, rank + 1));
         }
         if (mpi_errno) {
             /* for communication errors, just record the error but continue */

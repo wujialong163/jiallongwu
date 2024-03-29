@@ -417,6 +417,9 @@ void MPIR_T_PVAR_REGISTER_impl(MPIR_T_pvar_class_t varclass, MPI_Datatype dtype,
                   case MPI_T_PVAR_CLASS_TIMER   : pvar->sub_comm_timer_index = sub_comm_timer_idx; 
       	                        				  sub_comm_timer_idx+=count;
                                                   break;
+                  case MPI_T_PVAR_CLASS_INFO    : pvar->sub_comm_timer_index = sub_comm_timer_idx; 
+      	                        				  sub_comm_timer_idx+=count;
+                                                  break;
                   case MPI_T_PVAR_CLASS_COUNTER : pvar->sub_comm_index = sub_comm_counter_idx;
                                                   sub_comm_counter_idx+=count; 
                                                   break;

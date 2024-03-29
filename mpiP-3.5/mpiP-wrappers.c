@@ -281,9 +281,11 @@ if ( mpiPi.reportStackDepth > 0 ) mpiPi_RecordTraceBack((*base_jbuf), call_stack
 }
 
 mpiPi_stats_mt_enter(hndl);
-
+/*pvar start 
+void mpiP_pvar_start(mpiPi_MPI_Allreduce)*/
 rc = PMPI_Allreduce( sendbuf, recvbuf,  * count,  * datatype,  * op,  * comm);
-
+/*pvar stop
+void mpiP_pvar_stop()*/
 mpiPi_stats_mt_exit(hndl);
 if (mpiPi_stats_mt_is_on(hndl)) {
 

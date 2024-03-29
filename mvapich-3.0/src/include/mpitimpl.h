@@ -273,7 +273,7 @@ typedef struct
     double timer[256];
 
     /* data */
-    double data_size;
+    int data_size[256];
 }MPI_T_PVAR_detail_info_t;
 
 /* An union to represent a watermark value */
@@ -900,11 +900,11 @@ typedef struct pvar_bucket
         MPL_time_t tmp_; \
         MPL_wtime(&tmp_); \
         MPL_wtime_acc(&((ptr_)->curstart), &tmp_, &((ptr_)->total)); \
-        /*double d,e,s;\
+        double d,e,s;\
         MPL_wtime_todouble(&((ptr_)->curstart),&s);\
         MPL_wtime_todouble(&tmp_,&e);\
         MPL_wtime_todouble(&((ptr_)->total),&d);\
-        printf("start=%lf ptr_time=%lf end=%lf \n",s,d,e);*/\
+        printf("start=%lf ptr_time=%lf end=%lf \n",s,d,e);\
     } while (0)
 
 #define MPIR_T_PVAR_TIMER_INIT_impl(name_) \
@@ -915,8 +915,8 @@ typedef struct pvar_bucket
     MPIR_T_PVAR_TIMER_START_VAR_impl(&PVAR_TIMER_##name_)
 #define MPIR_T_PVAR_TIMER_END_impl(name_) \
     do{\
-    /*char *name=QUOTE(name_);\
-    printf("name=%s\n",name);*/\
+    char *name=QUOTE(name_);\
+    printf("name=%s\n",name);\
     MPIR_T_PVAR_TIMER_END_VAR_impl(&PVAR_TIMER_##name_);\
     }while(0);
 #define MPIR_T_PVAR_TIMER_ADDR_impl(name_) \
@@ -942,6 +942,7 @@ static inline
     int i;
     for (i = 0; i < count; i++)
         MPL_wtime_todouble(&(timer[i].total), &buf[i]);
+        printf("value=%lf\n",*buf);
 }
 
 /* Registration for static storage */
@@ -978,14 +979,15 @@ static inline
             NULL, NULL, cat_, desc_); \
     } while (0)
 
-#define MPI_detail_info_impl(ptr_,send, recv, count_,time)\
+#define MPI_detail_info_impl(ptr_,send, recv, count_,time,_size)\
     do{\
         ((ptr_)->count)+=(count_);\
         ((ptr_)->send_rank)[(ptr_)->count]=send;\
-        printf("send=%d ptr_send rank=%d\n",send,((ptr_)->send_rank)[(ptr_)->count]);\
+        /*printf("send=%d ptr_send rank=%d\n",send,((ptr_)->send_rank)[(ptr_)->count]);*/\
         ((ptr_)->recv_rank)[(ptr_)->count]=recv;\
         ((ptr_)->timer)[(ptr_)->count]=time;\
-        printf("time=%lf ptr_time=%lf \n",time,((ptr_)->timer)[(ptr_)->count]);\
+        ((ptr_)->data_size)[(ptr_)->count]=_size;\
+        /*printf("time=%lf ptr_time=%lf \n",time,((ptr_)->timer)[(ptr_)->count]);*/\
     }while(0)
 /* MPI_T_PVAR_CLASS_HIGHWATERMARK (continuous or not)
  */

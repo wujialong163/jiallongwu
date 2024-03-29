@@ -40,7 +40,17 @@ int MPIR_T_pvar_start_impl(MPI_T_pvar_session session, MPI_T_pvar_handle handle)
         if (handle->get_value == NULL) {
             MPIR_Memcpy(handle->offset, handle->addr, handle->bytes * handle->count);
         } else {
-            handle->get_value(handle->addr, handle->obj_handle, handle->count, handle->offset);
+            handle->get_value(handle->addr, handle->obj_handle, handle->count, handle->offset); //获取的是total值，最近的一次算法执行时间。
+            printf("pvar_start\n");
+            if(handle->datatype == MPI_DOUBLE){
+                for (int i = 0; i < handle->count; i++)
+                {         
+                    printf("handle_name(pvar_start)=%s current(pvar_start)=%llu  accum(pvar_start)=%llu  addr(pvar_start)=%llu  offset(pvar_start)=%llu \n",
+                                    handle->info->name,((unsigned long long *)handle->current)[i],((unsigned long long *) handle->accum)[i]
+                    , ((unsigned long long *) handle->addr)[i],((unsigned long long *) handle->offset)[i]);
+                }
+
+            }
         }
     } else if (MPIR_T_pvar_is_watermark(handle)) {
         /* To start WATERMARK, if it has not ever been started,

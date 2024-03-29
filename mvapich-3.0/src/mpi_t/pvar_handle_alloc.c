@@ -63,7 +63,7 @@ int MPIR_T_pvar_handle_alloc_impl(MPI_T_pvar_session session, int pvar_index,
     extra = 0;
 
     if (info->varclass == MPI_T_PVAR_CLASS_COUNTER ||
-        info->varclass == MPI_T_PVAR_CLASS_AGGREGATE || info->varclass == MPI_T_PVAR_CLASS_TIMER) {
+        info->varclass == MPI_T_PVAR_CLASS_AGGREGATE || info->varclass == MPI_T_PVAR_CLASS_TIMER || info->varclass == MPI_T_PVAR_CLASS_INFO) {
         /* Extra memory for accum, offset, current */
         is_sum = TRUE;
         extra = bytes * cnt * 3;
@@ -71,6 +71,7 @@ int MPIR_T_pvar_handle_alloc_impl(MPI_T_pvar_session session, int pvar_index,
                info->varclass == MPI_T_PVAR_CLASS_LOWWATERMARK) {
         is_watermark = TRUE;
     }
+    
 
     /* Allocate memory and bzero it */
     MPIR_CHKPMEM_CALLOC(hnd, MPIR_T_pvar_handle_t *, sizeof(*hnd) + extra,

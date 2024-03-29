@@ -34,6 +34,7 @@ _MPI_Init (int *argc, char ***argv)
   //mpiPi_mt_stat_tls_t *hndl;
   //void *call_stack[MPIP_CALLSITE_STACK_DEPTH_MAX] = { NULL };
   int enabledStatus,threadsup;
+  int thsupport;
 
   enabledStatus = mpiPi.enabled;
   mpiPi.enabled = 0;
@@ -44,6 +45,9 @@ _MPI_Init (int *argc, char ***argv)
   //mpiPi_GETTIME (&start);
   rc = PMPI_Init (argc, argv);
   //mpiPi_GETTIME (&end);
+  /*init pvar*/
+  rc=MPI_T_init_thread(MPI_THREAD_SINGLE,&thsupport);
+  MPI_T_pvar_creat_session(&mpiPi.session);
   mpiPi.enabled = enabledStatus;
 
 #if defined(Linux) && ! defined(ppc64)
@@ -214,6 +218,8 @@ _MPI_Finalize ()
 
   //mpiPi_T_finalize();
   rc = PMPI_Finalize ();
+  /*pvar finalize*/
+  rc=MPI_T_finalize();
   mpiPi_msg_debug ("returning from PMPI_Finalize\n");
 
   return rc;
