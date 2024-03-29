@@ -25,3 +25,17 @@ void mpiP_pvar_start(int op){
     }
     
 }
+/*
+要读取变量内的值，如果用户有确定的变量名称则进行针对性的读取，如果没有，则读取有数据记录的变量的值。
+
+*/
+void mpiP_pvar_stop(int op){
+    int i=0;
+    while (i)
+    {
+        /* code */
+        MPI_T_pvar_stop(mpiPi.session,mpiPi.handle[i]);
+        MPI_T_pvar_read(mpiPi.session,mpiPi.handle[i],&buf);
+    }
+
+}
