@@ -983,7 +983,7 @@ static inline
     do{\
         ((ptr_)->count)+=(count_);\
         ((ptr_)->send_rank)[(ptr_)->count]=send;\
-        /*printf("send=%d ptr_send rank=%d\n",send,((ptr_)->send_rank)[(ptr_)->count]);*/\
+        printf("send=%d ptr_send rank=%d\n",send,((ptr_)->send_rank)[(ptr_)->count]);\
         ((ptr_)->recv_rank)[(ptr_)->count]=recv;\
         ((ptr_)->timer)[(ptr_)->count]=time;\
         ((ptr_)->data_size)[(ptr_)->count]=_size;\

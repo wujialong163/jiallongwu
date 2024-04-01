@@ -245,15 +245,19 @@ static inline cvar_table_entry_t *LOOKUP_CVAR_BY_NAME(const char *cvar_name)
 #define MPIR_T_PVAR_COMM_COUNTER_INC(MODULE,name_,inc_,comm) \
     PVAR_GATED_ACTION(MODULE, MPIR_T_PVAR_COMM_COUNTER_INC_impl(name_, inc_,comm))
 
-#define MPI_PVAR_DETAIL_INFO_INC(MODULE,name,send,recv,count,time,op,data_count,_datatype)\
+#define MPI_PVAR_DETAIL_INFO_INC(MODULE,op_id_,name,send,recv,count,time,op,data_count,_datatype)\
     do{\
-        int _Size = 0;                                                        \
-        MPIR_Datatype_get_size_macro(_datatype, _Size);                       \
-        int _size = data_count * _Size;                                           \
-        if (_size < 0) {                                                       \
-            _size = 0;                                                         \
+        if(MVP_PVAR_INFO_NAME){\
+            if(MVP_PVAR_INFO_NAME == op_id_){\
+                int _Size = 0;                                                        \
+                MPIR_Datatype_get_size_macro(_datatype, _Size);                       \
+                int _size = data_count * _Size;                                           \
+                if (_size < 0) {                                                       \
+                _size = 0;                                                         \
+                }\
+                PVAR_GATED_ACTION(MODULE,MPI_detail_info_impl(&(PVAR_INFO_##name##_##op),send,recv,count,time,_size));\
+            }\
         }\
-        PVAR_GATED_ACTION(MODULE,MPI_detail_info_impl(&(PVAR_INFO_##name##_##op),send,recv,count,time,_size));\
     }while(0)
     
 

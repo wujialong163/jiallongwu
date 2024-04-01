@@ -588,6 +588,9 @@ extern int MVP_ENABLE_ALLREDUCE_SKIP_LARGE_MESSAGE_TUNING_TABLE_SEARCH;
 extern int MVP_ENABLE_ALLREDUCE_SKIP_SMALL_MESSAGE_TUNING_TABLE_SEARCH;
 /* declared in /tmp/XiCjhDXj0Y/mvapich-3.0/maint/../src/mpi/coll/shmem/mvp_shmem_coll.c */
 extern int MVP_SOCKET_AWARE_ALLREDUCE_PPN_THRESHOLD;
+
+extern int MVP_PVAR_INFO_NAME;
+
 /* declared in /tmp/XiCjhDXj0Y/mvapich-3.0/maint/../src/mpid/ch3/channels/common/src/affinity/hwloc_bind.c */
 extern const char * MVP_CPU_BINDING_LEVEL;
 /* declared in /tmp/XiCjhDXj0Y/mvapich-3.0/maint/../src/mpid/ch3/channels/common/src/affinity/hwloc_bind.c */
@@ -1373,6 +1376,9 @@ enum {
     MVP_ENABLE_ALLREDUCE_SKIP_LARGE_MESSAGE_TUNING_TABLE_SEARCH_ID,
     MVP_ENABLE_ALLREDUCE_SKIP_SMALL_MESSAGE_TUNING_TABLE_SEARCH_ID,
     MVP_SOCKET_AWARE_ALLREDUCE_PPN_THRESHOLD_ID,
+
+    MVP_PVAR_INFO_NAME_ID,
+
     MVP_CPU_BINDING_LEVEL_ID,
     MVP_CPU_MAPPING_ID,
     MVP_ENABLE_AFFINITY_ID,

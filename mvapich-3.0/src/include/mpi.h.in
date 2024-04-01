@@ -676,6 +676,15 @@ typedef enum MPIR_T_scope_t {
     MPI_T_SCOPE_ALL_EQ
 } MPIR_T_scope_t;
 
+typedef enum PVAR_info_name_id_t{
+   MPI_T_Allreduce=1,
+   MPI_T_Allgatherv,
+   MPI_T_Allgather,
+   MPI_T_Alltoall,
+   MPI_T_Alltoallv,
+   MPI_T_Bcast
+}PVAR_info_name_id_t;
+
 typedef enum MPIR_T_pvar_class_t {
     /* don't name-shift this if/when MPI_T_ is accepted, this is an MPICH-only
      * extension */

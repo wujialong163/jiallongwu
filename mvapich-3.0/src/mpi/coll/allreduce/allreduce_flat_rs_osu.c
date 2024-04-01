@@ -100,7 +100,7 @@ int MPIR_Allreduce_pt2pt_rs_MVP(const void *sendbuf, void *recvbuf, int count,
             time=end-start;
             // printf("timer=%lf\n",time);
             //save rank;data;time;
-            MPI_PVAR_DETAIL_INFO_INC(MVP,mvp_coll_allreduce_pt2pt_rs,MPIR_Rank_list_mapper(comm_ptr, rank - 1),MPIR_Rank_list_mapper(comm_ptr, rank + 1)
+            MPI_PVAR_DETAIL_INFO_INC(MVP,MPI_T_Allreduce,mvp_coll_allreduce_pt2pt_rs,MPIR_Rank_list_mapper(comm_ptr, rank - 1),MPIR_Rank_list_mapper(comm_ptr, rank + 1)
             ,1,time,send,count,datatype);
 
 
@@ -182,7 +182,7 @@ int MPIR_Allreduce_pt2pt_rs_MVP(const void *sendbuf, void *recvbuf, int count,
                 time=end-start;
                 // printf("timer=%lf\n",time);
                 // printf("send=%d recv=%d \n", MPIR_Rank_list_mapper(comm_ptr, dst),MPIR_Rank_list_mapper(comm_ptr, dst));
-                MPI_PVAR_DETAIL_INFO_INC(MVP,mvp_coll_allreduce_pt2pt_rs,MPIR_Rank_list_mapper(comm_ptr, dst),MPIR_Rank_list_mapper(comm_ptr, dst)
+                MPI_PVAR_DETAIL_INFO_INC(MVP,MPI_T_Allreduce,mvp_coll_allreduce_pt2pt_rs,MPIR_Rank_list_mapper(comm_ptr, dst),MPIR_Rank_list_mapper(comm_ptr, dst)
             ,1,time,send,count,datatype);
                 if (mpi_errno) {
                     /* for communication errors,
@@ -282,7 +282,7 @@ int MPIR_Allreduce_pt2pt_rs_MVP(const void *sendbuf, void *recvbuf, int count,
                 time=end-start;
                 // printf("timer=%lf\n",time);
                 // printf("send=%d recv=%d \n", MPIR_Rank_list_mapper(comm_ptr, dst),MPIR_Rank_list_mapper(comm_ptr, dst));
-                MPI_PVAR_DETAIL_INFO_INC(MVP,mvp_coll_allreduce_pt2pt_rs,MPIR_Rank_list_mapper(comm_ptr, dst),MPIR_Rank_list_mapper(comm_ptr, dst)
+                MPI_PVAR_DETAIL_INFO_INC(MVP,MPI_T_Allreduce,mvp_coll_allreduce_pt2pt_rs,MPIR_Rank_list_mapper(comm_ptr, dst),MPIR_Rank_list_mapper(comm_ptr, dst)
             ,1,time,send,count,datatype);
                 if (mpi_errno) {
                     /* for communication errors,
@@ -358,7 +358,7 @@ int MPIR_Allreduce_pt2pt_rs_MVP(const void *sendbuf, void *recvbuf, int count,
                 time=end-start;
                 // printf("timer=%lf\n",time);
                 // printf("send=%d recv=%d \n", MPIR_Rank_list_mapper(comm_ptr, dst),MPIR_Rank_list_mapper(comm_ptr, dst));
-                MPI_PVAR_DETAIL_INFO_INC(MVP,mvp_coll_allreduce_pt2pt_rs,MPIR_Rank_list_mapper(comm_ptr, dst),MPIR_Rank_list_mapper(comm_ptr, dst)
+                MPI_PVAR_DETAIL_INFO_INC(MVP,MPI_T_Allreduce,mvp_coll_allreduce_pt2pt_rs,MPIR_Rank_list_mapper(comm_ptr, dst),MPIR_Rank_list_mapper(comm_ptr, dst)
             ,1,time,send,count,datatype);
                 if (mpi_errno) {
                     /* for communication errors,
@@ -390,7 +390,7 @@ int MPIR_Allreduce_pt2pt_rs_MVP(const void *sendbuf, void *recvbuf, int count,
             end=MPI_Wtime();
             time=end-start;
             // printf("send=%d timer=%lf\n",MPIR_Rank_list_mapper(comm_ptr, rank - 1),time);
-            MPI_PVAR_DETAIL_INFO_INC(MVP,mvp_coll_allreduce_pt2pt_rs,MPIR_Rank_list_mapper(comm_ptr,rank + 1),MPIR_Rank_list_mapper(comm_ptr,rank - 1)
+            MPI_PVAR_DETAIL_INFO_INC(MVP,MPI_T_Allreduce,mvp_coll_allreduce_pt2pt_rs,MPIR_Rank_list_mapper(comm_ptr,rank + 1),MPIR_Rank_list_mapper(comm_ptr,rank - 1)
             ,1,time,send,count,datatype);
         } else { /* even */
             MPIR_PVAR_INC(allreduce, pt2pt_rs, recv, count, datatype);

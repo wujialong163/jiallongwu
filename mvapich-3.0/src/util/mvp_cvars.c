@@ -233,6 +233,9 @@ int MVP_BCAST_STATUS_ALIGNMENT;
 int MVP_ENABLE_ALLREDUCE_SKIP_LARGE_MESSAGE_TUNING_TABLE_SEARCH;
 int MVP_ENABLE_ALLREDUCE_SKIP_SMALL_MESSAGE_TUNING_TABLE_SEARCH;
 int MVP_SOCKET_AWARE_ALLREDUCE_PPN_THRESHOLD;
+
+int MVP_PVAR_INFO_NAME;
+
 const char * MVP_CPU_BINDING_LEVEL;
 const char * MVP_CPU_MAPPING;
 int MVP_ENABLE_AFFINITY;
@@ -6137,6 +6140,22 @@ data equally among processes within a node");
     rc = MPL_env2int("MVP_ENABLE_PVAR_TIMER", &(MVP_ENABLE_PVAR_TIMER));
     if (1 == rc) {MVP_CVAR_SET_USER_SET_FLAG(MVP_ENABLE_PVAR_TIMER);}
     MPIR_ERR_CHKANDJUMP1((-1 == rc),mpi_errno,MPI_ERR_OTHER,"**envvarparse","**envvarparse %s","MVP_ENABLE_PVAR_TIMER");
+
+    defaultval.d = 1;
+    MPIR_T_CVAR_REGISTER_STATIC(
+        MPI_INT,
+        MVP_PVAR_INFO_NAME, /* name */
+        &MVP_PVAR_INFO_NAME, /* address */
+        1, /* count */
+        MPI_T_VERBOSITY_USER_BASIC,
+        MPI_T_SCOPE_ALL_EQ,
+        defaultval,
+        "COLLECTIVE", /* category */
+        "TODO-DESC");
+    MVP_PVAR_INFO_NAME = defaultval.d;
+    rc = MPL_env2int("MVP_PVAR_INFO_NAME", &(MVP_PVAR_INFO_NAME));
+    if (1 == rc) {MVP_CVAR_SET_USER_SET_FLAG(MVP_PVAR_INFO_NAME);}
+    MPIR_ERR_CHKANDJUMP1((-1 == rc),mpi_errno,MPI_ERR_OTHER,"**envvarparse","**envvarparse %s","MVP_PVAR_INFO_NAME");
 
     defaultval.d = 1;
     MPIR_T_CVAR_REGISTER_STATIC(
