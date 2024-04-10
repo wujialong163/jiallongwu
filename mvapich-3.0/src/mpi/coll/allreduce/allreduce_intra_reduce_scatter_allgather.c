@@ -4,7 +4,8 @@
  */
 
 #include "mpiimpl.h"
-
+#include "mvp_coll_shmem.h"
+#include "allreduce_tuning.h"
 /* Algorithm: Rabenseifner's Algorithm
  *
  * Restrictions: Built-in ops only
@@ -53,6 +54,7 @@ int MPIR_Allreduce_intra_reduce_scatter_allgather(const void *sendbuf,
         send_idx, recv_idx, last_idx, send_cnt, recv_cnt, *cnts, *disps;
     MPI_Aint true_extent, true_lb, extent;
     void *tmp_buf;
+    double start,end;
 
     comm_size = comm_ptr->local_size;
     rank = comm_ptr->rank;
@@ -86,8 +88,12 @@ int MPIR_Allreduce_intra_reduce_scatter_allgather(const void *sendbuf,
 
     if (rank < 2 * rem) {
         if (rank % 2 == 0) {    /* even */
+            start=MPI_Wtime();
             mpi_errno = MPIC_Send(recvbuf, count,
                                   datatype, rank + 1, MPIR_ALLREDUCE_TAG, comm_ptr, errflag);
+            end=MPI_Wtime();
+            MPI_PVAR_DETAIL_INFO_INC(MVP,MPI_T_Allreduce,mvp_coll_allreduce,rank,rank+1
+            ,1,start,end,sendrecv,count,datatype);
             if (mpi_errno) {
                 /* for communication errors, just record the error but continue */
                 *errflag =
@@ -102,9 +108,13 @@ int MPIR_Allreduce_intra_reduce_scatter_allgather(const void *sendbuf,
              * doubling */
             newrank = -1;
         } else {        /* odd */
+            start=MPI_Wtime();
             mpi_errno = MPIC_Recv(tmp_buf, count,
                                   datatype, rank - 1,
                                   MPIR_ALLREDUCE_TAG, comm_ptr, MPI_STATUS_IGNORE, errflag);
+            end=MPI_Wtime();
+            MPI_PVAR_DETAIL_INFO_INC(MVP,MPI_T_Allreduce,mvp_coll_allreduce,rank-1,rank
+            ,1,start,end,sendrecv,count,datatype);
             if (mpi_errno) {
                 /* for communication errors, just record the error but continue */
                 *errflag =
@@ -179,7 +189,7 @@ int MPIR_Allreduce_intra_reduce_scatter_allgather(const void *sendbuf,
                 for (i = recv_idx; i < last_idx; i++)
                     recv_cnt += cnts[i];
             }
-
+            start=MPI_Wtime();
             /* Send data from recvbuf. Recv into tmp_buf */
             mpi_errno = MPIC_Sendrecv((char *) recvbuf +
                                       disps[send_idx] * extent,
@@ -189,6 +199,11 @@ int MPIR_Allreduce_intra_reduce_scatter_allgather(const void *sendbuf,
                                       disps[recv_idx] * extent,
                                       recv_cnt, datatype, dst,
                                       MPIR_ALLREDUCE_TAG, comm_ptr, MPI_STATUS_IGNORE, errflag);
+            end=MPI_Wtime();
+            MPI_PVAR_DETAIL_INFO_INC(MVP,MPI_T_Allreduce,mvp_coll_allreduce,rank,dst
+            ,1,start,end,sendrecv,send_cnt,datatype);
+            MPI_PVAR_DETAIL_INFO_INC(MVP,MPI_T_Allreduce,mvp_coll_allreduce,dst,rank
+            ,1,start,end,sendrecv,recv_cnt,datatype);
             if (mpi_errno) {
                 /* for communication errors, just record the error but continue */
                 *errflag =
@@ -245,7 +260,7 @@ int MPIR_Allreduce_intra_reduce_scatter_allgather(const void *sendbuf,
                 for (i = recv_idx; i < send_idx; i++)
                     recv_cnt += cnts[i];
             }
-
+            start=MPI_Wtime();
             mpi_errno = MPIC_Sendrecv((char *) recvbuf +
                                       disps[send_idx] * extent,
                                       send_cnt, datatype,
@@ -254,6 +269,11 @@ int MPIR_Allreduce_intra_reduce_scatter_allgather(const void *sendbuf,
                                       disps[recv_idx] * extent,
                                       recv_cnt, datatype, dst,
                                       MPIR_ALLREDUCE_TAG, comm_ptr, MPI_STATUS_IGNORE, errflag);
+            end=MPI_Wtime();
+            MPI_PVAR_DETAIL_INFO_INC(MVP,MPI_T_Allreduce,mvp_coll_allreduce,rank,dst
+            ,1,start,end,sendrecv,send_cnt,datatype);
+            MPI_PVAR_DETAIL_INFO_INC(MVP,MPI_T_Allreduce,mvp_coll_allreduce,dst,rank
+            ,1,start,end,sendrecv,recv_cnt,datatype);
             if (mpi_errno) {
                 /* for communication errors, just record the error but continue */
                 *errflag =
@@ -273,13 +293,22 @@ int MPIR_Allreduce_intra_reduce_scatter_allgather(const void *sendbuf,
      * processes of rank < 2*rem send the result to
      * (rank-1), the ranks who didn't participate above. */
     if (rank < 2 * rem) {
-        if (rank % 2)   /* odd */
+        if (rank % 2){   /* odd */
+            start=MPI_Wtime();
             mpi_errno = MPIC_Send(recvbuf, count,
                                   datatype, rank - 1, MPIR_ALLREDUCE_TAG, comm_ptr, errflag);
-        else    /* even */
+            end=MPI_Wtime();
+            MPI_PVAR_DETAIL_INFO_INC(MVP,MPI_T_Allreduce,mvp_coll_allreduce,rank,rank-1
+            ,1,start,end,sendrecv,count,datatype);
+        }else{    /* even */
+            start=MPI_Wtime();
             mpi_errno = MPIC_Recv(recvbuf, count,
                                   datatype, rank + 1,
                                   MPIR_ALLREDUCE_TAG, comm_ptr, MPI_STATUS_IGNORE, errflag);
+            end=MPI_Wtime();
+            MPI_PVAR_DETAIL_INFO_INC(MVP,MPI_T_Allreduce,mvp_coll_allreduce,rank+1,rank
+            ,1,start,end,sendrecv,count,datatype);
+        }
         if (mpi_errno) {
             /* for communication errors, just record the error but continue */
             *errflag =
@@ -289,6 +318,7 @@ int MPIR_Allreduce_intra_reduce_scatter_allgather(const void *sendbuf,
             MPIR_ERR_ADD(mpi_errno_ret, mpi_errno);
         }
     }
+MPI_PVAR_INFO_TAG_ADD(mvp_coll_allreduce,sendrecv,1);
   fn_exit:
     MPIR_CHKLMEM_FREEALL();
     return mpi_errno;

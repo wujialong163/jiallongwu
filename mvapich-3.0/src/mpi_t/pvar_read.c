@@ -41,7 +41,7 @@ int MPIR_T_pvar_read_impl(MPI_T_pvar_session session, MPI_T_pvar_handle handle, 
     }
     
     MPI_T_PVAR_detail_info_t *info_t;
-    info_t=&(PVAR_INFO_mvp_coll_allreduce_pt2pt_rs_send);
+    info_t=&(PVAR_INFO_mvp_coll_allreduce_sendrecv);
     if (info_t)
     {
         int rank;
@@ -51,13 +51,16 @@ int MPIR_T_pvar_read_impl(MPI_T_pvar_session session, MPI_T_pvar_handle handle, 
         snprintf(file,128,"./mpi_allreduce_rs-%d.txt",rank);
         fp=fopen(file,"w");
 
-        for(int i=1;i<info_t->count;i++){
+        for(int i=0;i<info_t->count;i++){
             // printf("send=%d recv=%d time=%lf \n",((info_t)->send_rank)[i],
             // ((info_t)->recv_rank)[i],
             // ((info_t)->timer)[i]);
-            fprintf(fp,"send=%d recv=%d data_size=%d time=%lf \n",((info_t)->send_rank)[i],((info_t)->recv_rank)[i],
+            fprintf(fp,"send=%d recv=%d data_size=%d time=%lf start=%lf end =%lf tag=%d \n",((info_t)->send_rank)[i],((info_t)->recv_rank)[i],
             ((info_t)->data_size)[i],
-            ((info_t)->timer)[i]);
+            ((info_t)->timer)[i],
+            ((info_t)->start)[i],
+            ((info_t)->end)[i],
+            ((info_t)->tag)[i]);
         }
         fclose(fp);
     }
@@ -110,7 +113,7 @@ int MPIR_T_pvar_read_impl(MPI_T_pvar_session session, MPI_T_pvar_handle handle, 
             }
         } else {
             /* A running SUM with callback. Read its current value into handle */
-            printf("handle->get_value\n");
+            // printf("handle->get_value\n");
             handle->get_value(handle->addr, handle->obj_handle, handle->count, handle->current);
             // double d;
             // MPIR_T_pvar_timer_t *ptr=handle->addr;
@@ -316,4 +319,27 @@ int MPI_T_pvar_read(MPI_T_pvar_session session, MPI_T_pvar_handle handle, void *
     mpi_errno = MPIR_Err_return_comm(NULL, __func__, mpi_errno);
     goto fn_exit;
     /* --END ERROR HANDLING-- */
+}
+
+#if defined(HAVE_PRAGMA_WEAK)
+#pragma weak MPI_T_set_pvar_info_name = PMPI_T_set_pvar_info_name
+#elif defined(HAVE_PRAGMA_HP_SEC_DEF)
+#pragma _HP_SECONDARY_DEF PMPI_T_set_pvar_info_name  MPI_T_set_pvar_info_name
+#elif defined(HAVE_PRAGMA_CRI_DUP)
+#pragma _CRI duplicate MPI_T_set_pvar_info_name as PMPI_T_set_pvar_info_name
+#elif defined(HAVE_WEAK_ATTRIBUTE)
+void MPI_T_set_pvar_info_name(int input[], int count)
+    __attribute__ ((weak, alias("PMPI_T_set_pvar_info_name")));
+#endif
+
+#ifndef MPICH_MPI_FROM_PMPI
+#undef MPI_T_set_info_name
+#define MPI_T_set_pvar_info_name PMPI_T_set_pvar_info_name 
+#endif
+int pvar_name[64];
+void MPI_T_set_pvar_info_name(int input[],int count){
+    pvar_name[0]=count;
+    for(int i=1;i<count && i<64;i++){
+        pvar_name[i]=input[i-1];
+    }
 }

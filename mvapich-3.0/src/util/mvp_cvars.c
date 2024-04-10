@@ -6152,7 +6152,7 @@ data equally among processes within a node");
         defaultval,
         "COLLECTIVE", /* category */
         "TODO-DESC");
-    MVP_PVAR_INFO_NAME = defaultval.d;
+    MVP_PVAR_INFO_NAME= defaultval.d;
     rc = MPL_env2int("MVP_PVAR_INFO_NAME", &(MVP_PVAR_INFO_NAME));
     if (1 == rc) {MVP_CVAR_SET_USER_SET_FLAG(MVP_PVAR_INFO_NAME);}
     MPIR_ERR_CHKANDJUMP1((-1 == rc),mpi_errno,MPI_ERR_OTHER,"**envvarparse","**envvarparse %s","MVP_PVAR_INFO_NAME");

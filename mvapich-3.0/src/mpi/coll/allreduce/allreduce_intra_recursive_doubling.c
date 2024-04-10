@@ -4,7 +4,8 @@
  */
 
 #include "mpiimpl.h"
-
+#include "mvp_coll_shmem.h"
+#include "allreduce_tuning.h"
 /*
  * Algorithm: Recursive Doubling
  *
@@ -31,6 +32,7 @@ int MPIR_Allreduce_intra_recursive_doubling(const void *sendbuf,
     int mask, dst, is_commutative, pof2, newrank, rem, newdst;
     MPI_Aint true_extent, true_lb, extent;
     void *tmp_buf;
+    double start,end;
 
     comm_size = comm_ptr->local_size;
     rank = comm_ptr->rank;
@@ -66,8 +68,12 @@ int MPIR_Allreduce_intra_recursive_doubling(const void *sendbuf,
 
     if (rank < 2 * rem) {
         if (rank % 2 == 0) {    /* even */
+            start=MPI_Wtime();
             mpi_errno = MPIC_Send(recvbuf, count,
                                   datatype, rank + 1, MPIR_ALLREDUCE_TAG, comm_ptr, errflag);
+            end=MPI_Wtime();
+            MPI_PVAR_DETAIL_INFO_INC(MVP,MPI_T_Allreduce,mvp_coll_allreduce,rank,rank+1
+            ,1,start,end,sendrecv,count,datatype);
             if (mpi_errno) {
                 /* for communication errors, just record the error but continue */
                 *errflag =
@@ -82,9 +88,13 @@ int MPIR_Allreduce_intra_recursive_doubling(const void *sendbuf,
              * doubling */
             newrank = -1;
         } else {        /* odd */
+            start=MPI_Wtime();
             mpi_errno = MPIC_Recv(tmp_buf, count,
                                   datatype, rank - 1,
                                   MPIR_ALLREDUCE_TAG, comm_ptr, MPI_STATUS_IGNORE, errflag);
+            end=MPI_Wtime();
+            MPI_PVAR_DETAIL_INFO_INC(MVP,MPI_T_Allreduce,mvp_coll_allreduce,rank-1,rank
+            ,1,start,end,sendrecv,count,datatype);
             if (mpi_errno) {
                 /* for communication errors, just record the error but continue */
                 *errflag =
@@ -124,10 +134,16 @@ int MPIR_Allreduce_intra_recursive_doubling(const void *sendbuf,
 
             /* Send the most current data, which is in recvbuf. Recv
              * into tmp_buf */
+            start=MPI_Wtime();
             mpi_errno = MPIC_Sendrecv(recvbuf, count, datatype,
                                       dst, MPIR_ALLREDUCE_TAG, tmp_buf,
                                       count, datatype, dst,
                                       MPIR_ALLREDUCE_TAG, comm_ptr, MPI_STATUS_IGNORE, errflag);
+            end=MPI_Wtime();
+            MPI_PVAR_DETAIL_INFO_INC(MVP,MPI_T_Allreduce,mvp_coll_allreduce,dst,rank
+            ,1,start,end,sendrecv,count,datatype);
+            MPI_PVAR_DETAIL_INFO_INC(MVP,MPI_T_Allreduce,mvp_coll_allreduce,rank,dst
+            ,1,start,end,sendrecv,count,datatype);
             if (mpi_errno) {
                 /* for communication errors, just record the error but continue */
                 *errflag =
@@ -161,12 +177,22 @@ int MPIR_Allreduce_intra_recursive_doubling(const void *sendbuf,
      * (rank-1), the ranks who didn't participate above. */
     if (rank < 2 * rem) {
         if (rank % 2)   /* odd */
+            {
+            start=MPI_Wtime();
             mpi_errno = MPIC_Send(recvbuf, count,
                                   datatype, rank - 1, MPIR_ALLREDUCE_TAG, comm_ptr, errflag);
-        else    /* even */
+            end=MPI_Wtime();
+            MPI_PVAR_DETAIL_INFO_INC(MVP,MPI_T_Allreduce,mvp_coll_allreduce,rank,rank-1
+            ,1,start,end,sendrecv,count,datatype);
+        }else{    /* even */
+            start=MPI_Wtime();
             mpi_errno = MPIC_Recv(recvbuf, count,
                                   datatype, rank + 1,
                                   MPIR_ALLREDUCE_TAG, comm_ptr, MPI_STATUS_IGNORE, errflag);
+            end=MPI_Wtime();
+            MPI_PVAR_DETAIL_INFO_INC(MVP,MPI_T_Allreduce,mvp_coll_allreduce,rank+1,rank
+            ,1,start,end,sendrecv,count,datatype);
+        }
         if (mpi_errno) {
             /* for communication errors, just record the error but continue */
             *errflag =
@@ -176,6 +202,7 @@ int MPIR_Allreduce_intra_recursive_doubling(const void *sendbuf,
             MPIR_ERR_ADD(mpi_errno_ret, mpi_errno);
         }
     }
+MPI_PVAR_INFO_TAG_ADD(mvp_coll_allreduce,sendrecv,1);
   fn_exit:
     MPIR_CHKLMEM_FREEALL();
     return mpi_errno;

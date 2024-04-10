@@ -2224,6 +2224,9 @@ int PMPI_T_category_changed(int *stamp) MPICH_API_PUBLIC;
 int PMPI_T_cvar_get_index(const char *name, int *cvar_index) MPICH_API_PUBLIC;
 int PMPI_T_pvar_get_index(const char *name, int var_class, int *pvar_index) MPICH_API_PUBLIC;
 int PMPI_T_category_get_index(const char *name, int *cat_index) MPICH_API_PUBLIC;
+
+void PMPI_T_set_pvar_info_name(int input[],int count) MPICH_API_PUBLIC;
+void MPI_T_set_pvar_info_name(int input[],int count) MPICH_API_PUBLIC;
 /* End Skip Prototypes */
 
 

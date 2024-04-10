@@ -39,6 +39,18 @@ extern int MPIR_T_cat_add_cvar(const char *cat_name, int cvar_index);
 extern int MPIR_T_cat_add_subcat(const char *parent_name, const char *child_name);
 extern int MPIR_T_cat_add_desc(const char *cat_name, const char *cat_desc);
 
+static inline
+    int find_pvar_info_name(int name[], int name_id)
+{
+    for(int i=1 ;i<name[0] && i<64;i++){
+        if (name[i] == name_id)
+        {
+            return 1;
+        }
+    }
+    return 0;
+}
+
 static inline cvar_table_entry_t *LOOKUP_CVAR_BY_NAME(const char *cvar_name)
 {
     unsigned cvar_idx;
@@ -245,21 +257,31 @@ static inline cvar_table_entry_t *LOOKUP_CVAR_BY_NAME(const char *cvar_name)
 #define MPIR_T_PVAR_COMM_COUNTER_INC(MODULE,name_,inc_,comm) \
     PVAR_GATED_ACTION(MODULE, MPIR_T_PVAR_COMM_COUNTER_INC_impl(name_, inc_,comm))
 
-#define MPI_PVAR_DETAIL_INFO_INC(MODULE,op_id_,name,send,recv,count,time,op,data_count,_datatype)\
+
+#define MPI_PVAR_INFO_TAG_ADD(name,op,add_)\
+    MPI_PVAR_INFO_TAG_ADD_impl(&(PVAR_INFO_##name##_##op),add_)
+
+
+#define MPI_PVAR_DETAIL_INFO_INC(MODULE,op_id_,name,send,recv,count,start,end,op,data_count,_datatype)\
     do{\
+        /*printf("count=%d\n",pvar_name[0]);\
+        for(int i=1;i<=pvar_name[0];i++){\
+            printf("%d ",pvar_name[i]);\
+        }\
+        printf("end\n");*/\
         if(MVP_PVAR_INFO_NAME){\
-            if(MVP_PVAR_INFO_NAME == op_id_){\
+            if(find_pvar_info_name(pvar_name,op_id_)){\
                 int _Size = 0;                                                        \
                 MPIR_Datatype_get_size_macro(_datatype, _Size);                       \
                 int _size = data_count * _Size;                                           \
                 if (_size < 0) {                                                       \
                 _size = 0;                                                         \
                 }\
-                PVAR_GATED_ACTION(MODULE,MPI_detail_info_impl(&(PVAR_INFO_##name##_##op),send,recv,count,time,_size));\
+                PVAR_GATED_ACTION(MODULE,MPI_detail_info_impl(&(PVAR_INFO_##name##_##op),send,recv,count,start,end,_size));\
             }\
         }\
     }while(0)
-    
+
 
 #define MPIR_T_PVAR_COUNTER_ADDR(name_) \
     MPIR_T_PVAR_COUNTER_ADDR_impl(name_)
@@ -487,5 +509,6 @@ int MPIR_T_pvar_readreset_impl(MPI_T_pvar_session session, MPI_T_pvar_handle han
 int MPIR_T_category_get_cvars_impl(int cat_index, int len, int indices[]);
 int MPIR_T_category_get_pvars_impl(int cat_index, int len, int indices[]);
 int MPIR_T_category_get_categories_impl(int cat_index, int len, int indices[]);
+
 
 #endif /* MPIT_H_INCLUDED */

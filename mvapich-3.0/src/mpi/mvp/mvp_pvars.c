@@ -187,7 +187,9 @@ unsigned long long PVAR_COUNTER_mvp_coll_allreduce_pt2pt_ring;
 unsigned long long PVAR_COUNTER_mvp_coll_allreduce_pt2pt_ring_inplace;
 unsigned long long PVAR_COUNTER_mvp_coll_allreduce_pt2pt_rd_bytes_send;
 unsigned long long PVAR_COUNTER_mvp_coll_allreduce_pt2pt_rs_bytes_send;
-MPI_T_PVAR_detail_info_t PVAR_INFO_mvp_coll_allreduce_pt2pt_rs_send;
+
+MPI_T_PVAR_detail_info_t PVAR_INFO_mvp_coll_allreduce_sendrecv;
+
 unsigned long long PVAR_COUNTER_mvp_coll_allreduce_pt2pt_ring_bytes_send;
 unsigned long long PVAR_COUNTER_mvp_coll_allreduce_pt2pt_ring_wrapper_bytes_send;
 unsigned long long PVAR_COUNTER_mvp_coll_allreduce_pt2pt_ring_inplace_bytes_send;
@@ -9019,7 +9021,7 @@ void MPIT_REGISTER_MVP_VARIABLES(void)
      MPIR_T_PVAR_INFO_REGISTER_STATIC(
          MVP, /* Module */
          MPI_DOUBLE, /* Datatype */
-         mvp_coll_allreduce_pt2pt_rs_send, /* Name */
+         mvp_coll_allreduce_sendrecv, /* Name */
          MPI_T_VERBOSITY_USER_BASIC, /* Verbosity */
          MPI_T_BIND_NO_OBJECT, /* Bind */
          MPIR_T_PVAR_FLAG_SUM, /* Flags */

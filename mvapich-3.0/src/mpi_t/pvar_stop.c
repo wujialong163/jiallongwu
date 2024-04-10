@@ -56,9 +56,9 @@ int MPIR_T_pvar_stop_impl(MPI_T_pvar_session session, MPI_T_pvar_handle handle)
                 for (i = 0; i < handle->count; i++) {
                     ((double *) handle->accum)[i] += ((double *) handle->current)[i]
                         - ((double *) handle->offset)[i];
-                    printf("handle_name=%s current(pvar_stop)=%lf  accum(pvar_stop)=%lf  addr(pvar_stop)=%lf  offset(pvar_stop)=%lf \n",
-                    handle->info->name,((double *)handle->current)[i],((double *) handle->accum)[i]
-                        , ((double *) handle->addr)[i],((double *) handle->offset)[i]);
+                    // printf("handle_name=%s current(pvar_stop)=%lf  accum(pvar_stop)=%lf  addr(pvar_stop)=%lf  offset(pvar_stop)=%lf \n",
+                    // handle->info->name,((double *)handle->current)[i],((double *) handle->accum)[i]
+                    //     , ((double *) handle->addr)[i],((double *) handle->offset)[i]);
                 }
                 break;
             case MPI_UNSIGNED:

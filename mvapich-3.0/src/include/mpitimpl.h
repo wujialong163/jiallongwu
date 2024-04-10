@@ -152,6 +152,8 @@ void MPIR_T_CVAR_REGISTER_impl(MPI_Datatype dtype, const char *name, const void 
 /* MPI_T performance variable (pvar)
  */
 
+extern int pvar_name[64];
+
 /* Forward declaration */
 struct MPIR_T_pvar_handle_s;
 struct MPIR_T_pvar_session_s;
@@ -269,8 +271,14 @@ typedef struct
     /*count*/
     int count;
 
+    /*tag*/
+    int tag[256];
+    int site;
+
     /*time*/
     double timer[256];
+    double start[256];
+    double end[256];
 
     /* data */
     int data_size[256];
@@ -901,10 +909,10 @@ typedef struct pvar_bucket
         MPL_wtime(&tmp_); \
         MPL_wtime_acc(&((ptr_)->curstart), &tmp_, &((ptr_)->total)); \
         double d,e,s;\
-        MPL_wtime_todouble(&((ptr_)->curstart),&s);\
+        /*MPL_wtime_todouble(&((ptr_)->curstart),&s);\
         MPL_wtime_todouble(&tmp_,&e);\
         MPL_wtime_todouble(&((ptr_)->total),&d);\
-        printf("start=%lf ptr_time=%lf end=%lf \n",s,d,e);\
+        printf("start=%lf ptr_time=%lf end=%lf \n",s,d,e);*/\
     } while (0)
 
 #define MPIR_T_PVAR_TIMER_INIT_impl(name_) \
@@ -916,7 +924,7 @@ typedef struct pvar_bucket
 #define MPIR_T_PVAR_TIMER_END_impl(name_) \
     do{\
     char *name=QUOTE(name_);\
-    printf("name=%s\n",name);\
+    /*printf("name=%s\n",name);*/\
     MPIR_T_PVAR_TIMER_END_VAR_impl(&PVAR_TIMER_##name_);\
     }while(0);
 #define MPIR_T_PVAR_TIMER_ADDR_impl(name_) \
@@ -924,10 +932,8 @@ typedef struct pvar_bucket
 
 #define MPIR_T_PVAR_INFO_INIT_VAR_impl(ptr_)\
     do{\
+        (ptr_)->site=0;\
         (ptr_)->count=0;\
-        (ptr_)->send_rank=0;\
-        (ptr_)->recv_rank=0;\
-        (ptr_)->timer=0;\
     }while(0)
 
 
@@ -942,8 +948,8 @@ static inline
     int i;
     for (i = 0; i < count; i++)
         MPL_wtime_todouble(&(timer[i].total), &buf[i]);
-        printf("value=%lf\n",*buf);
 }
+
 
 /* Registration for static storage */
 #define MPIR_T_PVAR_TIMER_REGISTER_STATIC_impl(dtype_, name_, \
@@ -971,7 +977,7 @@ static inline
         void *count_addr_; \
         /* Allowable datatypes only */ \
         MPIR_Assert((dtype_) == MPI_DOUBLE); \
-        /*MPIR_T_PVAR_INFO_INIT_impl(name_); */\
+        MPIR_T_PVAR_INFO_INIT_impl(name_);\
         addr_ = &PVAR_INFO_##name_; \
         count_addr_ = &(PVAR_INFO_##name_.count); \
         MPIR_T_PVAR_REGISTER_impl(MPI_T_PVAR_CLASS_INFO, dtype_, #name_, \
@@ -979,14 +985,30 @@ static inline
             NULL, NULL, cat_, desc_); \
     } while (0)
 
-#define MPI_detail_info_impl(ptr_,send, recv, count_,time,_size)\
+// static int find_info_name(int name[], int id){
+    
+// }
+
+#define MPI_PVAR_INFO_TAG_ADD_impl(ptr_,add_)\
     do{\
-        ((ptr_)->count)+=(count_);\
+        if((ptr_)->count !=0){\
+            if(((ptr_)->site) ==((ptr_)->tag)[(ptr_)->count-1] ){\
+            ((ptr_)->site)+=(add_);\
+            }\
+        }\
+    }while(0)
+
+#define MPI_detail_info_impl(ptr_,send, recv, count_,start,end,_size)\
+    do{\
         ((ptr_)->send_rank)[(ptr_)->count]=send;\
-        printf("send=%d ptr_send rank=%d\n",send,((ptr_)->send_rank)[(ptr_)->count]);\
+        /*printf("send=%d ptr_send rank=%d\n",send,((ptr_)->send_rank)[(ptr_)->count]);*/\
         ((ptr_)->recv_rank)[(ptr_)->count]=recv;\
-        ((ptr_)->timer)[(ptr_)->count]=time;\
+        ((ptr_)->timer)[(ptr_)->count]=end-start;\
         ((ptr_)->data_size)[(ptr_)->count]=_size;\
+        ((ptr_)->start)[(ptr_)->count]=start;\
+        ((ptr_)->end)[(ptr_)->count]=end;\
+        ((ptr_)->tag)[(ptr_)->count]=(ptr_)->site;\
+        ((ptr_)->count)+=(count_);\
         /*printf("time=%lf ptr_time=%lf \n",time,((ptr_)->timer)[(ptr_)->count]);*/\
     }while(0)
 /* MPI_T_PVAR_CLASS_HIGHWATERMARK (continuous or not)

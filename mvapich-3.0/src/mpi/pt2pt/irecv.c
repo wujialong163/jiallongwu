@@ -131,6 +131,9 @@ int MPI_Irecv(void *buf, int count, MPI_Datatype datatype, int source,
 
     mpi_errno = MPID_Irecv(buf, count, datatype, source, tag, comm_ptr,
                            MPIR_CONTEXT_INTRA_PT2PT, &request_ptr);
+    double time;
+    time=PMPI_Wtime();
+    printf("mpid_irecv time=%lf \n",time);
     /* return the handle of the request to the user */
     /* MPIU_OBJ_HANDLE_PUBLISH is unnecessary for irecv, lower-level access is
      * responsible for its own consistency, while upper-level field access is

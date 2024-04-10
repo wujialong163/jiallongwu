@@ -22,6 +22,7 @@ int MPIR_Allreduce_pt2pt_rd_MVP(const void *sendbuf, void *recvbuf, int count,
     int mask, dst, is_commutative, pof2, newrank = 0, rem, newdst;
     MPI_Aint true_lb, true_extent, extent;
     void *tmp_buf;
+    double start,end;
     MPI_User_function *uop;
 #ifdef HAVE_CXX_BINDING
     int is_cxx_uop = 0;
@@ -83,8 +84,12 @@ int MPIR_Allreduce_pt2pt_rd_MVP(const void *sendbuf, void *recvbuf, int count,
         if (rank % 2 == 0) {
             /* even */
             MPIR_PVAR_INC(allreduce, pt2pt_rd, send, count, datatype);
+            start=MPI_Wtime();
             mpi_errno = MPIC_Send(recvbuf, count, datatype, rank + 1,
                                   MPIR_ALLREDUCE_TAG, comm_ptr, errflag);
+            end=MPI_Wtime();
+            MPI_PVAR_DETAIL_INFO_INC(MVP,MPI_T_Allreduce,mvp_coll_allreduce,rank,rank+1
+            ,1,start,end,sendrecv,count,datatype);
             if (mpi_errno) {
                 /* for communication errors,
                  * just record the error but continue */
@@ -100,9 +105,13 @@ int MPIR_Allreduce_pt2pt_rd_MVP(const void *sendbuf, void *recvbuf, int count,
         } else {
             /* odd */
             MPIR_PVAR_INC(allreduce, pt2pt_rd, recv, count, datatype);
+            start=MPI_Wtime();
             mpi_errno = MPIC_Recv(tmp_buf, count, datatype, rank - 1,
                                   MPIR_ALLREDUCE_TAG, comm_ptr,
                                   MPI_STATUS_IGNORE, errflag);
+            end=MPI_Wtime();
+            MPI_PVAR_DETAIL_INFO_INC(MVP,MPI_T_Allreduce,mvp_coll_allreduce,rank-1,rank
+            ,1,start,end,sendrecv,count,datatype);
             if (mpi_errno) {
                 /* for communication errors,
                  * just record the error but continue */
@@ -149,10 +158,16 @@ int MPIR_Allreduce_pt2pt_rd_MVP(const void *sendbuf, void *recvbuf, int count,
              * Recv into tmp_buf */
             MPIR_PVAR_INC(allreduce, pt2pt_rd, send, count, datatype);
             MPIR_PVAR_INC(allreduce, pt2pt_rd, recv, count, datatype);
+            start=MPI_Wtime();
             mpi_errno =
                 MPIC_Sendrecv(recvbuf, count, datatype, dst, MPIR_ALLREDUCE_TAG,
                               tmp_buf, count, datatype, dst, MPIR_ALLREDUCE_TAG,
                               comm_ptr, MPI_STATUS_IGNORE, errflag);
+            end=MPI_Wtime();
+            MPI_PVAR_DETAIL_INFO_INC(MVP,MPI_T_Allreduce,mvp_coll_allreduce,dst,rank
+            ,1,start,end,sendrecv,count,datatype);
+            MPI_PVAR_DETAIL_INFO_INC(MVP,MPI_T_Allreduce,mvp_coll_allreduce,rank,dst
+            ,1,start,end,sendrecv,count,datatype);
 
             if (mpi_errno) {
                 /* for communication errors,
@@ -200,13 +215,21 @@ int MPIR_Allreduce_pt2pt_rd_MVP(const void *sendbuf, void *recvbuf, int count,
     if (rank < 2 * rem) {
         if (rank % 2) { /* odd */
             MPIR_PVAR_INC(allreduce, pt2pt_rd, send, count, datatype);
+            start=MPI_Wtime();
             mpi_errno = MPIC_Send(recvbuf, count, datatype, rank - 1,
                                   MPIR_ALLREDUCE_TAG, comm_ptr, errflag);
+            end=MPI_Wtime();
+            MPI_PVAR_DETAIL_INFO_INC(MVP,MPI_T_Allreduce,mvp_coll_allreduce,rank,rank-1
+            ,1,start,end,sendrecv,count,datatype);
         } else { /* even */
             MPIR_PVAR_INC(allreduce, pt2pt_rd, recv, count, datatype);
+            start=MPI_Wtime();
             mpi_errno = MPIC_Recv(recvbuf, count, datatype, rank + 1,
                                   MPIR_ALLREDUCE_TAG, comm_ptr,
                                   MPI_STATUS_IGNORE, errflag);
+            end=MPI_Wtime();
+            MPI_PVAR_DETAIL_INFO_INC(MVP,MPI_T_Allreduce,mvp_coll_allreduce,rank+1,rank
+            ,1,start,end,sendrecv,count,datatype);
         }
         if (mpi_errno) {
             /* for communication errors, just record the error but continue */
@@ -215,7 +238,7 @@ int MPIR_Allreduce_pt2pt_rd_MVP(const void *sendbuf, void *recvbuf, int count,
             MPIR_ERR_ADD(mpi_errno_ret, mpi_errno);
         }
     }
-
+MPI_PVAR_INFO_TAG_ADD(mvp_coll_allreduce,sendrecv,1);
 fn_exit:
     MPIR_CHKLMEM_FREEALL();
     MPIR_TIMER_END(coll, allreduce, shm_rd);
