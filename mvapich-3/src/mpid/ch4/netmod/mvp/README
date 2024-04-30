@@ -1,0 +1,32 @@
+This directory is mostly going to contain stubs as well as some headers that
+will eventually evolve into our proper netmod. It will probably be the UCR
+netmod by then, but for now it will just be a location to put mvp specific
+header files that we are going to use to override certain ucx/ofi
+functionality. All of our implementation should be done here, and anything we
+need to force onto those external netmods should be done by adding includes or
+macros from here. 
+
+To override functionality included in the basic netmod we create the
+`mvp/netmod_override.h` file. This is included at the end of
+`src/mpid/ch4/netmod/include/netmod_impl.h` to unset and override any
+functionality as needed. We tamper with a few files more directly through the
+AC_SUBSTR calls in the `ch4/subconfigure.m4` module but since we will only
+support one netmod at once for now that should be mostly irrelevant. ALL new
+includes should be added through the `netmod_override.h` header so that they are
+easy to move/replace. For now the only "pre" functionality we needed was comm,
+so that is included directly. Howver, we should probably define a "pre" override
+header too and include comm as a part of that. 
+
+The following CH4 files that don't belong to us have been tampered with and will
+need to have changes reverted as we are able to make our designs channel
+independent and migrate to a proper mvapich netmod: 
+
+src/mpid/ch4/include/mpidpre.h (Added MPIDI_MVP_LEGACY_COMM_DECL to dev)
+src/mpid/ch4/include/netmodpre.h.in (#include mvp_pre.h - all pre functionality)
+src/mpid/ch4/netmod/include/netmod_impl.h (#include coll overrides)
+src/mpid/ch4/subconfigure.m4 (Add the correct configurations)
+src/mpid/ch4/netmod/Makefile.mk (Add our makefile stub)
+
+Netmod particular files edited: 
+src/mpid/ch4/netmod/ofi/ofi_capability_sets.h (Add OPX detection)
+src/mpid/ch4/netmod/ofi/globals.c (Add OPX capability entry)

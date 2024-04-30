@@ -49,8 +49,9 @@ mpiPi_callsite_stats_src_hashkey (const void *p)
   int res = 0;
   callsite_stats_t *csp = (callsite_stats_t *) p;
   MPIP_CALLSITE_STATS_COOKIE_ASSERT (csp);
-  return 52271 ^ csp->op ^ res ^ csp->rank ^ csp->csid;
+  return 52271 ^ csp->op ^ res  ^ csp->csid;
 }
+
 
 static int
 mpiPi_callsite_stats_src_comparator (const void *p1, const void *p2)
@@ -63,7 +64,7 @@ mpiPi_callsite_stats_src_comparator (const void *p1, const void *p2)
 #define express(f) {if ((csp_1->f) > (csp_2->f)) {return 1;} if ((csp_1->f) < (csp_2->f)) {return -1;}}
   express (op);
   express (csid);
-  express (rank);
+  //express (rank);
 #undef express
 
   return 0;
@@ -141,7 +142,7 @@ mpiPi_init (char *appName, mpiPi_thr_mode_t thr_mode)
 
   /* set some defaults values */
   mpiPi.collectorRank = 0;
-  mpiPi.tableSize = 256;
+  mpiPi.tableSize = 512;
   mpiPi.reportPrintThreshold = 0.0;
   mpiPi.baseNames = 0;
   mpiPi.reportFormat = MPIP_REPORT_SCI_FORMAT;
@@ -211,7 +212,7 @@ mpiPi_insert_callsite_records (callsite_stats_t * p)
   callsite_stats_t *csp = NULL;
 
   mpiPi_query_src (p);		/* sets the file/line in p */
-  
+
   /* If exists, accumulate, otherwise insert. This is
      specifically for optimizations that have multiple PCs for
      one src line. We aggregate across rank after this.
@@ -221,17 +222,22 @@ mpiPi_insert_callsite_records (callsite_stats_t * p)
    */
   if (mpiPi.collective_report == 0)
     {
+      printf("cookie=%ld\n",p->cookie);
       if (NULL == h_search (mpiPi.global_callsite_stats, p, (void **) &csp))
         {
+          printf("=null cookie=%ld\n",p->cookie);
           callsite_stats_t *newp = NULL;
           newp = (callsite_stats_t *) malloc (sizeof (callsite_stats_t));
 
           memcpy (newp, p, sizeof (callsite_stats_t));
           /* insert new record into global */
           h_insert (mpiPi.global_callsite_stats, newp);
+          printf("insert\n");
         }
-      else
+      else{
+        printf("!=null cookie=%ld\n",p->cookie);
         mpiPi_cs_merge(csp, p);
+      }
     }
   
   /*callsite_stats_t *newp = NULL;
@@ -262,13 +268,16 @@ mpiPi_insert_callsite_records (callsite_stats_t * p)
   //h_insert_new(mpiPi.global_callsite_stats_agg,newp);
   
   /* Collect aggregate callsite summary information indpendent of rank. */
+  printf("global cookie 1 =%ld\n",p->cookie);
   if (NULL == h_search (mpiPi.global_callsite_stats_agg, p, (void **) &csp))
     {
+      printf("global cookie=%ld\n",p->cookie);
       callsite_stats_t *newp = NULL;
       newp = (callsite_stats_t *) malloc (sizeof (callsite_stats_t));
 
       memcpy (newp, p, sizeof (callsite_stats_t));
       newp->rank = p->rank;
+      newp->cookie=MPIP_CALLSITE_STATS_COOKIE;
       //printf("%d \n",newp->op);
       if (mpiPi.calcCOV)
         {
@@ -282,6 +291,7 @@ mpiPi_insert_callsite_records (callsite_stats_t * p)
     }
   else
     {
+      printf("global cookie !=null =%ld\n",p->cookie);
       mpiPi_cs_merge(csp, p);
       //printf("merge=%d \n",csp->op);
       if (mpiPi.calcCOV)
@@ -500,7 +510,7 @@ mpiPi_mergeResults ()
             {
               
               mpiPi_insert_callsite_records (av[ndx]);
-              
+              printf("rank0\n");
 		/*if (NULL == h_rank_search (rank_stat, p, (void **) &csp))
                 {
                   callsite_stats_t *newp = NULL;
@@ -534,6 +544,7 @@ mpiPi_mergeResults ()
               for (ndx = 0; ndx < count; ndx++)
                 {
                   mpiPi_insert_callsite_records (&rawCallsiteData[ndx]);
+                  printf("rank!=0\n");
                 }
             }
         }
@@ -930,7 +941,10 @@ mpiPi_T_finalize()
 void
 mpiPi_finalize ()
 {
+  double end;
   mpiPi_publishResults(mpiPi.report_style);
+  mpiPi_GETTIME(&end);
+  printf("end=%lf \n",end);
   if (mpiPi.disable_finalize_report == 0)
     mpiPi_generateReport (mpiPi.report_style);
 

@@ -1,0 +1,3611 @@
+Copyright (C) by Argonne National Laboratory
+    See COPYRIGHT in top-level directory
+
+Automatically generated
+  by:   ./maint/extractmvpcvars
+  at:   Fri Feb 16 17:33:28 2024 UTC
+DO NOT EDIT!!!
+
+This file lists the various environment variables available to change the
+behavior of the MPICH library.  These are intended to be used by advanced
+users.
+---------------------------------------------------------------------------
+
+MVP_ALLGATHER_BRUCK_THRESHOLD
+    Aliases: UCR_ALLGATHER_BRUCK_THRESHOLD
+             MV2_ALLGATHER_BRUCK_THRESHOLD
+    Description: TODO-DESC
+    Default: 524288
+
+MVP_ALLGATHER_RD_THRESHOLD
+    Aliases: UCR_ALLGATHER_RD_THRESHOLD
+             MV2_ALLGATHER_RD_THRESHOLD
+    Description: TODO-DESC
+    Default: 81920
+
+MVP_ALLGATHER_REVERSE_RANKING
+    Aliases: UCR_ALLGATHER_REVERSE_RANKING
+             MV2_ALLGATHER_REVERSE_RANKING
+    Description: TODO-DESC
+    Default: 1
+
+MVP_ALLGATHER_COLLECTIVE_ALGORITHM
+    Aliases: UCR_ALLGATHER_COLLECTIVE_ALGORITHM
+             MV2_ALLGATHER_COLLECTIVE_ALGORITHM
+    Description: Variable to select the allgather collective algorithm.
+        UNSET                   - Internal algorithm selection.
+        RD_ALLGATHER_COMM       - Performs data exchange by recursively
+        dividing
+        the group into halves and exchanging data
+        between neighboring processes, then reordering
+        the received data in a final step.
+        RD                      - Processes are divided into groups, and
+        each
+        group exchanges data with its neighbor groups in
+        a recursive manner until all processes have
+        received the complete data set.
+        BRUCK                   - Uses a combination of recursive doubling
+        and a
+        tree-based approach to perform an allgather
+        operation. It is often used in situations where
+        the network has low latency and high bandwidth.
+        RING                    - Uses a combination of recursive doubling
+        and a
+        tree-based approach.
+        DIRECT                  - A variant of the Two-Level Non-Blocking
+        algorithm that uses a direct-exchange approach
+        for the first level of communication.
+        DIRECTSPREAD            - A variant of the Direct algorithm that
+        uses a
+        scatter-gather approach to reduce the amount of
+        data that each process needs to send and
+        receive.
+        GATHER_BCAST            -  Involves first gathering all data onto a
+        single process and then broadcasting the result
+        to all processes. This algorithm is often used
+        in situations where the network has low
+        bandwidth and high latency.
+        2LVL_NONBLOCKED         - A variant of the Gather-Broadcast
+        algorithm
+        that uses a two-level tree-based approach to
+        reduce the amount of data that needs to be
+        transmitted.
+        2LVL_RING_NONBLOCKED    - A variant of the Two-Level Non-Blocking
+        algorithm that uses a ring-based approach for
+        the first level of communication.
+        2LVL_DIRECT             - A variant of the Two-Level Non-Blocking
+        algorithm that uses a direct-exchange approach
+        for the first level of communication.
+        2LVL_RING               - A variant of the Two-Level Non-Blocking
+        algorithm that uses a direct-exchange approach
+        for the first level of communication.
+    Default: MVP_ALLGATHER_COLLECTIVE_ALGORITHM_UNSET
+
+MVP_ALLGATHER_TUNING_IS_TWO_LEVEL
+    Aliases: UCR_ALLGATHER_TUNING_IS_TWO_LEVEL
+             MV2_ALLGATHER_TUNING_IS_TWO_LEVEL
+    Description: TODO-DESC
+    Default: 0
+
+MVP_ALLGATHERV_COLLECTIVE_ALGORITHM
+    Aliases: UCR_ALLGATHERV_COLLECTIVE_ALGORITHM
+             MV2_ALLGATHERV_COLLECTIVE_ALGORITHM
+    Description: Variable to select the allgatherv collective algorithm.
+        UNSET           - Internal algorithm selection.
+        RD              - Pairs of processes exchange data in a doubling
+        pattern.
+        BRUCK           - A communication-efficient algorithm based on a
+        generalized butterfly network.
+        RING            - Data is passed around a virtual ring in a fixed
+        pattern.
+        RING_CYCLIC     - Data is passed around a virtual ring in a cyclic
+        pattern.
+    Default: MVP_ALLGATHERV_COLLECTIVE_ALGORITHM_UNSET
+
+MVP_ALLREDUCE_2LEVEL_MSG
+    Aliases: UCR_ALLREDUCE_2LEVEL_MSG
+             MV2_ALLREDUCE_2LEVEL_MSG
+    Description: This parameter can be used to determine the threshold for
+        the 2-level Allreduce algorithm. We now use the shared-memory-based
+        algorithm for messages smaller than the MVP_SHMEM_ALLREDUCE_MSG
+        threshold, the 2-level algorithm for medium sized messages up to
+        the threshold defined by this parameter. We use the default
+        point-to-point algorithms messages larger than this threshold.
+    Default: (1 << 18)
+
+MVP_ALLREDUCE_SHORT_MSG
+    Aliases: UCR_ALLREDUCE_SHORT_MSG
+             MV2_ALLREDUCE_SHORT_MSG
+    Description: TODO-DESC
+    Default: 2048
+
+MVP_SHMEM_ALLREDUCE_MSG
+    Aliases: UCR_SHMEM_ALLREDUCE_MSG
+             MV2_SHMEM_ALLREDUCE_MSG
+    Description: The SHMEM AllReduce is used for messages less than this
+        threshold.
+    Default: (1<<15)
+
+MVP_USE_SHMEM_ALLREDUCE
+    Aliases: UCR_USE_SHMEM_ALLREDUCE
+             MV2_USE_SHMEM_ALLREDUCE
+    Description: This parameter can be used to turn off shared memory based
+        MPI_Allreduce for OFA-IB-CH3 over IBA by setting this to 0.
+    Default: 1
+
+MVP_USE_SOCKET_AWARE_ALLREDUCE
+    Aliases: UCR_USE_SOCKET_AWARE_ALLREDUCE
+             MV2_USE_SOCKET_AWARE_ALLREDUCE
+    Description: TODO-DESC
+    Default: 0
+
+MVP_USE_SOCKET_AWARE_SHARP_ALLREDUCE
+    Aliases: UCR_USE_SOCKET_AWARE_SHARP_ALLREDUCE
+             MV2_USE_SOCKET_AWARE_SHARP_ALLREDUCE
+    Description: TODO-DESC
+    Default: 1
+
+MVP_SOCKET_AWARE_ALLREDUCE_MAX_MSG
+    Aliases: UCR_SOCKET_AWARE_ALLREDUCE_MAX_MSG
+             MV2_SOCKET_AWARE_ALLREDUCE_MAX_MSG
+    Description: TODO-DESC
+    Default: 2048
+
+MVP_SOCKET_AWARE_ALLREDUCE_MIN_MSG
+    Aliases: UCR_SOCKET_AWARE_ALLREDUCE_MIN_MSG
+             MV2_SOCKET_AWARE_ALLREDUCE_MIN_MSG
+    Description: TODO-DESC
+    Default: 1
+
+MVP_ALLREDUCE_COLLECTIVE_ALGORITHM
+    Aliases: UCR_ALLREDUCE_COLLECTIVE_ALGORITHM
+             MV2_ALLREDUCE_COLLECTIVE_ALGORITHM
+    Description: This CVAR selects proper collective algorithm for inter
+        and intra node
+        allreduce operations. To set this operation to a two level
+        operation
+        then you must seperately set MVP_ALLREDUCE_TUNING_IS_TWO_LEVEL to
+        1.
+        (NOTE: This will override MVP_ALLREDUCE_INTER_NODE_TUNING_ALGO and
+        MVP_ALLREDUCE_INTRA_NODE_TUNING_ALGO).
+        UNSET       - No algorithm selected, will default to algo selected
+        by
+        CVARs MVP_ALLREDUCE_INTER_NODE_TUNING_ALGO and
+        MVP_ALLREDUCE_INTRA_NODE_TUNING_ALGO.
+    Default: MVP_ALLREDUCE_COLLECTIVE_ALGORITHM_UNSET
+
+MVP_ALLREDUCE_INTER_NODE_TUNING_ALGO
+    Aliases: UCR_ALLREDUCE_INTER_NODE_TUNING_ALGO
+             MV2_ALLREDUCE_INTER_NODE_TUNING_ALGO
+    Description: Variable to select the inter node allreduce algorithm. To
+        use a two
+        level operation you still must seperately set
+        MVP_ALLREDUCE_TUNING_IS_TWO_LEVEL=1. To use an MCAST algorithm, you
+        must
+        also set MVP_USE_MCAST_ALLREDUCE=1 and MVP_USE_MCAST=1. (This CVAR
+        can
+        be overriden by MVP_ALLREDUCE_COLLECTIVE_ALGORITHM)
+        UNSET       - Default to internal algorithm selection
+        P2P_RD      - This algorithm uses a peer-to-peer recursive doubling
+        approach to perform the allreduce operation among nodes.
+        The process starts with each node sending its data to its
+        "peer" node, which then combines the data and sends it to
+        its peer, and so on until all nodes have received the
+        combined data.
+        P2P_RSA     - This algorithm uses a peer-to-peer recursive scatter
+        and
+        allgather approach to perform the allreduce operation among
+        nodes. The process starts with each node recursively
+        splitting its data into smaller subsets and sending them to
+        its peers, and then receiving and combining the subsets
+        received from peers until all nodes have the combined data.
+        MCAST_2LVL  - This algorithm uses a two-level multicast approach to
+        perform the allreduce operation among nodes. The process
+        starts with a root node sending the data to two intermediate
+        nodes, which then multicast the data to the remaining nodes
+        in a tree-like structure.
+        MCAST_RSA   - This algorithm uses a recursive scatter and allgather
+        approach to perform the multicast and allreduce operations
+        among nodes. The process starts with each node recursively
+        splitting its data into smaller subsets and sending them to
+        its peers, and then receiving and combining the subsets
+        received from peers until all nodes have the combined data.
+        RSA         - This is a flat reduce-scatter-allgather allreduce
+        using
+        MPR_reduce_scatter and MPR_Allgather instead of uisng
+        Send/Recv like other functions. This function uses
+        reduce_scatter and allgather colls.
+        RING        - This algorithm uses a ring topology to perform the
+        allreduce operation among nodes. The process starts with
+        each node sending its data to its "neighbor" node on the
+        ring, which then combines the data and sends it to its
+        neighbor, and so on until all nodes have the combined data.
+        SOCK_AWARE  - This algorithm optimizes performance on systems with
+        multiple sockets by taking into account the placement of
+        MPI processes on the sockets during the allreduce operation
+        among nodes. The algorithm uses a combination of recursive
+        doubling and ring-based allreduce to minimize the amount of
+        inter-socket communication required.
+    Default: MVP_ALLREDUCE_INTER_NODE_TUNING_ALGO_UNSET
+
+MVP_ALLREDUCE_INTRA_NODE_TUNING_ALGO
+    Aliases: UCR_ALLREDUCE_INTRA_NODE_TUNING_ALGO
+             MV2_ALLREDUCE_INTRA_NODE_TUNING_ALGO
+    Description: Variable to select the intra node allreduce algorithm.
+        (This can be
+        overriden by MVP_ALLREDUCE_COLLECTIVE_ALGORITHM)
+        UNSET       - Default to internal algorithm selection.
+        P2P         - Intra-node p2p reduce as the first reduce in
+        allreduce.
+        SHMEM       - Intra-node shm reduce as the first reduce in
+        allreduce.
+        P2P_RD      - This algorithm uses a peer-to-peer recursive doubling
+        approach to perform the allreduce operation among nodes.
+        The process starts with each node sending its data to its
+        "peer" node, which then combines the data and sends it to
+        its peer, and so on until all nodes have received the
+        combined data.
+        P2P_RSA     - This algorithm uses a peer-to-peer recursive scatter
+        and
+        allgather approach to perform the allreduce operation among
+        nodes. The process starts with each node recursively
+        splitting its data into smaller subsets and sending them to
+        its peers, and then receiving and combining the subsets
+        received from peers until all nodes have the combined data.
+    Default: MVP_ALLREDUCE_INTRA_NODE_TUNING_ALGO_UNSET
+
+MVP_ALLREDUCE_TUNING_IS_TWO_LEVEL
+    Aliases: UCR_ALLREDUCE_TUNING_IS_TWO_LEVEL
+             MV2_ALLREDUCE_TUNING_IS_TWO_LEVEL
+    Description: TODO-DESC
+    Default: 0
+
+MVP_ALLTOALL_MEDIUM_MSG
+    Aliases: UCR_ALLTOALL_MEDIUM_MSG
+             MV2_ALLTOALL_MEDIUM_MSG
+    Description: TODO-DESC
+    Default: 16384
+
+MVP_ALLTOALL_SMALL_MSG
+    Aliases: UCR_ALLTOALL_SMALL_MSG
+             MV2_ALLTOALL_SMALL_MSG
+    Description: TODO-DESC
+    Default: 2048
+
+MVP_ALLTOALL_THROTTLE_FACTOR
+    Aliases: UCR_ALLTOALL_THROTTLE_FACTOR
+             MV2_ALLTOALL_THROTTLE_FACTOR
+    Description: TODO-DESC
+    Default: 32
+
+MVP_ALLTOALL_INTRA_THROTTLE_FACTOR
+    Aliases: UCR_ALLTOALL_INTRA_THROTTLE_FACTOR
+             MV2_ALLTOALL_INTRA_THROTTLE_FACTOR
+    Description: TODO-DESC
+    Default: 32
+
+MVP_ALLTOALL_LARGE_MSG_THROTTLE_FACTOR
+    Aliases: UCR_ALLTOALL_LARGE_MSG_THROTTLE_FACTOR
+             MV2_ALLTOALL_LARGE_MSG_THROTTLE_FACTOR
+    Description: TODO-DESC
+    Default: 4
+
+MVP_USE_XOR_ALLTOALL
+    Aliases: UCR_USE_XOR_ALLTOALL
+             MV2_USE_XOR_ALLTOALL
+    Description: TODO-DESC
+    Default: 1
+
+MVP_ALLTOALL_COLLECTIVE_ALGORITHM
+    Aliases: UCR_ALLTOALL_COLLECTIVE_ALGORITHM
+             MV2_ALLTOALL_COLLECTIVE_ALGORITHM
+    Description: This CVAR selects proper collective algorithm for the
+        all-to-all
+        operation.
+        UNSET           - No algorithm selected.
+        BRUCK           - Uses an algorithm based on Bruck's algorithm,
+        which
+        exchanges messages between neighboring processes in a
+        hypercube-like topology.
+        RD              - Performs a recurisve doubling alltoall, where
+        each
+        process sends all its data at each step along with data
+        it received in previous steps.
+        SCATTER_DEST    - Uses a scatter and gather approach, where each
+        process
+        scatters its data to all other processes, with each
+        process specifying the destination buffer to scatter to.
+        PAIRWISE        - Uses pairwise communication between processes,
+        where
+        each process exchanges data with every other process
+        using point-to-point communication.
+        INPLACE         - Performs an in-place all-to-all operation, where
+        each
+        process sends its data to every other process and
+        receives data from every other process in the same
+        buffer.
+    Default: MVP_ALLTOALL_COLLECTIVE_ALGORITHM_UNSET
+
+MVP_ALLTOALLV_COLLECTIVE_ALGORITHM
+    Aliases: UCR_ALLTOALLV_COLLECTIVE_ALGORITHM
+             MV2_ALLTOALLV_COLLECTIVE_ALGORITHM
+    Description: This CVAR selects proper collective algorithm for the
+        all-to-allv
+        operation.
+        UNSET       - No algorithm selected.
+        SCATTER     - TODO
+        INTRA       - TODO
+    Default: MVP_ALLTOALLV_COLLECTIVE_ALGORITHM_UNSET
+
+MVP_USE_SHMEM_BARRIER
+    Aliases: UCR_USE_SHMEM_BARRIER
+             MV2_USE_SHMEM_BARRIER
+    Description: This parameter can be used to turn off shared memory based
+        MPI_Barrier for OFA-IB-CH3 over IBA by setting this to 0.
+    Default: 1
+
+MVP_USE_SOCKET_AWARE_BARRIER
+    Aliases: UCR_USE_SOCKET_AWARE_BARRIER
+             MV2_USE_SOCKET_AWARE_BARRIER
+    Description: TODO-DESC
+    Default: 0
+
+MVP_BCAST_TWO_LEVEL_SYSTEM_SIZE
+    Aliases: UCR_BCAST_TWO_LEVEL_SYSTEM_SIZE
+             MV2_BCAST_TWO_LEVEL_SYSTEM_SIZE
+    Description: TODO-DESC
+    Default: 64
+
+MVP_KNOMIAL_2LEVEL_BCAST_MESSAGE_SIZE_THRESHOLD
+    Aliases: UCR_KNOMIAL_2LEVEL_BCAST_MESSAGE_SIZE_THRESHOLD
+             MV2_KNOMIAL_2LEVEL_BCAST_MESSAGE_SIZE_THRESHOLD
+    Description: TODO-DESC
+    Default: 2048
+
+MVP_KNOMIAL_2LEVEL_BCAST_SYSTEM_SIZE_THRESHOLD
+    Aliases: UCR_KNOMIAL_2LEVEL_BCAST_SYSTEM_SIZE_THRESHOLD
+             MV2_KNOMIAL_2LEVEL_BCAST_SYSTEM_SIZE_THRESHOLD
+    Description: TODO-DESC
+    Default: 64
+
+MVP_BCAST_SHORT_MSG
+    Aliases: UCR_BCAST_SHORT_MSG
+             MV2_BCAST_SHORT_MSG
+    Description: TODO-DESC
+    Default: 16384
+
+MVP_USE_KNOMIAL_2LEVEL_BCAST
+    Aliases: UCR_USE_KNOMIAL_2LEVEL_BCAST
+             MV2_USE_KNOMIAL_2LEVEL_BCAST
+    Description: TODO-DESC
+    Default: 1
+
+MVP_USE_KNOMIAL_INTER_LEADER_BCAST
+    Aliases: UCR_USE_KNOMIAL_INTER_LEADER_BCAST
+             MV2_USE_KNOMIAL_INTER_LEADER_BCAST
+    Description: TODO-DESC
+    Default: 1
+
+MVP_USE_SHMEM_BCAST
+    Aliases: UCR_USE_SHMEM_BCAST
+             MV2_USE_SHMEM_BCAST
+    Description: This parameter can be used to turn off shared memory based
+        MPI_Bcast for OFA-IB-CH3 over IBA by setting this to 0.
+    Default: 1
+
+MVP_BCAST_COLLECTIVE_ALGORITHM
+    Aliases: UCR_BCAST_COLLECTIVE_ALGORITHM
+             MV2_BCAST_COLLECTIVE_ALGORITHM
+    Description: This CVAR selects the broadcast collective algorithm. In
+        order to get a
+        two level operation you must set MVP_BCAST_TUNING_IS_TWO_LEVEL=1.
+        (NOTE: This will override MVP_BCAST_INTER_NODE_TUNING_ALGO and
+        MVP_BCAST_INTRA_NODE_TUNING_ALGO).
+        UNSET   - No algorithm selected
+        KNOMIAL - Sets both inter and intra node algo to the Knomial
+        algorithm
+    Default: MVP_BCAST_COLLECTIVE_ALGORITHM_UNSET
+
+MVP_BCAST_INTER_NODE_TUNING_ALGO
+    Aliases: UCR_BCAST_INTER_NODE_TUNING_ALGO
+             MV2_BCAST_INTER_NODE_TUNING_ALGO
+    Description: Variable to select the inter node broadcast algorithm.
+        (This can be
+        overriden by MVP_BCAST_COLLECTIVE_ALGORITHM)
+        UNSET                       - Internal algorithm selection
+        BINOMIAL                    - A binary tree-based broadcast
+        algorithm
+        that has low memory requirements but can be
+        slow for large messages.
+        SCATTER_DOUBLING_ALLGATHER  - A hybrid algorithm that first
+        scatters the
+        data using a recursive doubling algorithm
+        and then gathers it using an allgather
+        algorithm.
+        SCATTER_RING_ALLGATHER      - A hybrid algorithm that first
+        scatters the
+        data using a ring-based algorithm and then
+        gathers it using an allgather algorithm.
+        SCATTER_RING_ALLGATHER_SHM  - A variant of SCATTER_RING_ALLGATHER
+        that
+        uses shared memory to reduce communication
+        overhead.
+        KNOMIAL                     - A knomial tree-based broadcast
+        algorithm
+        that can be faster than BINOMIAL for large
+        messages.
+        PIPELINED                   - A pipelined broadcast algorithm that
+        overlaps communication and computation to
+        reduce latency.
+    Default: MVP_BCAST_INTER_NODE_TUNING_ALGO_UNSET
+
+MVP_BCAST_INTRA_NODE_TUNING_ALGO
+    Aliases: UCR_BCAST_INTRA_NODE_TUNING_ALGO
+             MV2_BCAST_INTRA_NODE_TUNING_ALGO
+    Description: Variable to select the intra node broadcast algorithm.
+        (This can be
+        overriden by MVP_BCAST_COLLECTIVE_ALGORITHM)
+        UNSET       - Internal algorithm selection
+        SHMEM       - Uses shared memory to perform broadcast within a
+        node.
+        KNOMIAL     - Uses a k-ary tree algorithm to perform broadcast
+        within a
+        node.
+    Default: MVP_BCAST_INTRA_NODE_TUNING_ALGO_UNSET
+
+MVP_BCAST_TUNING_IS_TWO_LEVEL
+    Aliases: UCR_BCAST_TUNING_IS_TWO_LEVEL
+             MV2_BCAST_TUNING_IS_TWO_LEVEL
+    Description: TODO-DESC
+    Default: 0
+
+MVP_GATHER_SWITCH_PT
+    Aliases: UCR_GATHER_SWITCH_PT
+             MV2_GATHER_SWITCH_PT
+    Description: We use different algorithms depending on the system size.
+        For small system sizes (up to 386 cores), we use the "2-level"
+        algorithm followed by the "Direct" algorithm. For medium system
+        sizes (up to 1k), we use the "Binomial" algorithm followed by the
+        "Direct" algorithm. Users can set the switching point between
+        algorithms using this runtime parameter.
+    Default: -1
+
+MVP_USE_DIRECT_GATHER
+    Aliases: UCR_USE_DIRECT_GATHER
+             MV2_USE_DIRECT_GATHER
+    Description: Use the "Direct" algorithm for the MPI_Gather operation.
+        If this parameter is set to 0 at run-time, the "Direct" algorithm
+        will not be invoked.
+    Default: 1
+
+MVP_USE_DIRECT_GATHER_SYSTEM_SIZE_MEDIUM
+    Aliases: UCR_USE_DIRECT_GATHER_SYSTEM_SIZE_MEDIUM
+             MV2_USE_DIRECT_GATHER_SYSTEM_SIZE_MEDIUM
+    Description: TODO-DESC
+    Default: 1024
+
+MVP_USE_DIRECT_GATHER_SYSTEM_SIZE_SMALL
+    Aliases: UCR_USE_DIRECT_GATHER_SYSTEM_SIZE_SMALL
+             MV2_USE_DIRECT_GATHER_SYSTEM_SIZE_SMALL
+    Description: TODO-DESC
+    Default: 384
+
+MVP_USE_TWO_LEVEL_GATHER
+    Aliases: UCR_USE_TWO_LEVEL_GATHER
+             MV2_USE_TWO_LEVEL_GATHER
+    Description: Use the two-level multi-core-aware algorithm for the
+        MPI_Gather operation. If this parameter is set to 0 at run-time,
+        the two-level algorithm will not be invoked.
+    Default: 1
+
+MVP_GATHER_COLLECTIVE_ALGORITHM
+    Aliases: UCR_GATHER_COLLECTIVE_ALGORITHM
+             MV2_GATHER_COLLECTIVE_ALGORITHM
+    Description: This CVAR selects proper collective algorithm for inter
+        and intra node
+        gather operations. (This will override
+        MVP_GATHER_INTER_NODE_TUNING_ALGO
+        and MVP_GATHER_INTRA_NODE_TUNING_ALGO)
+        UNSET       - No algorithm selected, will default to algo selected
+        by
+        CVARs MVP_GATHER_INTER_NODE_TUNING_ALGO and
+        MVP_GATHER_INTRA_NODE_TUNING_ALGO.
+        BINOMIAL    - Sets the inter and intra tuning algorithm to
+        binomial.
+        DIRECT      - Sets the inter and intra tuning algorithm to direct.
+    Default: MVP_GATHER_COLLECTIVE_ALGORITHM_UNSET
+
+MVP_GATHER_INTER_NODE_TUNING_ALGO
+    Aliases: UCR_GATHER_INTER_NODE_TUNING_ALGO
+             MV2_GATHER_INTER_NODE_TUNING_ALGO
+    Description: Variable to select the inter node gather algorithm. (This
+        can be
+        overriden by MVP_GATHER_COLLECTIVE_ALGORITHM)
+        UNSET               - Internal algorithm selection.
+        BINOMIAL            - A recursive algorithm that divides nodes into
+        pairs and exchanges data until all nodes have
+        the final result.
+        DIRECT              - A recursive algorithm that divides nodes into
+        pairs and exchanges data until all nodes have the
+        final result.
+        2LVL_DIRECT    - A recursive algorithm that divides nodes into
+        pairs and exchanges data until all nodes have the
+        final result.
+    Default: MVP_GATHER_INTER_NODE_TUNING_ALGO_UNSET
+
+MVP_GATHER_INTRA_NODE_TUNING_ALGO
+    Aliases: UCR_GATHER_INTRA_NODE_TUNING_ALGO
+             MV2_GATHER_INTRA_NODE_TUNING_ALGO
+    Description: Variable to select the intra node gather algorithm. (This
+        can be
+        overriden by MVP_GATHER_COLLECTIVE_ALGORITHM)
+        UNSET       - Internal algorithm selection
+        BINOMIAL    - A recursive algorithm that divides nodes into pairs
+        and
+        exchanges data until all nodes have the  final result.
+        DIRECT      - A recursive algorithm that divides nodes into pairs
+        and
+        exchanges data until all nodes have the final result.
+    Default: MVP_GATHER_INTRA_NODE_TUNING_ALGO_UNSET
+
+MVP_ENABLE_SHARP
+    Aliases: UCR_ENABLE_SHARP
+             MV2_ENABLE_SHARP
+    Description: Set this to 1, to enable hardware SHArP support in
+        collective communication.
+    Default: 0
+
+MVP_SHARP_MAX_MSG_SIZE
+    Aliases: UCR_SHARP_MAX_MSG_SIZE
+             MV2_SHARP_MAX_MSG_SIZE
+    Description: TODO-DESC
+    Default: -1
+
+MVP_SHARP_PORT
+    Aliases: UCR_SHARP_PORT
+             MV2_SHARP_PORT
+    Description: By default, this is set by the MVAPICH library. However,
+        you can explicitly set the HCA port which is realized by the SHArP
+        library.
+    Default: 0
+
+MVP_SHARP_HCA_NAME
+    Aliases: UCR_SHARP_HCA_NAME
+             MV2_SHARP_HCA_NAME
+    Description: By default, this is set by the MVAPICH library. However,
+        you can explicitly set the HCA name which is realized by the SHArP
+        library.
+    Default: NULL
+
+MVP_SHARP_MIN_NODE_COUNT
+    Aliases: UCR_SHARP_MIN_NODE_COUNT
+             MV2_SHARP_MIN_NODE_COUNT
+    Description: TODO-DESC
+    Default: 4
+
+MVP_ENABLE_SHARP_ALLREDUCE
+    Aliases: UCR_ENABLE_SHARP_ALLREDUCE
+             MV2_ENABLE_SHARP_ALLREDUCE
+    Description: Enable collective offloading via Mellanox SHArP for
+        allreduce
+    Default: 1
+
+MVP_ENABLE_SHARP_BARRIER
+    Aliases: UCR_ENABLE_SHARP_BARRIER
+             MV2_ENABLE_SHARP_BARRIER
+    Description: Enable collective offloading via Mellanox SHArP for
+        barrier
+    Default: 1
+
+MVP_ENABLE_SHARP_BCAST
+    Aliases: UCR_ENABLE_SHARP_BCAST
+             MV2_ENABLE_SHARP_BCAST
+    Description: Enable collective offloading via Mellanox SHArP for bcast
+    Default: 1
+
+MVP_ENABLE_SHARP_REDUCE
+    Aliases: UCR_ENABLE_SHARP_REDUCE
+             MV2_ENABLE_SHARP_REDUCE
+    Description: Enable collective offloading via Mellanox SHArP for reduce
+    Default: 1
+
+MVP_ENABLE_SHARP_SCATTER
+    Aliases: UCR_ENABLE_SHARP_SCATTER
+             MV2_ENABLE_SHARP_SCATTER
+    Description: Enable collective offloading via Mellanox SHArP for
+        scatter
+    Default: 1
+
+MVP_ENABLE_SHARP_SCATTERV
+    Aliases: UCR_ENABLE_SHARP_SCATTERV
+             MV2_ENABLE_SHARP_SCATTERV
+    Description: Enable collective offloading via Mellanox SHArP for
+        scatterv
+    Default: 1
+
+MVP_ENABLE_SHARP_IALLREDUCE
+    Aliases: UCR_ENABLE_SHARP_IALLREDUCE
+             MV2_ENABLE_SHARP_IALLREDUCE
+    Description: Enable collective offloading via Mellanox SHArP for
+        iallreduce
+    Default: 1
+
+MVP_ENABLE_SHARP_IREDUCE
+    Aliases: UCR_ENABLE_SHARP_IREDUCE
+             MV2_ENABLE_SHARP_IREDUCE
+    Description: Enable collective offloading via Mellanox SHArP for
+        ireduce
+    Default: 1
+
+MVP_ENABLE_SHARP_IBCAST
+    Aliases: UCR_ENABLE_SHARP_IBCAST
+             MV2_ENABLE_SHARP_IBCAST
+    Description: Enable collective offloading via Mellanox SHArP for ibcast
+    Default: 1
+
+MVP_ENABLE_SHARP_IBARRIER
+    Aliases: UCR_ENABLE_SHARP_IBARRIER
+             MV2_ENABLE_SHARP_IBARRIER
+    Description: Enable collective offloading via Mellanox SHArP for
+        ibarrier
+    Default: 1
+
+MVP_INTRA_SHMEM_REDUCE_MSG
+    Aliases: UCR_INTRA_SHMEM_REDUCE_MSG
+             MV2_INTRA_SHMEM_REDUCE_MSG
+    Description: TODO-DESC
+    Default: (1<<11)
+
+MVP_REDUCE_2LEVEL_MSG
+    Aliases: UCR_REDUCE_2LEVEL_MSG
+             MV2_REDUCE_2LEVEL_MSG
+    Description: This parameter can be used to determine the threshold for
+        the 2-level reduce algorithm. We now use the shared-memory-based
+        algorithm for messages smaller than the MVP_SHMEM_REDUCE_MSG, the
+        2-level algorithm for medium sized messages up to the threshold
+        defined by this parameter. We use the default point-to-point
+        algorithms messages larger than this threshold.
+    Default: (1<<14)
+
+MVP_REDUCE_SHORT_MSG
+    Aliases: UCR_REDUCE_SHORT_MSG
+             MV2_REDUCE_SHORT_MSG
+    Description: TODO-DESC
+    Default: 8192
+
+MVP_SHMEM_REDUCE_MSG
+    Aliases: UCR_SHMEM_REDUCE_MSG
+             MV2_SHMEM_REDUCE_MSG
+    Description: The SHMEM reduce is used for messages less than this
+        threshold.
+    Default: (1<<12)
+
+MVP_USE_SHMEM_REDUCE
+    Aliases: UCR_USE_SHMEM_REDUCE
+             MV2_USE_SHMEM_REDUCE
+    Description: This parameter can be used to turn off shared memory based
+        MPI_Reduce for OFA-IB-CH3 over IBA by setting this to 0.
+    Default: 1
+
+MVP_REDUCE_COLLECTIVE_ALGORITHM
+    Aliases: UCR_REDUCE_COLLECTIVE_ALGORITHM
+             MV2_REDUCE_COLLECTIVE_ALGORITHM
+    Description: This CVAR selects proper collective algorithm for inter
+        and intra node
+        reduce operations. To set this operation to a two level operation
+        then
+        you must seperately set MVP_REDUCE_TUNING_IS_TWO_LEVEL to 1 (true).
+        (NOTE: This will override MVP_REDUCE_INTER_NODE_TUNING_ALGO and
+        MVP_REDUCE_INTRA_NODE_TUNING_ALGO).
+        UNSET       - No algorithm selected, will default to algo selected
+        by
+        CVARs MVP_REDUCE_INTER_NODE_TUNING_ALGO and
+        MVP_REDUCE_INTRA_NODE_TUNING_ALGO.
+        BINOMIAL    - sets both inter and intra tuning algo to binomial
+        KNOMIAL     - sets both inter and intra tuning algo to knomial
+    Default: MVP_REDUCE_COLLECTIVE_ALGORITHM_UNSET
+
+MVP_REDUCE_INTER_NODE_TUNING_ALGO
+    Aliases: UCR_REDUCE_INTER_NODE_TUNING_ALGO
+             MV2_REDUCE_INTER_NODE_TUNING_ALGO
+    Description: Variable to select the inter node reduce algorithm. (This
+        can be
+        overriden by MVP_REDUCE_COLLECTIVE_ALGORITHM)
+        UNSET               - Default to internal algorithm selection
+        BINOMIAL            - The reduce operation is performed using a
+        binomial tree algorithm. This algorithm is efficient
+        for small to medium-sized messages and is scalable
+        to a large number of nodes.
+        KNOMIAL             - The reduce operation is performed using a
+        k-nomial
+        tree algorithm. This algorithm is efficient for
+        medium to large-sized messages and is also scalable
+        to a large number of nodes.
+        RED_SCAT_GATHER     - The reduce-scatter operation is performed
+        first,
+        followed by a gather operation. This algorithm is
+        efficient for medium to large-sized messages and can
+        be used on systems where there is no direct
+        support for reduce operation.
+        ALLREDUCE           - Uses an underlying allreduce algorithm to
+        perform
+        the reduce operation.
+    Default: MVP_REDUCE_INTER_NODE_TUNING_ALGO_UNSET
+
+MVP_REDUCE_INTRA_NODE_TUNING_ALGO
+    Aliases: UCR_REDUCE_INTRA_NODE_TUNING_ALGO
+             MV2_REDUCE_INTRA_NODE_TUNING_ALGO
+    Description: Variable to select the intra node reduce algorithm. (This
+        can be
+        overriden by MVP_REDUCE_COLLECTIVE_ALGORITHM)
+        UNSET       - Default to internal algorithm selection
+        KNOMIAL     - This algorithm is a recursive, tree-based algorithm
+        that
+        uses pairwise reduction operations to reduce data.
+        SHMEM       - This algorithm is optimized for communication within
+        a
+        single node and uses shared memory for data transfer.
+        BINOMIAL    - This algorithm is optimized for communication within
+        a
+        single node and uses shared memory for data transfer.
+    Default: MVP_REDUCE_INTRA_NODE_TUNING_ALGO_UNSET
+
+MVP_REDUCE_TUNING_IS_TWO_LEVEL
+    Aliases: UCR_REDUCE_TUNING_IS_TWO_LEVEL
+             MV2_REDUCE_TUNING_IS_TWO_LEVEL
+    Description: TODO-DESC
+    Default: 0
+
+MVP_RED_SCAT_LARGE_MSG
+    Aliases: UCR_RED_SCAT_LARGE_MSG
+             MV2_RED_SCAT_LARGE_MSG
+    Description: TODO-DESC
+    Default: (512*1024)
+
+MVP_RED_SCAT_SHORT_MSG
+    Aliases: UCR_RED_SCAT_SHORT_MSG
+             MV2_RED_SCAT_SHORT_MSG
+    Description: TODO-DESC
+    Default: 64
+
+MVP_SCATTER_MEDIUM_MSG
+    Aliases: UCR_SCATTER_MEDIUM_MSG
+             MV2_SCATTER_MEDIUM_MSG
+    Description: When the system size is lower than 512 cores, we use the
+        "2-level" algorithm for medium message sizes. This allows the user
+        to set the threshold for medium messages. -1 indicates allowing the
+        default values to be used.
+    Default: -1
+
+MVP_SCATTER_SMALL_MSG
+    Aliases: UCR_SCATTER_SMALL_MSG
+             MV2_SCATTER_SMALL_MSG
+    Description: When the system size is lower than 512 cores, we use the
+        "Binomial"algorithm for small message sizes. This allows the user
+        to set the threshold for small messgaes. -1 indicates allowing the
+        default values to be used.
+    Default: -1
+
+MVP_USE_DIRECT_SCATTER
+    Aliases: UCR_USE_DIRECT_SCATTER
+             MV2_USE_DIRECT_SCATTER
+    Description: Use the "Direct" algorithm for the MPI_Scatter operation.
+        If this parameter is set to 0 at runtime, the "Direct" algorithm
+        will not be invoked.
+    Default: 1
+
+MVP_USE_SCATTER_RD_INTER_LEADER_BCAST
+    Aliases: UCR_USE_SCATTER_RD_INTER_LEADER_BCAST
+             MV2_USE_SCATTER_RD_INTER_LEADER_BCAST
+    Description: TODO-DESC
+    Default: 1
+
+MVP_USE_SCATTER_RING_INTER_LEADER_BCAST
+    Aliases: UCR_USE_SCATTER_RING_INTER_LEADER_BCAST
+             MV2_USE_SCATTER_RING_INTER_LEADER_BCAST
+    Description: TODO-DESC
+    Default: 1
+
+MVP_USE_TWO_LEVEL_SCATTER
+    Aliases: UCR_USE_TWO_LEVEL_SCATTER
+             MV2_USE_TWO_LEVEL_SCATTER
+    Description: Use the two-level multi-core-aware algorithm for the
+        MPI_Scatter operation. If this parameter is set to 0 at run-time,
+        the two-level algorithm will not be invoked.
+    Default: 1
+
+MVP_SCATTER_COLLECTIVE_ALGORITHM
+    Aliases: UCR_SCATTER_COLLECTIVE_ALGORITHM
+             MV2_SCATTER_COLLECTIVE_ALGORITHM
+    Description: This CVAR selects proper collective algorithm for inter
+        and intra node
+        scatter operations. (NOTE: This will override
+        MVP_SCATTER_INTER_NODE_TUNING_ALGO and
+        MVP_SCATTER_INTRA_NODE_TUNING_ALGO).
+        UNSET       - No algorithm selected, will default to algo selected
+        by
+        CVARs MVP_SCATTER_INTER_NODE_TUNING_ALGO and
+        MVP_SCATTER_INTRA_NODE_TUNING_ALGO.
+        BINOMIAL    - Set both inter and intra node scatter tuning to
+        binomial.
+        DIRECT      - Set both inter and intra node scatter tuning to
+        binomial.
+    Default: MVP_SCATTER_COLLECTIVE_ALGORITHM_UNSET
+
+MVP_SCATTER_INTER_NODE_TUNING_ALGO
+    Aliases: UCR_SCATTER_INTER_NODE_TUNING_ALGO
+             MV2_SCATTER_INTER_NODE_TUNING_ALGO
+    Description: Variable to select the inter node scatter algorithm. To
+        use the two
+        level algorithms MVP_USE_TWO_LEVEL_SCATTER must be set to 1
+        (default).
+        (This CVAR can be overriden by MVP_SCATTER_COLLECTIVE_ALGORITHM).
+        UNSET           - Default to internal algorithm selection.
+        BINOMIAL        - Scatter data using a binomial tree algorithm that
+        divides data equally among processes.
+        DIRECT          - Scatter data by directly sending it from the root
+        to
+        all processes.
+        2LVL_BINOMIAL   - Scatter data using a two-level binomial tree,
+        where
+        processes within each node communicate with each other
+        before communicating across nodes.
+        2LVL_DIRECT     - Scatter data using a two-level direct
+        send-receive,
+        where processes within each node communicate with each
+        other before communicating across nodes.
+        MCAST           - Scatter data using a multicast algorithm that
+        sends
+        data to all processes at once. Also make sure to set
+        MVP_USE_MCAST_SCATTER=1 MVP_USE_MCAST_PIPELINE_SHM=1
+        MVP_USE_MCAST=1.
+    Default: MVP_SCATTER_INTER_NODE_TUNING_ALGO_UNSET
+
+MVP_SCATTER_INTRA_NODE_TUNING_ALGO
+    Aliases: UCR_SCATTER_INTRA_NODE_TUNING_ALGO
+             MV2_SCATTER_INTRA_NODE_TUNING_ALGO
+    Description: Variable to select the intra node scatter algorithm. (This
+        CVAR can be
+        overriden by MVP_SCATTER_COLLECTIVE_ALGORITHM).
+        UNSET       - Default to internal algorithm selection.
+        DIRECT      - Scatter data by directly sending it from the root to
+        all
+        processes within a node.
+        BINOMIAL    - Scatter data using a binomial tree algorithm that
+        divides
+        data equally among processes within a node
+    Default: MVP_SCATTER_INTRA_NODE_TUNING_ALGO_UNSET
+
+MVP_SHMEM_DIR
+    Aliases: UCR_SHMEM_DIR
+             MV2_SHMEM_DIR
+    Description: This parameter can be used to specify the path to the
+        shared memory files for intra-node communication.
+    Default: NULL
+
+MVP_KNOMIAL_INTER_LEADER_THRESHOLD
+    Aliases: UCR_KNOMIAL_INTER_LEADER_THRESHOLD
+             MV2_KNOMIAL_INTER_LEADER_THRESHOLD
+    Description: TODO-DESC
+    Default: (64 * 1024)
+
+MVP_KNOMIAL_INTER_NODE_FACTOR
+    Aliases: UCR_KNOMIAL_INTER_NODE_FACTOR
+             MV2_KNOMIAL_INTER_NODE_FACTOR
+    Description: This defines the degree of the knomial operation during
+        the inter-node knomial broadcast phase.
+    Default: 4
+
+MVP_KNOMIAL_INTRA_NODE_FACTOR
+    Aliases: UCR_KNOMIAL_INTRA_NODE_FACTOR
+             MV2_KNOMIAL_INTRA_NODE_FACTOR
+    Description: This defines the degree of the knomial operation during
+        the intra-node knomial broadcast phase.
+    Default: 4
+
+MVP_KNOMIAL_INTRA_NODE_THRESHOLD
+    Aliases: UCR_KNOMIAL_INTRA_NODE_THRESHOLD
+             MV2_KNOMIAL_INTRA_NODE_THRESHOLD
+    Description: TODO-DESC
+    Default: (128 * 1024)
+
+MVP_SHMEM_COLL_MAX_MSG_SIZE
+    Aliases: UCR_SHMEM_COLL_MAX_MSG_SIZE
+             MV2_SHMEM_COLL_MAX_MSG_SIZE
+    Description: This parameter can be used to select the max buffer size
+        of message for shared memory collectives.
+    Default: (128 * 1024)
+
+MVP_SHMEM_COLL_NUM_COMM
+    Aliases: UCR_SHMEM_COLL_NUM_COMM
+             MV2_SHMEM_COLL_NUM_COMM
+    Description: This parameter can be used to select the number of
+        communicators using shared memory collectives.
+    Default: 32
+
+MVP_SHMEM_COLL_NUM_PROCS
+    Aliases: UCR_SHMEM_COLL_NUM_PROCS
+             MV2_SHMEM_COLL_NUM_PROCS
+    Description: TODO-DESC
+    Default: -1
+
+MVP_SHMEM_COLL_SPIN_COUNT
+    Aliases: UCR_SHMEM_COLL_SPIN_COUNT
+             MV2_SHMEM_COLL_SPIN_COUNT
+    Description: TODO-DESC
+    Default: 5
+
+MVP_USE_OSU_COLLECTIVES
+    Aliases: UCR_USE_OSU_COLLECTIVES
+             MV2_USE_OSU_COLLECTIVES
+    Description: TODO-DESC
+    Default: 1
+
+MVP_USE_OSU_NB_COLLECTIVES
+    Aliases: UCR_USE_OSU_NB_COLLECTIVES
+             MV2_USE_OSU_NB_COLLECTIVES
+    Description: TODO-DESC
+    Default: 1
+
+MVP_USE_SHMEM_COLL
+    Aliases: UCR_USE_SHMEM_COLL
+             MV2_USE_SHMEM_COLL
+    Description: Use shared memory for collective communication. Set this
+        to 0 for disabling shared memory collectives.
+    Default: 1
+
+MVP_ENABLE_SOCKET_AWARE_COLLECTIVES
+    Aliases: UCR_ENABLE_SOCKET_AWARE_COLLECTIVES
+             MV2_ENABLE_SOCKET_AWARE_COLLECTIVES
+    Description: This parameter enables/disables support for socket-aware
+        collective communication. The parameter MVP_USE_SHMEM_COLL must be
+        set to 1 for this to work.
+    Default: 0
+
+MVP_USE_BLOCKING
+    Aliases: UCR_USE_BLOCKING
+             MV2_USE_BLOCKING
+    Description: Setting this parameter enables mvapich to use blocking
+        mode progress. MPI applications do not take up any CPU when they
+        are waiting for incoming messages.
+    Default: 0
+
+MVP_USE_SHARED_MEM
+    Aliases: UCR_USE_SHARED_MEM
+             MV2_USE_SHARED_MEM
+    Description: Use shared memory for intra-node communication.
+    Default: 1
+
+MVP_ENABLE_TOPO_AWARE_COLLECTIVES
+    Aliases: UCR_ENABLE_TOPO_AWARE_COLLECTIVES
+             MV2_ENABLE_TOPO_AWARE_COLLECTIVES
+    Description: TODO-DESC
+    Default: 1
+
+MVP_USE_TOPO_AWARE_ALLREDUCE
+    Aliases: UCR_USE_TOPO_AWARE_ALLREDUCE
+             MV2_USE_TOPO_AWARE_ALLREDUCE
+    Description: This parameter determines whether a topology-aware
+        algorithm should be used or not for allreduce collective
+        operations. It takes effect only if
+        MVP_ENABLE_TOPO_AWARE_COLLECTIVES is set to 1.
+    Default: 1
+
+MVP_USE_TOPO_AWARE_REDUCE
+    Aliases: UCR_USE_TOPO_AWARE_REDUCE
+             MV2_USE_TOPO_AWARE_REDUCE
+    Description: TODO-DESC
+    Default: 0
+
+MVP_USE_TOPO_AWARE_BCAST
+    Aliases: UCR_USE_TOPO_AWARE_BCAST
+             MV2_USE_TOPO_AWARE_BCAST
+    Description: TODO-DESC
+    Default: 0
+
+MVP_USE_OPTIMIZED_RELEASE_ALLREDUCE
+    Aliases: UCR_USE_OPTIMIZED_RELEASE_ALLREDUCE
+             MV2_USE_OPTIMIZED_RELEASE_ALLREDUCE
+    Description: TODO-DESC
+    Default: 1
+
+MVP_USE_SHMEM_TREE_ENABLE
+    Aliases: UCR_USE_SHMEM_TREE_ENABLE
+             MV2_USE_SHMEM_TREE_ENABLE
+    Description: TODO-DESC TODO: not used
+    Default: 0
+
+MVP_USE_SHMEM_TREE_MIN_MESSAGE_SIZE
+    Aliases: UCR_USE_SHMEM_TREE_MIN_MESSAGE_SIZE
+             MV2_USE_SHMEM_TREE_MIN_MESSAGE_SIZE
+    Description: TODO-DESC
+    Default: 1
+
+MVP_USE_SHMEM_TREE_MAX_MESSAGE_SIZE
+    Aliases: UCR_USE_SHMEM_TREE_MAX_MESSAGE_SIZE
+             MV2_USE_SHMEM_TREE_MAX_MESSAGE_SIZE
+    Description: TODO-DESC
+    Default: 16384
+
+MVP_USE_SHMEM_NUM_TREES
+    Aliases: UCR_USE_SHMEM_NUM_TREES
+             MV2_USE_SHMEM_NUM_TREES
+    Description: TODO-DESC
+    Default: 8
+
+MVP_COLL_TMP_BUF_SIZE
+    Aliases: UCR_COLL_TMP_BUF_SIZE
+             MV2_COLL_TMP_BUF_SIZE
+    Description: TODO-DESC
+    Default: 2048
+
+MVP_USE_TOPO_AWARE_BARRIER
+    Aliases: UCR_USE_TOPO_AWARE_BARRIER
+             MV2_USE_TOPO_AWARE_BARRIER
+    Description: This parameter determines whether a topology-aware
+        algorithm should be used or not for barrier collective operations.
+        It takes effect only if MVP_ENABLE_TOPO_AWARE_COLLECTIVES is set to
+        1.
+    Default: 1
+
+MVP_TOPO_AWARE_ALLREDUCE_MAX_MSG
+    Aliases: UCR_TOPO_AWARE_ALLREDUCE_MAX_MSG
+             MV2_TOPO_AWARE_ALLREDUCE_MAX_MSG
+    Description: TODO-DESC
+    Default: 2048
+
+MVP_TOPO_AWARE_ALLREDUCE_MIN_MSG
+    Aliases: UCR_TOPO_AWARE_ALLREDUCE_MIN_MSG
+             MV2_TOPO_AWARE_ALLREDUCE_MIN_MSG
+    Description: TODO-DESC
+    Default: 1
+
+MVP_TOPO_AWARE_REDUCE_MAX_MSG
+    Aliases: UCR_TOPO_AWARE_REDUCE_MAX_MSG
+             MV2_TOPO_AWARE_REDUCE_MAX_MSG
+    Description: TODO-DESC
+    Default: 2048
+
+MVP_TOPO_AWARE_REDUCE_MIN_MSG
+    Aliases: UCR_TOPO_AWARE_REDUCE_MIN_MSG
+             MV2_TOPO_AWARE_REDUCE_MIN_MSG
+    Description: TODO-DESC
+    Default: 1
+
+MVP_TOPO_AWARE_BCAST_MAX_MSG
+    Aliases: UCR_TOPO_AWARE_BCAST_MAX_MSG
+             MV2_TOPO_AWARE_BCAST_MAX_MSG
+    Description: TODO-DESC
+    Default: 2048
+
+MVP_TOPO_AWARE_BCAST_MIN_MSG
+    Aliases: UCR_TOPO_AWARE_BCAST_MIN_MSG
+             MV2_TOPO_AWARE_BCAST_MIN_MSG
+    Description: TODO-DESC
+    Default: 1
+
+MVP_TOPO_AWARE_REDUCE_PPN_THRESHOLD
+    Aliases: UCR_TOPO_AWARE_REDUCE_PPN_THRESHOLD
+             MV2_TOPO_AWARE_REDUCE_PPN_THRESHOLD
+    Description: TODO-DESC
+    Default: 1
+
+MVP_TOPO_AWARE_BCAST_PPN_THRESHOLD
+    Aliases: UCR_TOPO_AWARE_BCAST_PPN_THRESHOLD
+             MV2_TOPO_AWARE_BCAST_PPN_THRESHOLD
+    Description: TODO-DESC
+    Default: 1
+
+MVP_TOPO_AWARE_BCAST_NODE_THRESHOLD
+    Aliases: UCR_TOPO_AWARE_BCAST_NODE_THRESHOLD
+             MV2_TOPO_AWARE_BCAST_NODE_THRESHOLD
+    Description: TODO-DESC
+    Default: 1
+
+MVP_TOPO_AWARE_REDUCE_NODE_THRESHOLD
+    Aliases: UCR_TOPO_AWARE_REDUCE_NODE_THRESHOLD
+             MV2_TOPO_AWARE_REDUCE_NODE_THRESHOLD
+    Description: TODO-DESC
+    Default: 1
+
+MVP_GATHERV_SSEND_MIN_PROCS
+    Aliases: UCR_GATHERV_SSEND_MIN_PROCS
+             MV2_GATHERV_SSEND_MIN_PROCS
+    Description: TODO-DESC
+    Default: -1
+
+MVP_USE_MCAST_ALLREDUCE
+    Aliases: UCR_USE_MCAST_ALLREDUCE
+             MV2_USE_MCAST_ALLREDUCE
+    Description: TODO-DESC
+    Default: 1
+
+MVP_MCAST_ALLREDUCE_SMALL_MSG_SIZE
+    Aliases: UCR_MCAST_ALLREDUCE_SMALL_MSG_SIZE
+             MV2_MCAST_ALLREDUCE_SMALL_MSG_SIZE
+    Description: TODO-DESC
+    Default: 1024
+
+MVP_MCAST_ALLREDUCE_LARGE_MSG_SIZE
+    Aliases: UCR_MCAST_ALLREDUCE_LARGE_MSG_SIZE
+             MV2_MCAST_ALLREDUCE_LARGE_MSG_SIZE
+    Description: TODO-DESC
+    Default: (128 * 1024)
+
+MVP_USE_MCAST_SCATTER
+    Aliases: UCR_USE_MCAST_SCATTER
+             MV2_USE_MCAST_SCATTER
+    Description: TODO-DESC
+    Default: 1
+
+MVP_MCAST_SCATTER_MSG_SIZE
+    Aliases: UCR_MCAST_SCATTER_MSG_SIZE
+             MV2_MCAST_SCATTER_MSG_SIZE
+    Description: TODO-DESC
+    Default: 32
+
+MVP_MCAST_SCATTER_SMALL_SYS_SIZE
+    Aliases: UCR_MCAST_SCATTER_SMALL_SYS_SIZE
+             MV2_MCAST_SCATTER_SMALL_SYS_SIZE
+    Description: TODO-DESC
+    Default: 32
+
+MVP_MCAST_SCATTER_LARGE_SYS_SIZE
+    Aliases: UCR_MCAST_SCATTER_LARGE_SYS_SIZE
+             MV2_MCAST_SCATTER_LARGE_SYS_SIZE
+    Description: TODO-DESC
+    Default: 2048
+
+MVP_USE_BITONIC_COMM_SPLIT
+    Aliases: UCR_USE_BITONIC_COMM_SPLIT
+             MV2_USE_BITONIC_COMM_SPLIT
+    Description: TODO-DESC
+    Default: 0
+
+MVP_BITONIC_COMM_SPLIT_THRESHOLD
+    Aliases: UCR_BITONIC_COMM_SPLIT_THRESHOLD
+             MV2_BITONIC_COMM_SPLIT_THRESHOLD
+    Description: TODO-DESC
+    Default: 12000
+
+MVP_ENABLE_SKIP_TUNING_TABLE_SEARCH
+    Aliases: UCR_ENABLE_SKIP_TUNING_TABLE_SEARCH
+             MV2_ENABLE_SKIP_TUNING_TABLE_SEARCH
+    Description: TODO-DESC
+    Default: 1
+
+MVP_COLL_SKIP_TABLE_THRESHOLD
+    Aliases: UCR_COLL_SKIP_TABLE_THRESHOLD
+             MV2_COLL_SKIP_TABLE_THRESHOLD
+    Description: Message sizes larger than threshold will be pick an
+        algorithm from tuning table.
+    Default: 1024
+
+MVP_USE_INDEXED_ALLGATHER_TUNING
+    Aliases: UCR_USE_INDEXED_ALLGATHER_TUNING
+             MV2_USE_INDEXED_ALLGATHER_TUNING
+    Description: TODO-DESC
+    Default: 1
+
+MVP_USE_INDEXED_ALLTOALL_TUNING
+    Aliases: UCR_USE_INDEXED_ALLTOALL_TUNING
+             MV2_USE_INDEXED_ALLTOALL_TUNING
+    Description: TODO-DESC
+    Default: 1
+
+MVP_USE_INDEXED_ALLTOALLV_TUNING
+    Aliases: UCR_USE_INDEXED_ALLTOALLV_TUNING
+             MV2_USE_INDEXED_ALLTOALLV_TUNING
+    Description: TODO-DESC
+    Default: 1
+
+MVP_IBCAST_ENABLE
+    Aliases: UCR_IBCAST_ENABLE
+             MV2_IBCAST_ENABLE
+    Description: TODO-DESC
+    Default: 1
+
+MVP_IGATHER_ENABLE
+    Aliases: UCR_IGATHER_ENABLE
+             MV2_IGATHER_ENABLE
+    Description: TODO-DESC
+    Default: 1
+
+MVP_ISCATTER_ENABLE
+    Aliases: UCR_ISCATTER_ENABLE
+             MV2_ISCATTER_ENABLE
+    Description: TODO-DESC
+    Default: 1
+
+MVP_IALLGATHER_ENABLE
+    Aliases: UCR_IALLGATHER_ENABLE
+             MV2_IALLGATHER_ENABLE
+    Description: TODO-DESC
+    Default: 1
+
+MVP_IREDUCE_ENABLE
+    Aliases: UCR_IREDUCE_ENABLE
+             MV2_IREDUCE_ENABLE
+    Description: TODO-DESC
+    Default: 1
+
+MVP_IALLREDUCE_ENABLE
+    Aliases: UCR_IALLREDUCE_ENABLE
+             MV2_IALLREDUCE_ENABLE
+    Description: TODO-DESC
+    Default: 1
+
+MVP_IREDUCE_SCATTER_ENABLE
+    Aliases: UCR_IREDUCE_SCATTER_ENABLE
+             MV2_IREDUCE_SCATTER_ENABLE
+    Description: TODO-DESC
+    Default: 1
+
+MVP_IALLTOALL_ENABLE
+    Aliases: UCR_IALLTOALL_ENABLE
+             MV2_IALLTOALL_ENABLE
+    Description: TODO-DESC
+    Default: 1
+
+MVP_IALLTOALLV_ENABLE
+    Aliases: UCR_IALLTOALLV_ENABLE
+             MV2_IALLTOALLV_ENABLE
+    Description: TODO-DESC
+    Default: 1
+
+MVP_IALLGATHERV_ENABLE
+    Aliases: UCR_IALLGATHERV_ENABLE
+             MV2_IALLGATHERV_ENABLE
+    Description: TODO-DESC
+    Default: 1
+
+MVP_IBARRIER_ENABLE
+    Aliases: UCR_IBARRIER_ENABLE
+             MV2_IBARRIER_ENABLE
+    Description: TODO-DESC
+    Default: 1
+
+MVP_SHMEM_COLL_MAX_NUM_EMPTY_PROGRESS_POLLS
+    Aliases: UCR_SHMEM_COLL_MAX_NUM_EMPTY_PROGRESS_POLLS
+             MV2_SHMEM_COLL_MAX_NUM_EMPTY_PROGRESS_POLLS
+    Description: TODO-DESC
+    Default: 10000
+
+MVP_USE_KNOMIAL_REDUCE
+    Aliases: UCR_USE_KNOMIAL_REDUCE
+             MV2_USE_KNOMIAL_REDUCE
+    Description: TODO-DESC
+    Default: 1
+
+MVP_REDUCE_INTER_KNOMIAL_FACTOR
+    Aliases: UCR_REDUCE_INTER_KNOMIAL_FACTOR
+             MV2_REDUCE_INTER_KNOMIAL_FACTOR
+    Description: TODO-DESC
+    Default: 4
+
+MVP_REDUCE_ZCOPY_INTER_KNOMIAL_FACTOR
+    Aliases: UCR_REDUCE_ZCOPY_INTER_KNOMIAL_FACTOR
+             MV2_REDUCE_ZCOPY_INTER_KNOMIAL_FACTOR
+    Description: TODO-DESC
+    Default: 4
+
+MVP_REDUCE_INTRA_KNOMIAL_FACTOR
+    Aliases: UCR_REDUCE_INTRA_KNOMIAL_FACTOR
+             MV2_REDUCE_INTRA_KNOMIAL_FACTOR
+    Description: TODO-DESC
+    Default: 4
+
+MVP_INTRA_MULTI_LEVEL_GATHER_TUNING
+    Aliases: UCR_INTRA_MULTI_LEVEL_GATHER_TUNING
+             MV2_INTRA_MULTI_LEVEL_GATHER_TUNING
+    Description: TODO-DESC
+    Default: NULL
+
+MVP_USE_OLD_BCAST
+    Aliases: UCR_USE_OLD_BCAST
+             MV2_USE_OLD_BCAST
+    Description: TODO-DESC
+    Default: 0
+
+MVP_ALLRED_USE_RING
+    Aliases: UCR_ALLRED_USE_RING
+             MV2_ALLRED_USE_RING
+    Description: TODO-DESC
+    Default: 1
+
+MVP_USE_OLD_ALLGATHER
+    Aliases: UCR_USE_OLD_ALLGATHER
+             MV2_USE_OLD_ALLGATHER
+    Description: TODO-DESC
+    Default: 0
+
+MVP_USE_OLD_SCATTER
+    Aliases: UCR_USE_OLD_SCATTER
+             MV2_USE_OLD_SCATTER
+    Description: TODO-DESC
+    Default: 0
+
+MVP_USE_OLD_ALLREDUCE
+    Aliases: UCR_USE_OLD_ALLREDUCE
+             MV2_USE_OLD_ALLREDUCE
+    Description: TODO-DESC
+    Default: 0
+
+MVP_USE_OLD_REDUCE
+    Aliases: UCR_USE_OLD_REDUCE
+             MV2_USE_OLD_REDUCE
+    Description: TODO-DESC
+    Default: 0
+
+MVP_USE_OLD_ALLTOALL
+    Aliases: UCR_USE_OLD_ALLTOALL
+             MV2_USE_OLD_ALLTOALL
+    Description: TODO-DESC
+    Default: 0
+
+MVP_ALLTOALL_INPLACE_OLD
+    Aliases: UCR_ALLTOALL_INPLACE_OLD
+             MV2_ALLTOALL_INPLACE_OLD
+    Description: TODO-DESC
+    Default: 0
+
+MVP_ALLTOALL_RD_MAX_MSG_SIZE
+    Aliases: UCR_ALLTOALL_RD_MAX_MSG_SIZE
+             MV2_ALLTOALL_RD_MAX_MSG_SIZE
+    Description: TODO-DESC - in bytes.
+    Default: 512
+
+MVP_INTRA_IBCAST_TUNING
+    Aliases: UCR_INTRA_IBCAST_TUNING
+             MV2_INTRA_IBCAST_TUNING
+    Description: TODO-DESC
+    Default: NULL
+
+MVP_INTRA_IGATHER_TUNING
+    Aliases: UCR_INTRA_IGATHER_TUNING
+             MV2_INTRA_IGATHER_TUNING
+    Description: TODO-DESC
+    Default: NULL
+
+MVP_INTER_IBCAST_TUNING
+    Aliases: UCR_INTER_IBCAST_TUNING
+             MV2_INTER_IBCAST_TUNING
+    Description: TODO-DESC
+    Default: NULL
+
+MVP_INTER_IGATHER_TUNING
+    Aliases: UCR_INTER_IGATHER_TUNING
+             MV2_INTER_IGATHER_TUNING
+    Description: TODO-DESC
+    Default: NULL
+
+MVP_INTRA_ISCATTER_TUNING
+    Aliases: UCR_INTRA_ISCATTER_TUNING
+             MV2_INTRA_ISCATTER_TUNING
+    Description: TODO-DESC
+    Default: NULL
+
+MVP_INTER_ISCATTER_TUNING
+    Aliases: UCR_INTER_ISCATTER_TUNING
+             MV2_INTER_ISCATTER_TUNING
+    Description: TODO-DESC
+    Default: NULL
+
+MVP_INTRA_IALLREDUCE_TUNING
+    Aliases: UCR_INTRA_IALLREDUCE_TUNING
+             MV2_INTRA_IALLREDUCE_TUNING
+    Description: TODO-DESC
+    Default: NULL
+
+MVP_INTER_IALLREDUCE_TUNING
+    Aliases: UCR_INTER_IALLREDUCE_TUNING
+             MV2_INTER_IALLREDUCE_TUNING
+    Description: TODO-DESC
+    Default: NULL
+
+MVP_INTRA_IREDUCE_TUNING
+    Aliases: UCR_INTRA_IREDUCE_TUNING
+             MV2_INTRA_IREDUCE_TUNING
+    Description: TODO-DESC
+    Default: NULL
+
+MVP_INTER_IREDUCE_TUNING
+    Aliases: UCR_INTER_IREDUCE_TUNING
+             MV2_INTER_IREDUCE_TUNING
+    Description: TODO-DESC
+    Default: NULL
+
+MVP_INTRA_IREDUCE_SCATTER_TUNING
+    Aliases: UCR_INTRA_IREDUCE_SCATTER_TUNING
+             MV2_INTRA_IREDUCE_SCATTER_TUNING
+    Description: TODO-DESC
+    Default: NULL
+
+MVP_INTER_IREDUCE_SCATTER_TUNING
+    Aliases: UCR_INTER_IREDUCE_SCATTER_TUNING
+             MV2_INTER_IREDUCE_SCATTER_TUNING
+    Description: TODO-DESC
+    Default: NULL
+
+MVP_INTER_IALLGATHER_TUNING
+    Aliases: UCR_INTER_IALLGATHER_TUNING
+             MV2_INTER_IALLGATHER_TUNING
+    Description: TODO-DESC
+    Default: NULL
+
+MVP_INTRA_IALLGATHER_TUNING
+    Aliases: UCR_INTRA_IALLGATHER_TUNING
+             MV2_INTRA_IALLGATHER_TUNING
+    Description: TODO-DESC
+    Default: NULL
+
+MVP_INTRA_IALLTOALL_TUNING
+    Aliases: UCR_INTRA_IALLTOALL_TUNING
+             MV2_INTRA_IALLTOALL_TUNING
+    Description: TODO-DESC
+    Default: NULL
+
+MVP_INTER_IALLTOALL_TUNING
+    Aliases: UCR_INTER_IALLTOALL_TUNING
+             MV2_INTER_IALLTOALL_TUNING
+    Description: TODO-DESC
+    Default: NULL
+
+MVP_INTRA_IALLTOALLV_TUNING
+    Aliases: UCR_INTRA_IALLTOALLV_TUNING
+             MV2_INTRA_IALLTOALLV_TUNING
+    Description: TODO-DESC
+    Default: NULL
+
+MVP_INTER_IALLTOALLV_TUNING
+    Aliases: UCR_INTER_IALLTOALLV_TUNING
+             MV2_INTER_IALLTOALLV_TUNING
+    Description: TODO-DESC
+    Default: NULL
+
+MVP_INTER_IALLGATHERV_TUNING
+    Aliases: UCR_INTER_IALLGATHERV_TUNING
+             MV2_INTER_IALLGATHERV_TUNING
+    Description: TODO-DESC
+    Default: NULL
+
+MVP_INTRA_IALLGATHERV_TUNING
+    Aliases: UCR_INTRA_IALLGATHERV_TUNING
+             MV2_INTRA_IALLGATHERV_TUNING
+    Description: TODO-DESC
+    Default: NULL
+
+MVP_INTRA_IBARRIER_TUNING
+    Aliases: UCR_INTRA_IBARRIER_TUNING
+             MV2_INTRA_IBARRIER_TUNING
+    Description: TODO-DESC
+    Default: NULL
+
+MVP_INTER_IBARRIER_TUNING
+    Aliases: UCR_INTER_IBARRIER_TUNING
+             MV2_INTER_IBARRIER_TUNING
+    Description: TODO-DESC
+    Default: NULL
+
+MVP_INTER_RED_SCAT_TUNING
+    Aliases: UCR_INTER_RED_SCAT_TUNING
+             MV2_INTER_RED_SCAT_TUNING
+    Description: TODO-DESC
+    Default: NULL
+
+MVP_INTER_RED_SCAT_BLOCK_TUNING
+    Aliases: UCR_INTER_RED_SCAT_BLOCK_TUNING
+             MV2_INTER_RED_SCAT_BLOCK_TUNING
+    Description: TODO-DESC
+    Default: NULL
+
+MVP_INTER_ALLGATHERV_TUNING
+    Aliases: UCR_INTER_ALLGATHERV_TUNING
+             MV2_INTER_ALLGATHERV_TUNING
+    Description: TODO-DESC
+    Default: NULL
+
+MVP_USE_SCATTER_DEST_ALLTOALLV
+    Aliases: UCR_USE_SCATTER_DEST_ALLTOALLV
+             MV2_USE_SCATTER_DEST_ALLTOALLV
+    Description: TODO-DESC
+    Default: 0
+
+MVP_PIPELINED_ZCPY_BCAST_KNOMIAL_FACTOR
+    Aliases: UCR_PIPELINED_ZCPY_BCAST_KNOMIAL_FACTOR
+             MV2_PIPELINED_ZCPY_BCAST_KNOMIAL_FACTOR
+    Description: TODO-DESC
+    Default: 2
+
+MVP_USE_ZCOPY_BCAST
+    Aliases: UCR_USE_ZCOPY_BCAST
+             MV2_USE_ZCOPY_BCAST
+    Description: TODO-DESC
+    Default: 1
+
+MVP_USE_ZCOPY_REDUCE
+    Aliases: UCR_USE_ZCOPY_REDUCE
+             MV2_USE_ZCOPY_REDUCE
+    Description: TODO-DESC
+    Default: 1
+
+MVP_GATHERV_SSEND_THRESHOLD
+    Aliases: UCR_GATHERV_SSEND_THRESHOLD
+             MV2_GATHERV_SSEND_THRESHOLD
+    Description: TODO-DESC
+    Default: 32768
+
+MVP_ALLREDUCE_RING_ALGO_PPN_THRESHOLD
+    Aliases: UCR_ALLREDUCE_RING_ALGO_PPN_THRESHOLD
+             MV2_ALLREDUCE_RING_ALGO_PPN_THRESHOLD
+    Description: TODO-DESC
+    Default: 8
+
+MVP_ALLREDUCE_RING_ALGO_THRESHOLD
+    Aliases: UCR_ALLREDUCE_RING_ALGO_THRESHOLD
+             MV2_ALLREDUCE_RING_ALGO_THRESHOLD
+    Description: TODO-DESC
+    Default: (2 * 1024 * 1024)
+
+MVP_ALLREDUCE_RED_SCAT_ALLGATHER_ALGO_PPN_THRESHOLD
+    Aliases: UCR_ALLREDUCE_RED_SCAT_ALLGATHER_ALGO_PPN_THRESHOLD
+             MV2_ALLREDUCE_RED_SCAT_ALLGATHER_ALGO_PPN_THRESHOLD
+    Description: TODO-DESC
+    Default: 8
+
+MVP_ALLREDUCE_RED_SCAT_ALLGATHER_ALGO_THRESHOLD
+    Aliases: UCR_ALLREDUCE_RED_SCAT_ALLGATHER_ALGO_THRESHOLD
+             MV2_ALLREDUCE_RED_SCAT_ALLGATHER_ALGO_THRESHOLD
+    Description: TODO-DESC
+    Default: (2 * 1024 * 1024)
+
+MVP_ALLGATHER_RING_ALGO_THRESHOLD
+    Aliases: UCR_ALLGATHER_RING_ALGO_THRESHOLD
+             MV2_ALLGATHER_RING_ALGO_THRESHOLD
+    Description: TODO-DESC
+    Default: 131072
+
+MVP_ALLTOALLV_INTERMEDIATE_WAIT_THRESHOLD
+    Aliases: UCR_ALLTOALLV_INTERMEDIATE_WAIT_THRESHOLD
+             MV2_ALLTOALLV_INTERMEDIATE_WAIT_THRESHOLD
+    Description: TODO-DESC
+    Default: (256 * 1024)
+
+MVP_ALLGATHER_CYCLIC_ALGO_THRESHOLD
+    Aliases: UCR_ALLGATHER_CYCLIC_ALGO_THRESHOLD
+             MV2_ALLGATHER_CYCLIC_ALGO_THRESHOLD
+    Description: TODO-DESC
+    Default: 1024
+
+MVP_ALLREDUCE_CYCLIC_ALGO_THRESHOLD
+    Aliases: UCR_ALLREDUCE_CYCLIC_ALGO_THRESHOLD
+             MV2_ALLREDUCE_CYCLIC_ALGO_THRESHOLD
+    Description: TODO-DESC
+    Default: (1024 * 1024)
+
+MVP_REDSCAT_CYCLIC_ALGO_THRESHOLD
+    Aliases: UCR_REDSCAT_CYCLIC_ALGO_THRESHOLD
+             MV2_REDSCAT_CYCLIC_ALGO_THRESHOLD
+    Description: TODO-DESC
+    Default: 1024
+
+MVP_RED_SCAT_RING_ALGO_THRESHOLD
+    Aliases: UCR_RED_SCAT_RING_ALGO_THRESHOLD
+             MV2_RED_SCAT_RING_ALGO_THRESHOLD
+    Description: TODO-DESC
+    Default: 131072
+
+MVP_BCAST_SCATTER_RING_OVERLAP
+    Aliases: UCR_BCAST_SCATTER_RING_OVERLAP
+             MV2_BCAST_SCATTER_RING_OVERLAP
+    Description: TODO-DESC
+    Default: 1
+
+MVP_BCAST_SCATTER_RING_OVERLAP_MSG_UPPERBOUND
+    Aliases: UCR_BCAST_SCATTER_RING_OVERLAP_MSG_UPPERBOUND
+             MV2_BCAST_SCATTER_RING_OVERLAP_MSG_UPPERBOUND
+    Description: TODO-DESC
+    Default: 1048576
+
+MVP_BCAST_SCATTER_RING_OVERLAP_CORES_LOWERBOUND
+    Aliases: UCR_BCAST_SCATTER_RING_OVERLAP_CORES_LOWERBOUND
+             MV2_BCAST_SCATTER_RING_OVERLAP_CORES_LOWERBOUND
+    Description: TODO-DESC
+    Default: 32
+
+MVP_USE_PIPELINE_BCAST
+    Aliases: UCR_USE_PIPELINE_BCAST
+             MV2_USE_PIPELINE_BCAST
+    Description: TODO-DESC
+    Default: 1
+
+MVP_BCAST_SEGMENT_SIZE
+    Aliases: UCR_BCAST_SEGMENT_SIZE
+             MV2_BCAST_SEGMENT_SIZE
+    Description: TODO-DESC
+    Default: 8192
+
+MVP_USE_LIMIC_GATHER
+    Aliases: UCR_USE_LIMIC_GATHER
+             MV2_USE_LIMIC_GATHER
+    Description: If this flag is set to 1, we will use intra-node Zero-Copy
+        MPI_Gather designs, when the library has been configured to use
+        LiMIC2.
+    Default: 0
+
+MVP_USE_2LEVEL_ALLGATHER
+    Aliases: UCR_USE_2LEVEL_ALLGATHER
+             MV2_USE_2LEVEL_ALLGATHER
+    Description: TODO-DESC
+    Default: 0
+
+MVP_SHMEM_COLL_WINDOW_SIZE
+    Aliases: UCR_SHMEM_COLL_WINDOW_SIZE
+             MV2_SHMEM_COLL_WINDOW_SIZE
+    Description: TODO-DESC
+    Default: 128
+
+MVP_SHMEM_REDUCE_TREE_DEGREE
+    Aliases: UCR_SHMEM_REDUCE_TREE_DEGREE
+             MV2_SHMEM_REDUCE_TREE_DEGREE
+    Description: TODO-DESC
+    Default: 4
+
+MVP_SHMEM_COLL_SLOT_LEN
+    Aliases: UCR_SHMEM_COLL_SLOT_LEN
+             MV2_SHMEM_COLL_SLOT_LEN
+    Description: TODO-DESC
+    Default: 8192
+
+MVP_USE_SLOT_SHMEM_COLL
+    Aliases: UCR_USE_SLOT_SHMEM_COLL
+             MV2_USE_SLOT_SHMEM_COLL
+    Description: TODO-DESC
+    Default: 1
+
+MVP_USE_SLOT_SHMEM_BCAST
+    Aliases: UCR_USE_SLOT_SHMEM_BCAST
+             MV2_USE_SLOT_SHMEM_BCAST
+    Description: TODO-DESC
+    Default: 1
+
+MVP_USE_MCAST_PIPELINE_SHM
+    Aliases: UCR_USE_MCAST_PIPELINE_SHM
+             MV2_USE_MCAST_PIPELINE_SHM
+    Description: TODO-DESC
+    Default: 0
+
+MVP_TWO_LEVEL_COMM_THRESHOLD
+    Aliases: UCR_TWO_LEVEL_COMM_THRESHOLD
+             MV2_TWO_LEVEL_COMM_THRESHOLD
+    Description: TODO-DESC
+    Default: 16
+
+MVP_TWO_LEVEL_COMM_EARLY_INIT_THRESHOLD
+    Aliases: UCR_TWO_LEVEL_COMM_EARLY_INIT_THRESHOLD
+             MV2_TWO_LEVEL_COMM_EARLY_INIT_THRESHOLD
+    Description: Max process count for MPI_COMM_WORLD to create 2lvl comm
+        in MPI_INIT
+    Default: 2048
+
+MVP_ENABLE_PVAR_TIMER
+    Aliases: UCR_ENABLE_PVAR_TIMER
+             MV2_ENABLE_PVAR_TIMER
+    Description: TODO-DESC
+    Default: 0
+
+MVP_ENABLE_ALLREDUCE_ALL_COMPUTE
+    Aliases: UCR_ENABLE_ALLREDUCE_ALL_COMPUTE
+             MV2_ENABLE_ALLREDUCE_ALL_COMPUTE
+    Description: TODO-DESC
+    Default: 1
+
+MVP_GATHER_STATUS_ALIGNMENT
+    Aliases: UCR_GATHER_STATUS_ALIGNMENT
+             MV2_GATHER_STATUS_ALIGNMENT
+    Description: TODO-DESC
+    Default: 16
+
+MVP_BCAST_STATUS_ALIGNMENT
+    Aliases: UCR_BCAST_STATUS_ALIGNMENT
+             MV2_BCAST_STATUS_ALIGNMENT
+    Description: TODO-DESC
+    Default: 16
+
+MVP_ENABLE_ALLREDUCE_SKIP_LARGE_MESSAGE_TUNING_TABLE_SEARCH
+    Aliases: UCR_ENABLE_ALLREDUCE_SKIP_LARGE_MESSAGE_TUNING_TABLE_SEARCH
+             MV2_ENABLE_ALLREDUCE_SKIP_LARGE_MESSAGE_TUNING_TABLE_SEARCH
+    Description: TODO-DESC
+    Default: 1
+
+MVP_ENABLE_ALLREDUCE_SKIP_SMALL_MESSAGE_TUNING_TABLE_SEARCH
+    Aliases: UCR_ENABLE_ALLREDUCE_SKIP_SMALL_MESSAGE_TUNING_TABLE_SEARCH
+             MV2_ENABLE_ALLREDUCE_SKIP_SMALL_MESSAGE_TUNING_TABLE_SEARCH
+    Description: TODO-DESC
+    Default: 1
+
+MVP_SOCKET_AWARE_ALLREDUCE_PPN_THRESHOLD
+    Aliases: UCR_SOCKET_AWARE_ALLREDUCE_PPN_THRESHOLD
+             MV2_SOCKET_AWARE_ALLREDUCE_PPN_THRESHOLD
+    Description: TODO-DESC
+    Default: 1
+
+MVP_CPU_BINDING_LEVEL
+    Aliases: UCR_CPU_BINDING_LEVEL
+             MV2_CPU_BINDING_LEVEL
+    Description: This CVAR allows users to specify process to CPU (core)
+        mapping at different binding levels. This parameters will not take
+        effect if MVP_ENABLE_AFFINITY or MVP_USE_SHARED_MEM CVARs are set
+        to 0, if MVP_CPU_MAPPING is set, or if the library was configured
+        with the "--disable-hwloc" option. The value of
+        MVP_CPU_BINDING_LEVEL can be "core", "socket", or "numanode". When
+        this value is not set "core" will be used as the default binding
+        level.
+    Default: NULL
+
+MVP_CPU_MAPPING
+    Aliases: UCR_CPU_MAPPING
+             MV2_CPU_MAPPING
+    Description: This CVAR allows users to specify process to CPU(core)
+        mapping. This parameter will not take effect if either
+        MVP_ENABLE_AFFINITY or MVP_USE_SHARED_MEM CVARs are set to 0 or if
+        the library was configured with the "--disable-hwloc" option.
+        MVP_CPU_MAPPING is currently not supported on Solaris.
+    Default: NULL
+
+MVP_ENABLE_AFFINITY
+    Aliases: UCR_ENABLE_AFFINITY
+             MV2_ENABLE_AFFINITY
+    Description: Enable CPU affinity by setting MVP_ENABLE_AFFINITY to 1 or
+        disable it by setting MVP_ENABLE_AFFINITY to 0. MVP_ENABLE_AFFINITY
+        is currently not supported on Solaris. CPU affinity is also not
+        supported if MVP_USE_SHARED_MEM is set to 0.
+    Default: -1
+
+MVP_ENABLE_LEASTLOAD
+    Aliases: UCR_ENABLE_LEASTLOAD
+             MV2_ENABLE_LEASTLOAD
+    Description: TODO-DESC
+    Default: 0
+
+MVP_CM_MAX_SPIN_COUNT
+    Aliases: UCR_CM_MAX_SPIN_COUNT
+             MV2_CM_MAX_SPIN_COUNT
+    Description: TODO-DESC
+    Default: 5000
+
+MVP_CM_RECV_BUFFERS
+    Aliases: UCR_CM_RECV_BUFFERS
+             MV2_CM_RECV_BUFFERS
+    Description: This defines the number of buffers used by connection
+        manager to establish new connections. These buffers are quite small
+        and are shared for all connections, so this value may be increased
+        to 8192 for large clusters to avoid retries in case of packet
+        drops.
+    Default: 1024
+
+MVP_CM_SEND_DEPTH
+    Aliases: UCR_CM_SEND_DEPTH
+             MV2_CM_SEND_DEPTH
+    Description: TODO-DESC
+    Default: 10
+
+MVP_CM_TIMEOUT
+    Aliases: UCR_CM_TIMEOUT
+             MV2_CM_TIMEOUT
+    Description: This is the timeout value associated with connection
+        management messages via UD channel. Decreasing this value may lead
+        to faster retries but at the cost of generating duplicate messages.
+    Default: -1
+
+MVP_CM_UD_PSN
+    Aliases: UCR_CM_UD_PSN
+             MV2_CM_UD_PSN
+    Description: TODO-DESC
+    Default: 0
+
+MVP_CM_THREAD_STACKSIZE
+    Aliases: UCR_CM_THREAD_STACKSIZE
+             MV2_CM_THREAD_STACKSIZE
+    Description: TODO-DESC
+    Default: (1024*1024)
+
+MVP_FORCE_HCA_TYPE
+    Aliases: UCR_FORCE_HCA_TYPE
+             MV2_FORCE_HCA_TYPE
+    Description: TODO-DESC
+    Default: -1
+
+MVP_HCA_AWARE_PROCESS_MAPPING
+    Aliases: UCR_HCA_AWARE_PROCESS_MAPPING
+             MV2_HCA_AWARE_PROCESS_MAPPING
+    Description: TODO-DESC - Not used currently.
+    Default: 1
+
+MVP_RDMA_CM_ARP_TIMEOUT
+    Aliases: UCR_RDMA_CM_ARP_TIMEOUT
+             MV2_RDMA_CM_ARP_TIMEOUT
+    Description: This parameter specifies the ARP timeout to be used by
+        RDMA CM module.
+    Default: 2000
+
+MVP_RDMA_CM_PORT
+    Aliases: UCR_RDMA_CM_PORT
+             MV2_RDMA_CM_PORT
+    Description: TODO-DESC
+    Default: -1
+
+MVP_RDMA_CM_MAX_PORT
+    Aliases: UCR_RDMA_CM_MAX_PORT
+             MV2_RDMA_CM_MAX_PORT
+    Description: This parameter specifies the upper limit of the port range
+        to be used by the RDMA CM module when choosing the port on which it
+        listens for connections. If not specified, defaults to 65536.
+    Default: -1
+
+MVP_RDMA_CM_MIN_PORT
+    Aliases: UCR_RDMA_CM_MIN_PORT
+             MV2_RDMA_CM_MIN_PORT
+    Description: This parameter specifies the lower limit of the port range
+        to be used by the RDMA CM module when choosing the port on which it
+        listens for connections. If not specified, defaults to 1024.
+    Default: -1
+
+MVP_EAGER_CUDAHOST_REG
+    Aliases: UCR_EAGER_CUDAHOST_REG
+             MV2_EAGER_CUDAHOST_REG
+    Description: TODO-DESC
+    Default: -1
+
+MVP_CUDA_VECTOR_OPT
+    Aliases: UCR_CUDA_VECTOR_OPT
+             MV2_CUDA_VECTOR_OPT
+    Description: TODO-DESC
+    Default: -1
+
+MVP_CUDA_KERNEL_OPT
+    Aliases: UCR_CUDA_KERNEL_OPT
+             MV2_CUDA_KERNEL_OPT
+    Description: TODO-DESC
+    Default: -1
+
+MVP_CUDA_KERNEL_VECTOR_TIDBLK_SIZE
+    Aliases: UCR_CUDA_KERNEL_VECTOR_TIDBLK_SIZE
+             MV2_CUDA_KERNEL_VECTOR_TIDBLK_SIZE
+    Description: This controls the number of CUDA threads per block in
+        pack/unpack kernels for MPI vector datatype in communication
+        involving GPU device buffers.
+    Default: 1024
+
+MVP_CUDA_KERNEL_VECTOR_YSIZE
+    Aliases: UCR_CUDA_KERNEL_VECTOR_YSIZE
+             MV2_CUDA_KERNEL_VECTOR_YSIZE
+    Description: This controls the y-dimension of a thread block in
+        pack/unpack kernels for MPI vector datatype in communication
+        involving GPU device buffers. It controls the number of threads
+        operating on each block of data in a vector.
+    Default: -1
+
+MVP_CUDA_KERNEL_SUBARR_TIDBLK_SIZE
+    Aliases: UCR_CUDA_KERNEL_SUBARR_TIDBLK_SIZE
+             MV2_CUDA_KERNEL_SUBARR_TIDBLK_SIZE
+    Description: TODO-DESC
+    Default: -1
+
+MVP_CUDA_KERNEL_SUBARR_XDIM
+    Aliases: UCR_CUDA_KERNEL_SUBARR_XDIM
+             MV2_CUDA_KERNEL_SUBARR_XDIM
+    Description: TODO-DESC
+    Default: -1
+
+MVP_CUDA_KERNEL_SUBARR_YDIM
+    Aliases: UCR_CUDA_KERNEL_SUBARR_YDIM
+             MV2_CUDA_KERNEL_SUBARR_YDIM
+    Description: TODO-DESC
+    Default: -1
+
+MVP_CUDA_KERNEL_SUBARR_ZDIM
+    Aliases: UCR_CUDA_KERNEL_SUBARR_ZDIM
+             MV2_CUDA_KERNEL_SUBARR_ZDIM
+    Description: TODO-DESC
+    Default: -1
+
+MVP_CUDA_NUM_EVENTS
+    Aliases: UCR_CUDA_NUM_EVENTS
+             MV2_CUDA_NUM_EVENTS
+    Description: TODO-DESC
+    Default: -1
+
+MVP_CUDA_INIT_CONTEXT
+    Aliases: UCR_CUDA_INIT_CONTEXT
+             MV2_CUDA_INIT_CONTEXT
+    Description: TODO-DESC
+    Default: -1
+
+MVP_CUDA_USE_NAIVE
+    Aliases: UCR_CUDA_USE_NAIVE
+             MV2_CUDA_USE_NAIVE
+    Description: TODO-DESC
+    Default: -1
+
+MVP_CUDA_ALLTOALL_DYNAMIC
+    Aliases: UCR_CUDA_ALLTOALL_DYNAMIC
+             MV2_CUDA_ALLTOALL_DYNAMIC
+    Description: TODO-DESC
+    Default: -1
+
+MVP_CUDA_REGISTER_NAIVE_BUF
+    Aliases: UCR_CUDA_REGISTER_NAIVE_BUF
+             MV2_CUDA_REGISTER_NAIVE_BUF
+    Description: TODO-DESC
+    Default: -1
+
+MVP_CUDA_GATHER_NAIVE_LIMIT
+    Aliases: UCR_CUDA_GATHER_NAIVE_LIMIT
+             MV2_CUDA_GATHER_NAIVE_LIMIT
+    Description: TODO-DESC
+    Default: -1
+
+MVP_CUDA_SCATTER_NAIVE_LIMIT
+    Aliases: UCR_CUDA_SCATTER_NAIVE_LIMIT
+             MV2_CUDA_SCATTER_NAIVE_LIMIT
+    Description: TODO-DESC
+    Default: -1
+
+MVP_CUDA_ALLTOALL_NAIVE_LIMIT
+    Aliases: UCR_CUDA_ALLTOALL_NAIVE_LIMIT
+             MV2_CUDA_ALLTOALL_NAIVE_LIMIT
+    Description: TODO-DESC
+    Default: -1
+
+MVP_CUDA_ALLTOALLV_NAIVE_LIMIT
+    Aliases: UCR_CUDA_ALLTOALLV_NAIVE_LIMIT
+             MV2_CUDA_ALLTOALLV_NAIVE_LIMIT
+    Description: TODO-DESC
+    Default: -1
+
+MVP_CUDA_ALLGATHER_NAIVE_LIMIT
+    Aliases: UCR_CUDA_ALLGATHER_NAIVE_LIMIT
+             MV2_CUDA_ALLGATHER_NAIVE_LIMIT
+    Description: TODO-DESC
+    Default: -1
+
+MVP_CUDA_ALLGATHERV_NAIVE_LIMIT
+    Aliases: UCR_CUDA_ALLGATHERV_NAIVE_LIMIT
+             MV2_CUDA_ALLGATHERV_NAIVE_LIMIT
+    Description: TODO-DESC
+    Default: -1
+
+MVP_CUDA_BCAST_NAIVE_LIMIT
+    Aliases: UCR_CUDA_BCAST_NAIVE_LIMIT
+             MV2_CUDA_BCAST_NAIVE_LIMIT
+    Description: TODO-DESC
+    Default: -1
+
+MVP_CUDA_GATHERV_NAIVE_LIMIT
+    Aliases: UCR_CUDA_GATHERV_NAIVE_LIMIT
+             MV2_CUDA_GATHERV_NAIVE_LIMIT
+    Description: TODO-DESC
+    Default: -1
+
+MVP_CUDA_SCATTERV_NAIVE_LIMIT
+    Aliases: UCR_CUDA_SCATTERV_NAIVE_LIMIT
+             MV2_CUDA_SCATTERV_NAIVE_LIMIT
+    Description: TODO-DESC
+    Default: -1
+
+MVP_CUDA_ALLGATHER_RD_LIMIT
+    Aliases: UCR_CUDA_ALLGATHER_RD_LIMIT
+             MV2_CUDA_ALLGATHER_RD_LIMIT
+    Description: TODO-DESC
+    Default: -1
+
+MVP_CUDA_ALLGATHER_FGP
+    Aliases: UCR_CUDA_ALLGATHER_FGP
+             MV2_CUDA_ALLGATHER_FGP
+    Description: TODO-DESC
+    Default: -1
+
+MVP_CUDA_IPC
+    Aliases: UCR_CUDA_IPC
+             MV2_CUDA_IPC
+    Description: This enables intra-node GPU-GPU communication using IPC
+        feature available from CUDA 4.1
+    Default: 1
+
+MVP_CUDA_IPC_SHARE_GPU
+    Aliases: UCR_CUDA_IPC_SHARE_GPU
+             MV2_CUDA_IPC_SHARE_GPU
+    Description: TODO-DESC
+    Default: -1
+
+MVP_CUDA_SMP_IPC
+    Aliases: UCR_CUDA_SMP_IPC
+             MV2_CUDA_SMP_IPC
+    Description: This enables an optimization for short message GPU
+        device-to-device communication using IPC feature available from
+        CUDA 4.1
+    Default: 0
+
+MVP_CUDA_ENABLE_IPC_CACHE
+    Aliases: UCR_CUDA_ENABLE_IPC_CACHE
+             MV2_CUDA_ENABLE_IPC_CACHE
+    Description: TODO-DESC
+    Default: -1
+
+MVP_CUDA_IPC_MAX_CACHE_ENTRIES
+    Aliases: UCR_CUDA_IPC_MAX_CACHE_ENTRIES
+             MV2_CUDA_IPC_MAX_CACHE_ENTRIES
+    Description: TODO-DESC
+    Default: -1
+
+MVP_CUDA_IPC_NUM_STAGE_BUFFERS
+    Aliases: UCR_CUDA_IPC_NUM_STAGE_BUFFERS
+             MV2_CUDA_IPC_NUM_STAGE_BUFFERS
+    Description: TODO-DESC
+    Default: -1
+
+MVP_CUDA_IPC_STAGE_BUF_SIZE
+    Aliases: UCR_CUDA_IPC_STAGE_BUF_SIZE
+             MV2_CUDA_IPC_STAGE_BUF_SIZE
+    Description: TODO-DESC
+    Default: -1
+
+MVP_CUDA_IPC_BUFFERED
+    Aliases: UCR_CUDA_IPC_BUFFERED
+             MV2_CUDA_IPC_BUFFERED
+    Description: TODO-DESC
+    Default: -1
+
+MVP_CUDA_IPC_THRESHOLD
+    Aliases: UCR_CUDA_IPC_THRESHOLD
+             MV2_CUDA_IPC_THRESHOLD
+    Description: TODO-DESC
+    Default: -1
+
+MVP_CUDA_IPC_BUFFERED_LIMIT
+    Aliases: UCR_CUDA_IPC_BUFFERED_LIMIT
+             MV2_CUDA_IPC_BUFFERED_LIMIT
+    Description: TODO-DESC
+    Default: -1
+
+MVP_CUDA_IPC_SYNC_LIMIT
+    Aliases: UCR_CUDA_IPC_SYNC_LIMIT
+             MV2_CUDA_IPC_SYNC_LIMIT
+    Description: TODO-DESC
+    Default: -1
+
+MVP_CUDA_DYNAMIC_INIT
+    Aliases: UCR_CUDA_DYNAMIC_INIT
+             MV2_CUDA_DYNAMIC_INIT
+    Description: TODO-DESC
+    Default: -1
+
+MVP_CUDA_NONBLOCKING_STREAMS
+    Aliases: UCR_CUDA_NONBLOCKING_STREAMS
+             MV2_CUDA_NONBLOCKING_STREAMS
+    Description: This controls the use of non-blocking streams for
+        asynchronous CUDA memory copies in communication involving GPU
+        memory.
+    Default: 1
+
+MVP_SMP_EAGERSIZE
+    Aliases: UCR_SMP_EAGERSIZE
+             MV2_SMP_EAGERSIZE
+    Description: This parameter defines the size of shared buffer between
+        every two processes on the same node for transferring messages
+        smaller than or equal to MVP_SMP_EAGERSIZE. Note that this variable
+        can be set with suffixes such as 'K'/'k', 'M'/'m' or 'G'/'g' to
+        denote Kilobyte, Megabyte or Gigabyte respectively.
+    Default: 8192
+
+MVP_IBA_HCA
+    Aliases: UCR_IBA_HCA
+             MV2_IBA_HCA
+    Description: This specifies the HCA's to be used for performing network
+        operations.
+    Default: NULL
+
+MVP_SMP_USE_CMA
+    Aliases: UCR_SMP_USE_CMA
+             MV2_SMP_USE_CMA
+    Description: This parameter enables/disables CMA based intra-node
+        communication at run time. It does not take effect if MVAPICH is
+        configured with -without-cma. When -with-limic2 is included in the
+        configure flags, LiMIC2 is used in preference over CMA. Please set
+        MVP_SMP_USE_LIMIC2 to 0 in order to choose CMA if MVAPICH is
+        configured with -with-limic2.
+    Default: 1
+
+MVP_SMP_USE_LIMIC2
+    Aliases: UCR_SMP_USE_LIMIC2
+             MV2_SMP_USE_LIMIC2
+    Description: This parameter enables/disables LiMIC2 at run time. It
+        does not take effect if MVAPICH is not configured with
+        -with-limic2. Not used currently.
+    Default: 1
+
+MVP_SMP_POLLING_THRESHOLD
+    Aliases: UCR_SMP_POLLING_THRESHOLD
+             MV2_SMP_POLLING_THRESHOLD
+    Description: TODO-DESC
+    Default: 200
+
+MVP_SMP_CMA_MAX_SIZE
+    Aliases: UCR_SMP_CMA_MAX_SIZE
+             MV2_SMP_CMA_MAX_SIZE
+    Description: TODO-DESC
+    Default: 4194304
+
+MVP_SMP_LIMIC2_MAX_SIZE
+    Aliases: UCR_SMP_LIMIC2_MAX_SIZE
+             MV2_SMP_LIMIC2_MAX_SIZE
+    Description: TODO-DESC
+    Default: 4194304
+
+MVP_SMP_QUEUE_LENGTH
+    Aliases: UCR_SMP_QUEUE_LENGTH
+             MV2_SMP_QUEUE_LENGTH
+    Description: This parameter defines the size of the shared buffer
+        between every two processes on the same node for transferring
+        intra-node messages smaller than or equal to MVP_SMP_EAGERSIZE.
+        This variable can be set with suffixes suck as 'K'/'k', 'M'/'m', or
+        'G'/'g' to denote Kilobyte, Megabyte, or Gigabyte respectively.
+    Default: 262144
+
+MVP_LIMIC_PUT_THRESHOLD
+    Aliases: UCR_LIMIC_PUT_THRESHOLD
+             MV2_LIMIC_PUT_THRESHOLD
+    Description: TODO-DESC
+    Default: (8 * 1024)
+
+MVP_LIMIC_GET_THRESHOLD
+    Aliases: UCR_LIMIC_GET_THRESHOLD
+             MV2_LIMIC_GET_THRESHOLD
+    Description: TODO-DESC
+    Default: (8 * 1024)
+
+MVP_R3_THRESHOLD
+    Aliases: UCR_R3_THRESHOLD
+             MV2_R3_THRESHOLD
+    Description: The value of this variable controls what message sizes go
+        over the R3 rendezvous protocol. Messages above this message size
+        use MVP_RNDV_PROTOCOL.
+    Default: 4096
+
+MVP_INTRA_NODE_R3_THRESHOLD
+    Aliases: UCR_INTRA_NODE_R3_THRESHOLD
+             MV2_INTRA_NODE_R3_THRESHOLD
+    Description: TODO-DESC
+    Default: 1
+
+MVP_INTER_NODE_R3_THRESHOLD
+    Aliases: UCR_INTER_NODE_R3_THRESHOLD
+             MV2_INTER_NODE_R3_THRESHOLD
+    Description: TODO-DESC
+    Default: 4096
+
+MVP_R3_NOCACHE_THRESHOLD
+    Aliases: UCR_R3_NOCACHE_THRESHOLD
+             MV2_R3_NOCACHE_THRESHOLD
+    Description: The value of this variable controls what message sizes go
+        over the R3 rendezvous protocol when the registration cache is
+        disabled (MVP_USE_LAZY_MEM_UNREGISTER=0). Messages above this
+        message size use MVP_RNDV_PROTOCOL.
+    Default: 32768
+
+MVP_MAX_R3_PENDING_DATA
+    Aliases: UCR_MAX_R3_PENDING_DATA
+             MV2_MAX_R3_PENDING_DATA
+    Description: TODO-DESC
+    Default: (512 * 1024)
+
+MVP_USE_LIMIC2_COLL
+    Aliases: UCR_USE_LIMIC2_COLL
+             MV2_USE_LIMIC2_COLL
+    Description: TODO-DESC
+    Default: 1
+
+MVP_SMP_USE_MAX_SWITCH
+    Aliases: UCR_SMP_USE_MAX_SWITCH
+             MV2_SMP_USE_MAX_SWITCH
+    Description: TODO-DESC
+    Default: 0
+
+MVP_CUDA_SMP_PIPELINE
+    Aliases: UCR_CUDA_SMP_PIPELINE
+             MV2_CUDA_SMP_PIPELINE
+    Description: TODO-DESC
+    Default: 1
+
+MVP_SMP_DELAY_SHMEM_POOL_INIT
+    Aliases: UCR_SMP_DELAY_SHMEM_POOL_INIT
+             MV2_SMP_DELAY_SHMEM_POOL_INIT
+    Description: TODO-DESC
+    Default: 1
+
+MVP_SMP_PRIORITY_POLLING
+    Aliases: UCR_SMP_PRIORITY_POLLING
+             MV2_SMP_PRIORITY_POLLING
+    Description: TODO-DESC
+    Default: 1
+
+MVP_SMP_NUM_SEND_BUFFER
+    Aliases: UCR_SMP_NUM_SEND_BUFFER
+             MV2_SMP_NUM_SEND_BUFFER
+    Description: This parameter defines the number of internal send buffers
+        for sending intra-node messages larger than MVP_SMP_EAGERSIZE.
+    Default: 128
+
+MVP_SMP_BATCH_SIZE
+    Aliases: UCR_SMP_BATCH_SIZE
+             MV2_SMP_BATCH_SIZE
+    Description: TODO-DESC
+    Default: 8
+
+MVP_SMP_SEND_BUF_SIZE
+    Aliases: UCR_SMP_SEND_BUF_SIZE
+             MV2_SMP_SEND_BUF_SIZE
+    Description: This parameter defines the packet size when sending
+        intra-node messages larger than MVP_SMP_EAGERSIZE.
+    Default: 8192
+
+MVP_USE_OPT_EAGER_RECV
+    Aliases: UCR_USE_OPT_EAGER_RECV
+             MV2_USE_OPT_EAGER_RECV
+    Description: TODO-DESC
+    Default: 0
+
+MVP_NUM_NODES_IN_JOB
+    Aliases: UCR_NUM_NODES_IN_JOB
+             MV2_NUM_NODES_IN_JOB
+    Description: TODO-DESC
+    Default: -1
+
+MVP_USE_MCAST
+    Aliases: UCR_USE_MCAST
+             MV2_USE_MCAST
+    Description: Set this to 1, to enable hardware multicast support in
+        collective communication.
+    Default: -1
+
+MVP_USE_RDMA_CM_MCAST
+    Aliases: UCR_USE_RDMA_CM_MCAST
+             MV2_USE_RDMA_CM_MCAST
+    Description: This parameter enables support for RDMA_CM based multicast
+        group setup. Requires the parameter MVP_USE_MCAST to be set to 1.
+    Default: -1
+
+MVP_USE_QOS
+    Aliases: UCR_USE_QOS
+             MV2_USE_QOS
+    Description: TODO-DESC
+    Default: 0
+
+MVP_3DTORUS_SUPPORT
+    Aliases: UCR_3DTORUS_SUPPORT
+             MV2_3DTORUS_SUPPORT
+    Description: TODO-DESC
+    Default: -1
+
+MVP_PATH_SL_QUERY
+    Aliases: UCR_PATH_SL_QUERY
+             MV2_PATH_SL_QUERY
+    Description: TODO-DESC
+    Default: 0
+
+MVP_NUM_SLS
+    Aliases: UCR_NUM_SLS
+             MV2_NUM_SLS
+    Description: TODO-DESC
+    Default: 8
+
+MVP_NUM_SA_QUERY_RETRIES
+    Aliases: UCR_NUM_SA_QUERY_RETRIES
+             MV2_NUM_SA_QUERY_RETRIES
+    Description: Number of times the MPI library will attempt to query the
+        subnet to obtain the path record information before giving up.
+    Default: 20
+
+MVP_MAX_RDMA_CONNECT_ATTEMPTS
+    Aliases: UCR_MAX_RDMA_CONNECT_ATTEMPTS
+             MV2_MAX_RDMA_CONNECT_ATTEMPTS
+    Description: TODO-DESC
+    Default: 20
+
+MVP_RDMA_CM_CONNECT_RETRY_INTERVAL
+    Aliases: UCR_RDMA_CM_CONNECT_RETRY_INTERVAL
+             MV2_RDMA_CM_CONNECT_RETRY_INTERVAL
+    Description: TODO-DESC
+    Default: 100
+
+MVP_USE_HSAM
+    Aliases: UCR_USE_HSAM
+             MV2_USE_HSAM
+    Description: This parameter is used for utilizing hot-spot avoidance
+        with InfiniBand clusters. To leverage this functionality, the
+        subnet should be configured with lmc greater than zero.
+    Default: -1
+
+MVP_USE_APM
+    Aliases: UCR_USE_APM
+             MV2_USE_APM
+    Description: This parameter is used for recovery from network faults
+        using Automatic Path Migration. This functionality is beneficial in
+        the presence of multiple paths in the network, which can be enabled
+        by using lmc mechanism.
+    Default: -1
+
+MVP_USE_APM_TEST
+    Aliases: UCR_USE_APM_TEST
+             MV2_USE_APM_TEST
+    Description: This parameter is used for testing the Automatic Path
+        Migration functionality. It periodically moves the alternate path
+        as the primary path of communication and re-loads another alternate
+        path.
+    Default: -1
+
+MVP_USE_IWARP_MODE
+    Aliases: UCR_USE_IWARP_MODE
+             MV2_USE_IWARP_MODE
+    Description: This parameter enables the library to run in iWARP mode.
+    Default: -1
+
+MVP_USE_RDMA_CM
+    Aliases: UCR_USE_RDMA_CM
+             MV2_USE_RDMA_CM
+    Description: This parameter enables the use of RDMA CM for establishing
+        the connections.
+    Default: -1
+
+MVP_RDMA_CM_MULTI_SUBNET_SUPPORT
+    Aliases: UCR_RDMA_CM_MULTI_SUBNET_SUPPORT
+             MV2_RDMA_CM_MULTI_SUBNET_SUPPORT
+    Description: This parameter allows MPI jobs to be run across multiple
+        subnets interconnected by InfiniBand routers. Note that this
+        requires RDMA_CM support to be enabled at configure time and
+        runtime. Note that, RDMA_CM support is enabled by default at
+        configure time.
+    Default: 0
+
+MVP_ON_DEMAND_THRESHOLD
+    Aliases: UCR_ON_DEMAND_THRESHOLD
+             MV2_ON_DEMAND_THRESHOLD
+    Description: This defines threshold for enabling on-demand connection
+        management scheme. When the size of the job is larger than the
+        threshold value, on-demand connection management will be used.
+    Default: -1
+
+MVP_USE_XRC
+    Aliases: UCR_USE_XRC
+             MV2_USE_XRC
+    Description: Use the XRC InfiniBand transport available since Mellanox
+        ConnectX adapters. This features requires OFED version later than
+        1.3. It also automatically enables SRQ and ON-DEMAND connection
+        management. Note that the MVAPICH library needs to have been
+        configured with -enable-xrc=yes to use this feature.
+    Default: 0
+
+MVP_USE_SRQ
+    Aliases: UCR_USE_SRQ
+             MV2_USE_SRQ
+    Description: Setting this parameter enables MVAPICH to use shared
+        receive queue.
+    Default: 1
+
+MVP_IWARP_MULTIPLE_CQ_THRESHOLD
+    Aliases: UCR_IWARP_MULTIPLE_CQ_THRESHOLD
+             MV2_IWARP_MULTIPLE_CQ_THRESHOLD
+    Description: This defines the process size beyond which we use multiple
+        completion queues for iWARP interface.
+    Default: 32
+
+MVP_USE_LAZY_MEM_UNREGISTER
+    Aliases: UCR_USE_LAZY_MEM_UNREGISTER
+             MV2_USE_LAZY_MEM_UNREGISTER
+    Description: Setting this parameter enables MVAPICH to use memory
+        registration cache.
+    Default: 1
+
+MVP_USE_RMA_FAST_PATH
+    Aliases: UCR_USE_RMA_FAST_PATH
+             MV2_USE_RMA_FAST_PATH
+    Description: TODO-DESC
+    Default: 1
+
+MVP_FORCE_IB_ATOMIC
+    Aliases: UCR_FORCE_IB_ATOMIC
+             MV2_FORCE_IB_ATOMIC
+    Description: TODO-DESC
+    Default: 0
+
+MVP_USE_RDMA_ONE_SIDED
+    Aliases: UCR_USE_RDMA_ONE_SIDED
+             MV2_USE_RDMA_ONE_SIDED
+    Description: Setting this parameter allows MVAPICH to use optimized one
+        sided implementation based RDMA operations.
+    Default: 1
+
+MVP_RNDV_EXT_SENDQ_SIZE
+    Aliases: UCR_RNDV_EXT_SENDQ_SIZE
+             MV2_RNDV_EXT_SENDQ_SIZE
+    Description: TODO-DESC
+    Default: 5
+
+MVP_RDMA_NUM_EXTRA_POLLS
+    Aliases: UCR_RDMA_NUM_EXTRA_POLLS
+             MV2_RDMA_NUM_EXTRA_POLLS
+    Description: TODO-DESC
+    Default: 1
+
+MVP_COALESCE_THRESHOLD
+    Aliases: UCR_COALESCE_THRESHOLD
+             MV2_COALESCE_THRESHOLD
+    Description: This parameter determines the threshold for message
+        coalescing.
+    Default: 6
+
+MVP_USE_COALESCE
+    Aliases: UCR_USE_COALESCE
+             MV2_USE_COALESCE
+    Description: Setting this parameter enables message coalescing to
+        increase small message throughput.
+    Default: 1
+
+MVP_SPIN_COUNT
+    Aliases: UCR_SPIN_COUNT
+             MV2_SPIN_COUNT
+    Description: TODO-DESC
+    Default: 5000
+
+MVP_PROCESS_TO_RAIL_MAPPING
+    Aliases: UCR_PROCESS_TO_RAIL_MAPPING
+             MV2_PROCESS_TO_RAIL_MAPPING
+    Description: When MVP_RAIL_SHARING_POLICY is set to the value
+        "FIXED_MAPPING" this variable decides the manner in which the HCAs
+        will be mapped to the rails. The <CUSTOM LIST> is colon(:)
+        separated list with the HCA ranks specified. e.g. 0:1:1:0. This
+        list must map equally to the number of local processes on the nodes
+        failing which, the default policy will be used. Similarly the
+        number of processes on each node must be the same.
+    Default: NULL
+
+MVP_SM_SCHEDULING
+    Aliases: UCR_SM_SCHEDULING
+             MV2_SM_SCHEDULING
+    Description: TODO-DESC
+    Default: "USE_FIRST"
+
+MVP_SMALL_MSG_RAIL_SHARING_POLICY
+    Aliases: UCR_SMALL_MSG_RAIL_SHARING_POLICY
+             MV2_SMALL_MSG_RAIL_SHARING_POLICY
+    Description: This specifies the policy that will be used to assign HCAs
+        to each of the processes with small message sizes.
+    Default: "ROUND_ROBIN"
+
+MVP_MED_MSG_RAIL_SHARING_POLICY
+    Aliases: UCR_MED_MSG_RAIL_SHARING_POLICY
+             MV2_MED_MSG_RAIL_SHARING_POLICY
+    Description: This specifies the policy that will be used to assign HCAs
+        to each of the processes with medium message sizes.
+    Default: "ROUND_ROBIN"
+
+MVP_RAIL_SHARING_POLICY
+    Aliases: UCR_RAIL_SHARING_POLICY
+             MV2_RAIL_SHARING_POLICY
+    Description: This specifies the policy that will be used to assign HCAs
+        to each of the processes. In the previous versions of MVAPICH it
+        was known as MVP_SM_SCHEDULING. Value Domain: USE_FIRST,
+        ROUND_ROBIN, FIXED_MAPPING
+    Default: NULL
+
+MVP_SUPPRESS_JOB_STARTUP_PERFORMANCE_WARNING
+    Aliases: UCR_SUPPRESS_JOB_STARTUP_PERFORMANCE_WARNING
+             MV2_SUPPRESS_JOB_STARTUP_PERFORMANCE_WARNING
+    Description: Set to 1 to suppress performance warnings.
+    Default: 0
+
+MVP_USE_RDMA_FAST_PATH
+    Aliases: UCR_USE_RDMA_FAST_PATH
+             MV2_USE_RDMA_FAST_PATH
+    Description: Setting this parameter enables MVAPICH to use adaptive
+        RDMA fast path features for OFA-IB-CH3 interface.
+    Default: -1
+
+MVP_RDMA_FAST_PATH_BUF_SIZE
+    Aliases: UCR_RDMA_FAST_PATH_BUF_SIZE
+             MV2_RDMA_FAST_PATH_BUF_SIZE
+    Description: The size of the buffer used in RDMA fast path
+        communication. This value will be ineffective if
+        MVP_USE_RDMA_FAST_PATH is not set
+    Default: 4096
+
+MVP_POLLING_SET_LIMIT
+    Aliases: UCR_POLLING_SET_LIMIT
+             MV2_POLLING_SET_LIMIT
+    Description: TODO-DESC
+    Default: 64
+
+MVP_POLLING_SET_THRESHOLD
+    Aliases: UCR_POLLING_SET_THRESHOLD
+             MV2_POLLING_SET_THRESHOLD
+    Description: TODO-DESC
+    Default: 256
+
+MVP_RDMA_EAGER_LIMIT
+    Aliases: UCR_RDMA_EAGER_LIMIT
+             MV2_RDMA_EAGER_LIMIT
+    Description: TODO-DESC
+    Default: 32
+
+MVP_NUM_RDMA_BUFFER
+    Aliases: UCR_NUM_RDMA_BUFFER
+             MV2_NUM_RDMA_BUFFER
+    Description: The number of RDMA buffers used for the RDMA fast path.
+        This fast path is used to reduce latency and overhead of small data
+        and control messages. This value will be ineffective if
+        MVP_USE_RDMA_FAST_PATH is not set.
+    Default: -1
+
+MVP_RDMA_FAST_PATH_PREALLOCATE_BUFFERS
+    Aliases: UCR_RDMA_FAST_PATH_PREALLOCATE_BUFFERS
+             MV2_RDMA_FAST_PATH_PREALLOCATE_BUFFERS
+    Description: TODO-DESC
+    Default: 0
+
+MVP_SYSREPORT
+    Aliases: UCR_SYSREPORT
+             MV2_SYSREPORT
+    Description: TODO-DESC
+    Default: 0
+
+MVP_DEFAULT_MTU
+    Aliases: UCR_DEFAULT_MTU
+             MV2_DEFAULT_MTU
+    Description: The internal MTU size. For OFA-IB-CH3, this parameter
+        should be a string instead of an integer. Valid values are:
+        IBV_MTU_256, IBV_MTU_512, IBV_MTU_1024, IBV_MTU_2048, IBV_MTU_4096.
+    Default: NULL
+
+MVP_NUM_CQES_PER_POLL
+    Aliases: UCR_NUM_CQES_PER_POLL
+             MV2_NUM_CQES_PER_POLL
+    Description: Set this to 1, to enable hardware multicast support in
+        collective communication
+    Default: 96
+
+MVP_NUM_PORTS
+    Aliases: UCR_NUM_PORTS
+             MV2_NUM_PORTS
+    Description: This parameter indicates number of ports per InfiniBand
+        adapter to be used for communication per adapter on an end node.
+    Default: 1
+
+MVP_NUM_QP_PER_PORT
+    Aliases: UCR_NUM_QP_PER_PORT
+             MV2_NUM_QP_PER_PORT
+    Description: This parameter indicates number of queue pairs per port to
+        be used for communication on an end node. This is useful in the
+        presence of multiple send/recv engines available per port for data
+        transfer.
+    Default: 1
+
+MVP_PIN_POOL_SIZE
+    Aliases: UCR_PIN_POOL_SIZE
+             MV2_PIN_POOL_SIZE
+    Description: TODO-DESC
+    Default: (2 * 1024 * 1024)
+
+MVP_DEFAULT_MAX_CQ_SIZE
+    Aliases: UCR_DEFAULT_MAX_CQ_SIZE
+             MV2_DEFAULT_MAX_CQ_SIZE
+    Description: Setting this value forces a different CQ size. By default
+        the value is 40000 or the max value supported by the hardware. A
+        value of -1 indicates deferal to the hardware/default value.
+    Default: -1
+
+MVP_IBA_EAGER_THRESHOLD
+    Aliases: UCR_IBA_EAGER_THRESHOLD
+             MV2_IBA_EAGER_THRESHOLD
+    Description: This specifies the switch point between eager and
+        rendezvous protocol in MVAPICH. For better performance, the value
+        of MPIR_CVAR_MVP_IBA_EAGER_THRESHOLD should be set the same as
+        MPIR_CVAR_MVP_VBUF_TOTAL_SIZE. The default value is architecture
+        dependent.
+    Default: -1
+
+MVP_STRIPING_THRESHOLD
+    Aliases: UCR_STRIPING_THRESHOLD
+             MV2_STRIPING_THRESHOLD
+    Description: This parameter specifies the message size above which we
+        begin the stripe the message across multiple rails (if present).
+    Default: 8192
+
+MVP_RAIL_SHARING_MED_MSG_THRESHOLD
+    Aliases: UCR_RAIL_SHARING_MED_MSG_THRESHOLD
+             MV2_RAIL_SHARING_MED_MSG_THRESHOLD
+    Description: This specifies the threshold for the message size beyond
+        which striping will take place. In the previous versions of MVAPICH
+        it was known as MVP_STRIPING_THRESHOLD.
+    Default: 2048
+
+MVP_RAIL_SHARING_LARGE_MSG_THRESHOLD
+    Aliases: UCR_RAIL_SHARING_LARGE_MSG_THRESHOLD
+             MV2_RAIL_SHARING_LARGE_MSG_THRESHOLD
+    Description: This specifies the threshold for the message size beyond
+        which striping will take place. In the previous versions of MVAPICH
+        it was known as MVP_STRIPING_THRESHOLD
+    Default: -1
+
+MVP_DEFAULT_PUT_GET_LIST_SIZE
+    Aliases: UCR_DEFAULT_PUT_GET_LIST_SIZE
+             MV2_DEFAULT_PUT_GET_LIST_SIZE
+    Description: TODO-DESC
+    Default: 200
+
+MVP_EAGERSIZE_1SC
+    Aliases: UCR_EAGERSIZE_1SC
+             MV2_EAGERSIZE_1SC
+    Description: TODO-DESC
+    Default: -1
+
+MVP_PUT_FALLBACK_THRESHOLD
+    Aliases: UCR_PUT_FALLBACK_THRESHOLD
+             MV2_PUT_FALLBACK_THRESHOLD
+    Description: This defines the threshold beyond which the MPI_Put
+        implementation is based on direct one sided RDMA operations.
+    Default: -1
+
+MVP_GET_FALLBACK_THRESHOLD
+    Aliases: UCR_GET_FALLBACK_THRESHOLD
+             MV2_GET_FALLBACK_THRESHOLD
+    Description: TODO-DESC
+    Default: -1
+
+MVP_DEFAULT_QP_OUS_RD_ATOM
+    Aliases: UCR_DEFAULT_QP_OUS_RD_ATOM
+             MV2_DEFAULT_QP_OUS_RD_ATOM
+    Description: The maximum number of outstanding RDMA reads and atomic
+        operations per QP. Default value is 1 if supported. A value of -1
+        indicates defering to the hardware support.
+    Default: -1
+
+MVP_DEFAULT_MAX_RDMA_DST_OPS
+    Aliases: UCR_DEFAULT_MAX_RDMA_DST_OPS
+             MV2_DEFAULT_MAX_RDMA_DST_OPS
+    Description: TODO-DESC
+    Default: 4
+
+MVP_DEFAULT_PSN
+    Aliases: UCR_DEFAULT_PSN
+             MV2_DEFAULT_PSN
+    Description: TODO-DESC
+    Default: 0
+
+MVP_DEFAULT_PKEY
+    Aliases: UCR_DEFAULT_PKEY
+             MV2_DEFAULT_PKEY
+    Description: Select the partition to be used for the job.
+    Default: NULL
+
+MVP_DEFAULT_QKEY
+    Aliases: UCR_DEFAULT_QKEY
+             MV2_DEFAULT_QKEY
+    Description: TODO-DESC
+    Default: NULL
+
+MVP_DEFAULT_MIN_RNR_TIMER
+    Aliases: UCR_DEFAULT_MIN_RNR_TIMER
+             MV2_DEFAULT_MIN_RNR_TIMER
+    Description: TODO-DESC
+    Default: 12
+
+MVP_DEFAULT_SERVICE_LEVEL
+    Aliases: UCR_DEFAULT_SERVICE_LEVEL
+             MV2_DEFAULT_SERVICE_LEVEL
+    Description: TODO-DESC
+    Default: 0
+
+MVP_DEFAULT_TIME_OUT
+    Aliases: UCR_DEFAULT_TIME_OUT
+             MV2_DEFAULT_TIME_OUT
+    Description: TODO-DESC
+    Default: 20
+
+MVP_DEFAULT_STATIC_RATE
+    Aliases: UCR_DEFAULT_STATIC_RATE
+             MV2_DEFAULT_STATIC_RATE
+    Description: TODO-DESC
+    Default: 0
+
+MVP_DEFAULT_SRC_PATH_BITS
+    Aliases: UCR_DEFAULT_SRC_PATH_BITS
+             MV2_DEFAULT_SRC_PATH_BITS
+    Description: TODO-DESC
+    Default: 0
+
+MVP_DEFAULT_RETRY_COUNT
+    Aliases: UCR_DEFAULT_RETRY_COUNT
+             MV2_DEFAULT_RETRY_COUNT
+    Description: TODO-DESC
+    Default: 7
+
+MVP_DEFAULT_RNR_RETRY
+    Aliases: UCR_DEFAULT_RNR_RETRY
+             MV2_DEFAULT_RNR_RETRY
+    Description: TODO-DESC
+    Default: 7
+
+MVP_DEFAULT_MAX_SG_LIST
+    Aliases: UCR_DEFAULT_MAX_SG_LIST
+             MV2_DEFAULT_MAX_SG_LIST
+    Description: TODO-DESC
+    Default: 1
+
+MVP_DEFAULT_MAX_SEND_WQE
+    Aliases: UCR_DEFAULT_MAX_SEND_WQE
+             MV2_DEFAULT_MAX_SEND_WQE
+    Description: This specifies the maximum number of send WQEs on each QP.
+        Please note that for OFA-IB-CH3 and OFA-iWARP-CH3, the default
+        value of this parameter will be 16 if the number of processes is
+        larger than 256 for better memory scalability.
+    Default: 64
+
+MVP_CM_WAIT_TIME
+    Aliases: UCR_CM_WAIT_TIME
+             MV2_CM_WAIT_TIME
+    Description: TODO-DESC
+    Default: 5
+
+MVP_USE_UD_HYBRID
+    Aliases: UCR_USE_UD_HYBRID
+             MV2_USE_UD_HYBRID
+    Description: Set this to Zero, to disable UD transport in hybrid
+        configuration mode.
+    Default: 1
+
+MVP_UD_MTU
+    Aliases: UCR_UD_MTU
+             MV2_UD_MTU
+    Description: TODO-DESC
+    Default: 0
+
+MVP_HYBRID_MAX_RC_CONN
+    Aliases: UCR_HYBRID_MAX_RC_CONN
+             MV2_HYBRID_MAX_RC_CONN
+    Description: Maximum number of RC or XRC connections created per
+        process. This limits the amount of connection memory and prevents
+        HCA QP cache thrashing. Default value is dependent on the process
+        count, setting this value to -1 will use the default value for the
+        process count.
+    Default: -1
+
+MVP_UD_NUM_MSG_LIMIT
+    Aliases: UCR_UD_NUM_MSG_LIMIT
+             MV2_UD_NUM_MSG_LIMIT
+    Description: TODO-DESC
+    Default: 100
+
+MVP_UD_SENDWINDOW_SIZE
+    Aliases: UCR_UD_SENDWINDOW_SIZE
+             MV2_UD_SENDWINDOW_SIZE
+    Description: TODO-DESC
+    Default: 400
+
+MVP_UD_RECVWINDOW_SIZE
+    Aliases: UCR_UD_RECVWINDOW_SIZE
+             MV2_UD_RECVWINDOW_SIZE
+    Description: TODO-DESC
+    Default: 2501
+
+MVP_UD_RETRY_TIMEOUT
+    Aliases: UCR_UD_RETRY_TIMEOUT
+             MV2_UD_RETRY_TIMEOUT
+    Description: Time (usec) after which an unacknowledged message will be
+        retried.
+    Default: 500000
+
+MVP_UD_MAX_RETRY_TIMEOUT
+    Aliases: UCR_UD_MAX_RETRY_TIMEOUT
+             MV2_UD_MAX_RETRY_TIMEOUT
+    Description: TODO-DESC
+    Default: 20000000
+
+MVP_UD_PROGRESS_SPIN
+    Aliases: UCR_UD_PROGRESS_SPIN
+             MV2_UD_PROGRESS_SPIN
+    Description: TODO-DESC
+    Default: 1200
+
+MVP_UD_RETRY_COUNT
+    Aliases: UCR_UD_RETRY_COUNT
+             MV2_UD_RETRY_COUNT
+    Description: Number of retries of a message before the job is aborted.
+        This is needed in case of HCA fails. The default value is based on
+        the process count. Setting this to -1 will use the default for the
+        process count.
+    Default: -1
+
+MVP_UD_PROGRESS_TIMEOUT
+    Aliases: UCR_UD_PROGRESS_TIMEOUT
+             MV2_UD_PROGRESS_TIMEOUT
+    Description: Time (usec) until ACK status is checked (and ACKs are sent
+        if needed). To avoid unnecessary retries, set this value less than
+        MVP_UD_RETRY_TIMEOUT. It is recommended to set this to 1/10 of
+        MVP_UD_RETRY_TIMEOUT. The default value is based on the process
+        count. Setting this to -1 will use the default for the process
+        count.
+    Default: -1
+
+MVP_UD_MAX_SEND_WQE
+    Aliases: UCR_UD_MAX_SEND_WQE
+             MV2_UD_MAX_SEND_WQE
+    Description: TODO-DESC
+    Default: 256
+
+MVP_UD_MAX_RECV_WQE
+    Aliases: UCR_UD_MAX_RECV_WQE
+             MV2_UD_MAX_RECV_WQE
+    Description: TODO-DESC
+    Default: 4096
+
+MVP_USE_UD_SRQ
+    Aliases: UCR_USE_UD_SRQ
+             MV2_USE_UD_SRQ
+    Description: TODO-DESC
+    Default: 0
+
+MVP_UD_VBUF_POOL_SIZE
+    Aliases: UCR_UD_VBUF_POOL_SIZE
+             MV2_UD_VBUF_POOL_SIZE
+    Description: TODO-DESC
+    Default: 8192
+
+MVP_UD_MAX_ACK_PENDING
+    Aliases: UCR_UD_MAX_ACK_PENDING
+             MV2_UD_MAX_ACK_PENDING
+    Description: Maximum number of outstanding UD buffers waiting for ACK.
+        Setting this value to -1 will use the default value of
+        MVP_UD_SENDWINDOW_SIZE / 4.
+    Default: -1
+
+MVP_SHMEM_BACKED_UD_CM
+    Aliases: UCR_SHMEM_BACKED_UD_CM
+             MV2_SHMEM_BACKED_UD_CM
+    Description: TODO-DESC - Not used currently.
+    Default: 0
+
+MVP_USE_UD_ZCOPY
+    Aliases: UCR_USE_UD_ZCOPY
+             MV2_USE_UD_ZCOPY
+    Description: Whether or not to use the zero-copy transfer mechanism to
+        transfer large messages on UD transport.
+    Default: 1
+
+MVP_UD_ZCOPY_THRESHOLD
+    Aliases: UCR_UD_ZCOPY_THRESHOLD
+             MV2_UD_ZCOPY_THRESHOLD
+    Description: Defines the threshold for transitioning to UD ZCOPY
+        algorithm from R3 protocol for rndv messages. Defaults to
+        MVP_IBA_EAGER_THRESHOLD. Setting this value to -1 will use the
+        eager threshold (MVP_IBA_EAGER_THRESHOLD) as the default value
+        causing all rndv messages to use UD_ZCOPY.
+    Default: -1
+
+MVP_UD_NUM_ZCOPY_RNDV_QPS
+    Aliases: UCR_UD_NUM_ZCOPY_RNDV_QPS
+             MV2_UD_NUM_ZCOPY_RNDV_QPS
+    Description: Number of UD QPs to create for ZCOPY transfers. Setting
+        this to -1 will use the default value of 64 * <number_of_hcas>.
+    Default: -1
+
+MVP_UD_ZCOPY_RQ_SIZE
+    Aliases: UCR_UD_ZCOPY_RQ_SIZE
+             MV2_UD_ZCOPY_RQ_SIZE
+    Description: TODO-DESC
+    Default: 4096
+
+MVP_UD_ZCOPY_NUM_RETRY
+    Aliases: UCR_UD_ZCOPY_NUM_RETRY
+             MV2_UD_ZCOPY_NUM_RETRY
+    Description: TODO-DESC
+    Default: 50000
+
+MVP_UD_ZCOPY_ENABLE_POLLING
+    Aliases: UCR_UD_ZCOPY_ENABLE_POLLING
+             MV2_UD_ZCOPY_ENABLE_POLLING
+    Description: TODO-DESC
+    Default: 0
+
+MVP_UD_ZCOPY_PUSH_SEGMENT
+    Aliases: UCR_UD_ZCOPY_PUSH_SEGMENT
+             MV2_UD_ZCOPY_PUSH_SEGMENT
+    Description: TODO-DESC
+    Default: 32
+
+MVP_UD_DROP_PACKET_RATE
+    Aliases: UCR_UD_DROP_PACKET_RATE
+             MV2_UD_DROP_PACKET_RATE
+    Description: TODO-DESC
+    Default: 0
+
+MVP_MCAST_ENABLE_REL
+    Aliases: UCR_MCAST_ENABLE_REL
+             MV2_MCAST_ENABLE_REL
+    Description: TODO-DESC
+    Default: 1
+
+MVP_MCAST_USE_MCAST_NACK
+    Aliases: UCR_MCAST_USE_MCAST_NACK
+             MV2_MCAST_USE_MCAST_NACK
+    Description: TODO-DESC
+    Default: 1
+
+MVP_MCAST_NUM_NODES_THRESHOLD
+    Aliases: UCR_MCAST_NUM_NODES_THRESHOLD
+             MV2_MCAST_NUM_NODES_THRESHOLD
+    Description: This defines the threshold for enabling multicast support
+        in collective communication. When MVP_USE_MCAST is set to 1 and the
+        number of nodes in the job is greater than or equal to the
+        threshold value, it uses multicast support in collective
+        communication.
+    Default: -1
+
+MVP_MCAST_MAX_RECV_WQE
+    Aliases: UCR_MCAST_MAX_RECV_WQE
+             MV2_MCAST_MAX_RECV_WQE
+    Description: TODO-DESC
+    Default: 2096
+
+MVP_MCAST_WINDOW_SIZE
+    Aliases: UCR_MCAST_WINDOW_SIZE
+             MV2_MCAST_WINDOW_SIZE
+    Description: TODO-DESC
+    Default: 256
+
+MVP_MCAST_DROP_PACKET_RATE
+    Aliases: UCR_MCAST_DROP_PACKET_RATE
+             MV2_MCAST_DROP_PACKET_RATE
+    Description: TODO-DESC
+    Default: 0
+
+MVP_MCAST_RETRY_TIMEOUT
+    Aliases: UCR_MCAST_RETRY_TIMEOUT
+             MV2_MCAST_RETRY_TIMEOUT
+    Description: TODO-DESC
+    Default: 500000
+
+MVP_MCAST_MAX_RETRY_TIMEOUT
+    Aliases: UCR_MCAST_MAX_RETRY_TIMEOUT
+             MV2_MCAST_MAX_RETRY_TIMEOUT
+    Description: TODO-DESC
+    Default: 20000000
+
+MVP_MCAST_NSPIN_THRESHOLD
+    Aliases: UCR_MCAST_NSPIN_THRESHOLD
+             MV2_MCAST_NSPIN_THRESHOLD
+    Description: TODO-DESC
+    Default: 1200
+
+MVP_MCAST_COMM_INIT_TIMEOUT
+    Aliases: UCR_MCAST_COMM_INIT_TIMEOUT
+             MV2_MCAST_COMM_INIT_TIMEOUT
+    Description: TODO-DESC
+    Default: 10000
+
+MVP_MCAST_COMM_INIT_RETRIES
+    Aliases: UCR_MCAST_COMM_INIT_RETRIES
+             MV2_MCAST_COMM_INIT_RETRIES
+    Description: TODO-DESC
+    Default: 128
+
+MVP_MCAST_SKIP_LOOPBACK
+    Aliases: UCR_MCAST_SKIP_LOOPBACK
+             MV2_MCAST_SKIP_LOOPBACK
+    Description: TODO-DESC
+    Default: 1
+
+MVP_MCAST_BCAST_MIN_MSG
+    Aliases: UCR_MCAST_BCAST_MIN_MSG
+             MV2_MCAST_BCAST_MIN_MSG
+    Description: TODO-DESC
+    Default: 1
+
+MVP_MCAST_BCAST_MAX_MSG
+    Aliases: UCR_MCAST_BCAST_MAX_MSG
+             MV2_MCAST_BCAST_MAX_MSG
+    Description: TODO-DESC
+    Default: 512 * 1042
+
+MVP_DEFAULT_MAX_RECV_WQE
+    Aliases: UCR_DEFAULT_MAX_RECV_WQE
+             MV2_DEFAULT_MAX_RECV_WQE
+    Description: This specifies the maximum number of receive WQEs on each
+        QP (maximum number of receives that can be posted on a single QP).
+    Default: 128
+
+MVP_NDREG_ENTRIES_MAX
+    Aliases: UCR_NDREG_ENTRIES_MAX
+             MV2_NDREG_ENTRIES_MAX
+    Description: TODO-DESC
+    Default: -1
+
+MVP_NDREG_ENTRIES
+    Aliases: UCR_NDREG_ENTRIES
+             MV2_NDREG_ENTRIES
+    Description: This defines the total number of buffers that can be
+        stored in the registration cache. It has no effect if
+        MVP_USE_LAZY_MEM_UNREGISTER is not set. A larger value will lead to
+        less frequent lazy de-registration.
+    Default: -1
+
+MVP_DREG_CACHE_LIMIT
+    Aliases: UCR_DREG_CACHE_LIMIT
+             MV2_DREG_CACHE_LIMIT
+    Description: TODO-DESC
+    Default: 0
+
+MVP_USE_HWLOC_CPU_BINDING
+    Aliases: UCR_USE_HWLOC_CPU_BINDING
+             MV2_USE_HWLOC_CPU_BINDING
+    Description: TODO-DESC
+    Default: 1
+
+MVP_THREAD_YIELD_SPIN_THRESHOLD
+    Aliases: UCR_THREAD_YIELD_SPIN_THRESHOLD
+             MV2_THREAD_YIELD_SPIN_THRESHOLD
+    Description: TODO-DESC
+    Default: 5
+
+MVP_USE_THREAD_YIELD
+    Aliases: UCR_USE_THREAD_YIELD
+             MV2_USE_THREAD_YIELD
+    Description: TODO-DESC
+    Default: 1
+
+MVP_NUM_SPINS_BEFORE_LOCK
+    Aliases: UCR_NUM_SPINS_BEFORE_LOCK
+             MV2_NUM_SPINS_BEFORE_LOCK
+    Description: TODO-DESC
+    Default: 2000
+
+MVP_ASYNC_THREAD_STACK_SIZE
+    Aliases: UCR_ASYNC_THREAD_STACK_SIZE
+             MV2_ASYNC_THREAD_STACK_SIZE
+    Description: TODO-DESC
+    Default: (1 << 20)
+
+MVP_USE_HUGEPAGES
+    Aliases: UCR_USE_HUGEPAGES
+             MV2_USE_HUGEPAGES
+    Description: Set this to 0, to not use any HugePages.
+    Default: 1
+
+MVP_MEMORY_OPTIMIZATION
+    Aliases: UCR_MEMORY_OPTIMIZATION
+             MV2_MEMORY_OPTIMIZATION
+    Description: TODO-DESC
+    Default: 1
+
+MVP_SRQ_MAX_SIZE
+    Aliases: UCR_SRQ_MAX_SIZE
+             MV2_SRQ_MAX_SIZE
+    Description: This is the maximum number of work requests allowed on the
+        Shared Receive Queue. Upon receiving a SRQ limit event, the current
+        value of MVP_SRQ_SIZE will be doubled or moved to the maximum of
+        MVP_SRQ_MAX_SIZE, whichever is smaller. When using RDMA_CM, we
+        cannot support very large SRQ. So, unless user set it, reduce the
+        max_srq_size to 4K.
+    Default: -1
+
+MVP_SRQ_SIZE
+    Aliases: UCR_SRQ_SIZE
+             MV2_SRQ_SIZE
+    Description: This is the initial number of work requests posted to the
+        Shared Receive Queue.
+    Default: -1
+
+MVP_SRQ_LIMIT
+    Aliases: UCR_SRQ_LIMIT
+             MV2_SRQ_LIMIT
+    Description: This is the low water-mark limit for the Shared Receive
+        Queue. If the number of available work entries on the SRQ drops
+        below this limit, the flow control will be activated.
+    Default: -1
+
+MVP_UD_SRQ_MAX_SIZE
+    Aliases: UCR_UD_SRQ_MAX_SIZE
+             MV2_UD_SRQ_MAX_SIZE
+    Description: TODO-DESC
+    Default: -1
+
+MVP_UD_SRQ_SIZE
+    Aliases: UCR_UD_SRQ_SIZE
+             MV2_UD_SRQ_SIZE
+    Description: TODO-DESC
+    Default: 4096
+
+MVP_UD_SRQ_LIMIT
+    Aliases: UCR_UD_SRQ_LIMIT
+             MV2_UD_SRQ_LIMIT
+    Description: TODO-DESC
+    Default: 128
+
+MVP_MAX_NUM_UD_VBUFS
+    Aliases: UCR_MAX_NUM_UD_VBUFS
+             MV2_MAX_NUM_UD_VBUFS
+    Description: TODO-DESC
+    Default: (INT_MAX)
+
+MVP_MAX_INLINE_SIZE
+    Aliases: UCR_MAX_INLINE_SIZE
+             MV2_MAX_INLINE_SIZE
+    Description: This defines the maximum inline size for data transfer.
+        Please note that the default value of this parameter will be 0 when
+        the number of processes is larger than 256 to improve memory usage
+        scalability.
+    Default: -1
+
+MVP_VBUF_TOTAL_SIZE
+    Aliases: UCR_VBUF_TOTAL_SIZE
+             MV2_VBUF_TOTAL_SIZE
+    Description: The size of each vbuf, the basic communication buffer of
+        MVAPICH. For better performance, the value of
+        MVP_IBA_EAGER_THRESHOLD should be set the same as
+        MVP_VBUF_TOTAL_SIZE.
+    Default: -1
+
+MVP_VBUF_MAX
+    Aliases: UCR_VBUF_MAX
+             MV2_VBUF_MAX
+    Description: Max (total) number of vbufs to allocate, after which
+        process terminates with a fatal error. -1 means no limit.
+    Default: -1
+
+MVP_INITIAL_PREPOST_DEPTH
+    Aliases: UCR_INITIAL_PREPOST_DEPTH
+             MV2_INITIAL_PREPOST_DEPTH
+    Description: This defines the initial number of pre-posted receive
+        buffers for each connection. If communication happen for a
+        particular connection, the number of buffers will be increased to
+        RDMA_PREPOST_DEPTH.
+    Default: 10
+
+MVP_PREPOST_DEPTH
+    Aliases: UCR_PREPOST_DEPTH
+             MV2_PREPOST_DEPTH
+    Description: This defines the number of buffers pre-posted for each
+        connection to handle send/receive operations.
+    Default: 64
+
+MVP_VBUF_POOL_SIZE
+    Aliases: UCR_VBUF_POOL_SIZE
+             MV2_VBUF_POOL_SIZE
+    Description: The number of vbufs in the initial pool. This pool is
+        shared among all the connections.
+    Default: -1
+
+MVP_MAX_NUM_VBUFS
+    Aliases: UCR_MAX_NUM_VBUFS
+             MV2_MAX_NUM_VBUFS
+    Description: TODO-DESC
+    Default: 8192
+
+MVP_VBUF_SECONDARY_POOL_SIZE
+    Aliases: UCR_VBUF_SECONDARY_POOL_SIZE
+             MV2_VBUF_SECONDARY_POOL_SIZE
+    Description: The number of vbufs allocated each time when the global
+        pool is running out in the initial pool. This is also shared among
+        all the connections.
+    Default: -1
+
+MVP_CUDA_BLOCK_SIZE
+    Aliases: UCR_CUDA_BLOCK_SIZE
+             MV2_CUDA_BLOCK_SIZE
+    Description: The chunk size used in large message transfer from device
+        memory to host memory. The other suggested values for this
+        parameter are 131072 and 524288.
+    Default: (256 * 1024)
+
+MVP_CUDA_NUM_RNDV_BLOCKS
+    Aliases: UCR_CUDA_NUM_RNDV_BLOCKS
+             MV2_CUDA_NUM_RNDV_BLOCKS
+    Description: TODO-DESC
+    Default: 8
+
+MVP_MPIRUN_RSH_LAUNCH
+    Aliases: UCR_MPIRUN_RSH_LAUNCH
+             MV2_MPIRUN_RSH_LAUNCH
+    Description: TODO-DESC
+    Default: 0
+
+MVP_USE_ROCE
+    Aliases: UCR_USE_ROCE
+             MV2_USE_ROCE
+             MVP_USE_RoCE
+             UCR_USE_RoCE
+             MV2_USE_RoCE
+    Description: This parameter enables the use of RDMA over Ethernet for
+        MPI communication. The underlying HCA and network must support this
+        feature.
+    Default: 0
+
+MVP_USE_ROCE_MODE
+    Aliases: UCR_USE_ROCE_MODE
+             MV2_USE_ROCE_MODE
+             MVP_USE_RoCE_MODE
+             UCR_USE_RoCE_MODE
+             MV2_USE_RoCE_MODE
+    Description: TODO-DESC
+    Default: -1
+
+MVP_USE_RING_STARTUP
+    Aliases: UCR_USE_RING_STARTUP
+             MV2_USE_RING_STARTUP
+    Description: Setting this parameter enables MVAPICH to use ring based
+        start up.
+    Default: -1
+
+MVP_ON_DEMAND_UD_INFO_EXCHANGE
+    Aliases: UCR_ON_DEMAND_UD_INFO_EXCHANGE
+             MV2_ON_DEMAND_UD_INFO_EXCHANGE
+    Description: Setting MVP_ON_DEMAND_UD_INFO_EXCHANGE to 1 will enable
+        on-demand Address Handle creation for hybrid mode.
+    Default: -1
+
+MVP_USE_PMI_IBARRIER
+    Aliases: UCR_USE_PMI_IBARRIER
+             MV2_USE_PMI_IBARRIER
+    Description: TODO-DESC
+    Default: 1
+
+MVP_USE_PMI_IALLGATHER
+    Aliases: UCR_USE_PMI_IALLGATHER
+             MV2_USE_PMI_IALLGATHER
+    Description: TODO-DESC
+    Default: 0
+
+MVP_NUM_HCAS
+    Aliases: UCR_NUM_HCAS
+             MV2_NUM_HCAS
+    Description: This parameter indicates number of InfiniBand adapters to
+        be used for communication on an end node. Value is potentially
+        computed.
+    Default: 0
+
+MVP_HOMOGENEOUS_CLUSTER
+    Aliases: UCR_HOMOGENEOUS_CLUSTER
+             MV2_HOMOGENEOUS_CLUSTER
+    Description: Set to 1 if using a homogeneous cluster.
+    Default: 0
+
+MVP_LIBIBVERBS_PATH
+    Aliases: UCR_LIBIBVERBS_PATH
+             MV2_LIBIBVERBS_PATH
+    Description: TODO-DESC
+    Default: NULL
+
+MVP_LIBIBMAD_PATH
+    Aliases: UCR_LIBIBMAD_PATH
+             MV2_LIBIBMAD_PATH
+    Description: TODO-DESC
+    Default: NULL
+
+MVP_LIBIBUMAD_PATH
+    Aliases: UCR_LIBIBUMAD_PATH
+             MV2_LIBIBUMAD_PATH
+    Description: TODO-DESC
+    Default: NULL
+
+MVP_LIBRDMACM_PATH
+    Aliases: UCR_LIBRDMACM_PATH
+             MV2_LIBRDMACM_PATH
+    Description: TODO-DESC
+    Default: NULL
+
+MVP_LIBSHARP_PATH
+    Aliases: UCR_LIBSHARP_PATH
+             MV2_LIBSHARP_PATH
+    Description: TODO-DESC
+    Default: NULL
+
+MVP_ALLOW_HETEROGENEOUS_HCA_SELECTION
+    Aliases: UCR_ALLOW_HETEROGENEOUS_HCA_SELECTION
+             MV2_ALLOW_HETEROGENEOUS_HCA_SELECTION
+    Description: TODO-DESC
+    Default: -1
+
+MVP_PROCESS_PLACEMENT_AWARE_HCA_MAPPING
+    Aliases: UCR_PROCESS_PLACEMENT_AWARE_HCA_MAPPING
+             MV2_PROCESS_PLACEMENT_AWARE_HCA_MAPPING
+    Description: TODO-DESC
+    Default: -1
+
+MVP_DEFAULT_PORT
+    Aliases: UCR_DEFAULT_PORT
+             MV2_DEFAULT_PORT
+    Description: This parameter is to select the specific HCA port on a
+        active multi port InfiniBand adapter. A value of -1 indicates no
+        user selection.
+    Default: -1
+
+MVP_DEFAULT_GID_INDEX
+    Aliases: UCR_DEFAULT_GID_INDEX
+             MV2_DEFAULT_GID_INDEX
+    Description: In RoCE mode, this parameter allows to choose non-default
+        GID index in loss-less ethernet setup using VLANs.
+    Default: 0
+
+MVP_IOV_DENSITY_MIN
+    Aliases: UCR_IOV_DENSITY_MIN
+             MV2_IOV_DENSITY_MIN
+    Description: TODO-DESC
+    Default: (1024*16)
+
+MVP_ENABLE_EAGER_THRESHOLD_REDUCTION
+    Aliases: UCR_ENABLE_EAGER_THRESHOLD_REDUCTION
+             MV2_ENABLE_EAGER_THRESHOLD_REDUCTION
+    Description: TODO-DESC
+    Default: 1
+
+MVP_USE_EAGER_FAST_SEND
+    Aliases: UCR_USE_EAGER_FAST_SEND
+             MV2_USE_EAGER_FAST_SEND
+    Description: TODO-DESC
+    Default: 1
+
+MVP_SUPPORT_FORK_SAFETY
+    Aliases: UCR_SUPPORT_FORK_SAFETY
+             MV2_SUPPORT_FORK_SAFETY
+    Description: TODO-DESC
+    Default: -1
+
+MVP_RDMA_MAX_TRANSFER_SIZE
+    Aliases: UCR_RDMA_MAX_TRANSFER_SIZE
+             MV2_RDMA_MAX_TRANSFER_SIZE
+    Description: TODO-DESC
+    Default: -1
+
+MVP_RNDV_IMMEDIATE
+    Aliases: UCR_RNDV_IMMEDIATE
+             MV2_RNDV_IMMEDIATE
+    Description: TODO-DESC
+    Default: -1
+
+MVP_CHECK_CACHE_ALIGNMENT
+    Aliases: UCR_CHECK_CACHE_ALIGNMENT
+             MV2_CHECK_CACHE_ALIGNMENT
+    Description: TODO-DESC
+    Default: -1
+
+MVP_HYBRID_ENABLE_THRESHOLD
+    Aliases: UCR_HYBRID_ENABLE_THRESHOLD
+             MV2_HYBRID_ENABLE_THRESHOLD
+    Description: This defines the threshold for enabling Hybrid
+        communication using UD and RC/XRC. When the size of the job is
+        greater than or equal to the threshold value, Hybrid mode will be
+        enabled. Otherwise, it uses default RC/XRC connections for
+        communication.
+    Default: 512
+
+MVP_USE_ONLY_UD
+    Aliases: UCR_USE_ONLY_UD
+             MV2_USE_ONLY_UD
+    Description: Set this to 1, to enable only UD transport in hybrid
+        configuration mode. It will not use any RC/XRC connections in this
+        mode.
+    Default: 0
+
+MVP_SHOW_ENV_INFO
+    Aliases: UCR_SHOW_ENV_INFO
+             MV2_SHOW_ENV_INFO
+    Description: Show the values assigned to the run time environment
+        parameters.
+    Default: 0
+
+MVP_DEBUG_CORESIZE
+    Aliases: UCR_DEBUG_CORESIZE
+             MV2_DEBUG_CORESIZE
+    Description: TODO-DESC
+    Default: NULL
+
+MVP_DEBUG_SHOW_BACKTRACE
+    Aliases: UCR_DEBUG_SHOW_BACKTRACE
+             MV2_DEBUG_SHOW_BACKTRACE
+    Description: TODO-DESC
+    Default: 0
+
+MVP_USE_THREAD_WARNING
+    Aliases: UCR_USE_THREAD_WARNING
+             MV2_USE_THREAD_WARNING
+    Description: TODO-DESC
+    Default: 1
+
+MVP_POLLING_LEVEL
+    Aliases: UCR_POLLING_LEVEL
+             MV2_POLLING_LEVEL
+    Description: Defines the frequency at which the IB device is polled
+    Default: 1
+
+MVP_WALK_SHARED_PAGES
+    Aliases: UCR_WALK_SHARED_PAGES
+             MV2_WALK_SHARED_PAGES
+    Description: TODO-DESC
+    Default: 1
+
+MVP_SMP_PRIORITY_FACTOR
+    Aliases: UCR_SMP_PRIORITY_FACTOR
+             MV2_SMP_PRIORITY_FACTOR
+    Description: TODO-DESC
+    Default: 1
+
+MVP_USE_PT2PT_SHMEM
+    Aliases: UCR_USE_PT2PT_SHMEM
+             MV2_USE_PT2PT_SHMEM
+    Description: Enable shared memory for pt2pt communications
+    Default: 1
+
+MVP_ABORT_SLEEP_SECONDS
+    Aliases: UCR_ABORT_SLEEP_SECONDS
+             MV2_ABORT_SLEEP_SECONDS
+    Description: TODO-DESC
+    Default: 0
+
+MVP_SHOW_CPU_BINDING
+    Aliases: UCR_SHOW_CPU_BINDING
+             MV2_SHOW_CPU_BINDING
+    Description: Possible values: 0, 1, 2 If set to 1, prints the CPU
+        mapping of all processes on the node where rank 0 exists. If set to
+        2, prints the CPU mapping of all processes on all nodes.
+    Default: 0
+
+MVP_SHOW_HCA_BINDING
+    Aliases: UCR_SHOW_HCA_BINDING
+             MV2_SHOW_HCA_BINDING
+    Description: Possible values: 0, 1, 2 If set to 1, prints the HCA
+        mapping of all processes on the node where rank 0 exists. If set to
+        2, prints the HCA mapping of all processes on all nodes.
+    Default: 0
+
+MVP_SHOW_HW_BINDING
+    Aliases: UCR_SHOW_HW_BINDING
+             MV2_SHOW_HW_BINDING
+    Description: Possible values: 0, 1, 2 If set to 1, prints the CPU and
+        HCA mappings of all processes on the node where rank 0 exists. If
+        set to 2, prints the CPU and HCA mappings of all processes on all
+        nodes.
+    Default: 0
+
+MVP_REPORT_LOAD_IMBALANCE
+    Aliases: UCR_REPORT_LOAD_IMBALANCE
+             MV2_REPORT_LOAD_IMBALANCE
+    Description: Reports load imbalance, the time it takes for a barrier
+        call to synchronize all processes, for enabled collectives. Setting
+        this variable to 1 will enable load imbalance reporting for all
+        enabled collectives.
+    Default: 0
+
+MVP_BCAST_HWLOC_TOPOLOGY
+    Aliases: UCR_BCAST_HWLOC_TOPOLOGY
+             MV2_BCAST_HWLOC_TOPOLOGY
+    Description: TODO-DESC
+    Default: 0
+
+MVP_SUPPORT_DPM
+    Aliases: UCR_SUPPORT_DPM
+             MV2_SUPPORT_DPM
+    Description: This option enables the dynamic process management
+        interface and on-demand connection management.
+    Default: 0
+
+MVP_PIVOT_CORE_ID
+    Aliases: UCR_PIVOT_CORE_ID
+             MV2_PIVOT_CORE_ID
+    Description: TODO-DESC
+    Default: 0
+
+MVP_FORCE_ARCH_TYPE
+    Aliases: UCR_FORCE_ARCH_TYPE
+             MV2_FORCE_ARCH_TYPE
+    Description: Default value 0 corresponds to MVP_ARCH_UNKWN.
+    Default: 0
+
+MVP_THREADS_PER_PROCESS
+    Aliases: UCR_THREADS_PER_PROCESS
+             MV2_THREADS_PER_PROCESS
+    Description: TODO-DESC
+    Default: 1
+
+MVP_SHOW_RUNLOG_INFO
+    Aliases: UCR_SHOW_RUNLOG_INFO
+             MV2_SHOW_RUNLOG_INFO
+    Description: TODO-DESC
+    Default: 0
+
+MVP_USE_ALIGNED_ALLOC
+    Aliases: UCR_USE_ALIGNED_ALLOC
+             MV2_USE_ALIGNED_ALLOC
+    Description: TODO-DESC
+    Default: 0
+
+MVP_HYBRID_BINDING_POLICY
+    Aliases: UCR_HYBRID_BINDING_POLICY
+             MV2_HYBRID_BINDING_POLICY
+    Description: Variable to select hybrid binding policy
+        LINEAR      - Bind each MPI rank as well as its associated threads
+        to
+        phyical cores. Only use hardware threads when you runout of
+        physical resources.
+        COMPACT     - Bind each MPI rank to a single phyical core, and bind
+        its
+        associated threads to the hardware threads of the same
+        physical core. Use first socket followed by the second
+        socket.
+        SPREAD      - Evenly distributes all the PUs among MPI ranks and
+        ensures
+        that no two MPI ranks get bound to the same physical core.
+        BUNCH       - Bind each MPI rank to a single phyical core of first
+        socket followed by second secket.
+        SCATTER     - Bind consecutive MPI ranks to different sockets in
+        round-robin fashion.
+        NUMA        - Bind consecutive MPI ranks to different NUMA domains
+        in
+        round-robin fashion.
+    Default: MVP_HYBRID_BINDING_POLICY_SPREAD
+
+MVP_CPU_BINDING_POLICY
+    Aliases: UCR_CPU_BINDING_POLICY
+             MV2_CPU_BINDING_POLICY
+    Description: Variable to select cpu binding policy (see
+        MVP_HYBRID_BINDING_POLICY
+        for default values of enums).
+        BUNCH       - Allocates contiguous CPU cores to a process, allowing
+        it
+        to maximize cache locality and reduce inter-core
+        communication overhead.
+        SCATTER     - Distributes a process's threads across multiple
+        non-contiguous CPU cores, which can help balance the
+        workload and reduce contention.
+        HYBRID      - Allows for contiguous and non-contiguous CPU core
+        allocation for optimal cache locality and load balancing.
+    Default: MVP_CPU_BINDING_POLICY_HYBRID
+
+MVP_ENABLE_PVAR_MEM
+    Aliases: UCR_ENABLE_PVAR_MEM
+             MV2_ENABLE_PVAR_MEM
+    Description: TODO-DESC
+    Default: 0
+
+MVP_USE_BUCKET_FILE
+    Aliases: UCR_USE_BUCKET_FILE
+             MV2_USE_BUCKET_FILE
+    Description: TODO-DESC
+    Default: NULL
+
+MVP_RNDV_PROTOCOL
+    Aliases: UCR_RNDV_PROTOCOL
+             MV2_RNDV_PROTOCOL
+    Description: The value of this variable can be set to choose different
+        Rendezvous
+        protocols. The default enum values are soley meant for implementors
+        to
+        stay consistent with MRAILI_Protocol_t.
+        R3   = 2    - send/recv based
+        RPUT = 3    - default RDMA-Write
+        RGET = 4    - RDMA Read based
+    Default: MVP_RNDV_PROTOCOL_RGET
+
+MVP_SMP_RNDV_PROTOCOL
+    Aliases: UCR_SMP_RNDV_PROTOCOL
+             MV2_SMP_RNDV_PROTOCOL
+    Description: (Note: This is the same as MVP_RNDV_PROTOCOL)
+        The value of this variable can be set to choose different
+        Rendezvous
+        protocols. The default enum values are soley meant for implementors
+        to
+        stay consistent with MRAILI_Protocol_t.
+        R3   = 2    - send/recv based
+        RPUT = 3    - default RDMA-Write
+        RGET = 4    - RDMA Read based
+    Default: MVP_SMP_RNDV_PROTOCOL_RGET
+

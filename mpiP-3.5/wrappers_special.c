@@ -14,7 +14,7 @@
 static char *svnid =
   "$Id$";
 #endif
-
+#include "mpi.h"
 #include "mpiPconfig.h"
 #include "mpiPi.h"
 #include "symbols.h"
@@ -30,7 +30,7 @@ static int
 _MPI_Init (int *argc, char ***argv)
 {
   int rc = 0;
-  //mpiPi_TIME start,end;
+  mpiPi_TIME start,end;
   //mpiPi_mt_stat_tls_t *hndl;
   //void *call_stack[MPIP_CALLSITE_STACK_DEPTH_MAX] = { NULL };
   int enabledStatus,threadsup;
@@ -44,10 +44,11 @@ _MPI_Init (int *argc, char ***argv)
 
   //mpiPi_GETTIME (&start);
   rc = PMPI_Init (argc, argv);
-  //mpiPi_GETTIME (&end);
+  mpiPi_GETTIME (&end);
+  printf("start=%lf \n ",end);
   /*init pvar*/
   rc=MPI_T_init_thread(MPI_THREAD_SINGLE,&thsupport);
-  MPI_T_pvar_creat_session(&mpiPi.session);
+  //MPI_T_pvar_creat_session(&mpiPi.session);
   mpiPi.enabled = enabledStatus;
 
 #if defined(Linux) && ! defined(ppc64)
