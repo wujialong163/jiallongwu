@@ -222,20 +222,20 @@ mpiPi_insert_callsite_records (callsite_stats_t * p)
    */
   if (mpiPi.collective_report == 0)
     {
-      printf("cookie=%ld\n",p->cookie);
+      //printf("cookie=%ld\n",p->cookie);
       if (NULL == h_search (mpiPi.global_callsite_stats, p, (void **) &csp))
         {
-          printf("=null cookie=%ld\n",p->cookie);
+          //printf("=null cookie=%ld\n",p->cookie);
           callsite_stats_t *newp = NULL;
           newp = (callsite_stats_t *) malloc (sizeof (callsite_stats_t));
 
           memcpy (newp, p, sizeof (callsite_stats_t));
           /* insert new record into global */
           h_insert (mpiPi.global_callsite_stats, newp);
-          printf("insert\n");
+          //printf("insert\n");
         }
       else{
-        printf("!=null cookie=%ld\n",p->cookie);
+        //printf("!=null cookie=%ld\n",p->cookie);
         mpiPi_cs_merge(csp, p);
       }
     }
@@ -268,10 +268,10 @@ mpiPi_insert_callsite_records (callsite_stats_t * p)
   //h_insert_new(mpiPi.global_callsite_stats_agg,newp);
   
   /* Collect aggregate callsite summary information indpendent of rank. */
-  printf("global cookie 1 =%ld\n",p->cookie);
+  //printf("global cookie 1 =%ld\n",p->cookie);
   if (NULL == h_search (mpiPi.global_callsite_stats_agg, p, (void **) &csp))
     {
-      printf("global cookie=%ld\n",p->cookie);
+      //printf("global cookie=%ld\n",p->cookie);
       callsite_stats_t *newp = NULL;
       newp = (callsite_stats_t *) malloc (sizeof (callsite_stats_t));
 
@@ -291,7 +291,7 @@ mpiPi_insert_callsite_records (callsite_stats_t * p)
     }
   else
     {
-      printf("global cookie !=null =%ld\n",p->cookie);
+      //printf("global cookie !=null =%ld\n",p->cookie);
       mpiPi_cs_merge(csp, p);
       //printf("merge=%d \n",csp->op);
       if (mpiPi.calcCOV)
@@ -946,7 +946,7 @@ mpiPi_finalize ()
   mpiPi_GETTIME(&end);
   printf("end=%lf \n",end);
   if (mpiPi.disable_finalize_report == 0)
-    mpiPi_generateReport (mpiPi.report_style);
+    //mpiPi_generateReport (mpiPi.report_style);
 
   mpiPi_stats_mt_fini(&mpiPi.task_stats);
 

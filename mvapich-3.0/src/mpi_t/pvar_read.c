@@ -40,41 +40,41 @@ int MPIR_T_pvar_read_impl(MPI_T_pvar_session session, MPI_T_pvar_handle handle, 
         goto fn_fail;
     }
     
-    // MPI_T_PVAR_detail_info_t *info_t;
+    MPI_T_PVAR_detail_info_t *info_t;
     
-    // info_t=handle->addr;
-    // if (info_t)
-    // {
-    //     int rank;
-    //     FILE *fp;
-    //     char file[128];
-    //     PMPI_Comm_rank(MPI_COMM_WORLD,&rank);
-    //     snprintf(file,128,"./mpi_allreduce_rs-%d.txt",rank);
-    //     fp=fopen(file,"w");
+    info_t=handle->addr;
+    if (info_t)
+    {
+        int rank;
+        FILE *fp;
+        char file[128];
+        PMPI_Comm_rank(MPI_COMM_WORLD,&rank);
+        snprintf(file,128,"./mpi_allreduce_rs-%d.txt",rank);
+        fp=fopen(file,"w");
 
-    //     for(int i=0;i<info_t->count;i++){
-    //         // printf("send=%d recv=%d time=%lf \n",((info_t)->send_rank)[i],
-    //         // ((info_t)->recv_rank)[i],
-    //         // ((info_t)->timer)[i]);
-    //         if(((info_t)->send_rank)[i] ==((info_t)->recv_rank)[i] ){
-    //                     fprintf(fp,"sendrecv=%d data_size=%d time=%lf start=%lf end =%lf tag=%d \n",((info_t)->send_rank)[i],
-    //                         ((info_t)->data_size)[i],
-    //                         ((info_t)->timer)[i],
-    //                         ((info_t)->start)[i],
-    //                         ((info_t)->end)[i],
-    //                         ((info_t)->tag)[i]);
-    //         }else{
+        for(int i=0;i<info_t->count;i++){
+            // printf("send=%d recv=%d time=%lf \n",((info_t)->send_rank)[i],
+            // ((info_t)->recv_rank)[i],
+            // ((info_t)->timer)[i]);
+            if(((info_t)->send_rank)[i] ==((info_t)->recv_rank)[i] ){
+                        fprintf(fp,"sendrecv=%d data_size=%d time=%lf start=%lf end =%lf tag=%d \n",((info_t)->send_rank)[i],
+                            ((info_t)->data_size)[i],
+                            ((info_t)->timer)[i],
+                            ((info_t)->start)[i],
+                            ((info_t)->end)[i],
+                            ((info_t)->tag)[i]);
+            }else{
 
-    //         fprintf(fp,"send=%d recv=%d data_size=%d time=%lf start=%lf end =%lf tag=%d \n",((info_t)->send_rank)[i],((info_t)->recv_rank)[i],
-    //         ((info_t)->data_size)[i],
-    //         ((info_t)->timer)[i],
-    //         ((info_t)->start)[i],
-    //         ((info_t)->end)[i],
-    //         ((info_t)->tag)[i]);
-    //         }
-    //     }
-    //     fclose(fp);
-    // }
+            fprintf(fp,"send=%d recv=%d data_size=%d time=%lf start=%lf end =%lf tag=%d \n",((info_t)->send_rank)[i],((info_t)->recv_rank)[i],
+            ((info_t)->data_size)[i],
+            ((info_t)->timer)[i],
+            ((info_t)->start)[i],
+            ((info_t)->end)[i],
+            ((info_t)->tag)[i]);
+            }
+        }
+        fclose(fp);
+    }
     /* For SUM pvars, return accum value + current value - offset value */
     if (MPIR_T_pvar_is_sum(handle) && MPIR_T_pvar_is_started(handle)) {
         if (handle->get_value == NULL) {
