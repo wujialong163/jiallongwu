@@ -110,7 +110,7 @@ mpiPi_init (char *appName, mpiPi_thr_mode_t thr_mode)
     
   PMPI_Barrier(MPI_COMM_WORLD);
   mpiPi_GETTIME(&mpiPi.startime);
-  mpiPi.pre_op=-1;  //pre mpi callsite
+  mpiPi.call_id=0;  //pre mpi callsite
 
   mpiPi.toolname = "mpiP";
   mpiPi.comm = MPI_COMM_WORLD;
@@ -714,26 +714,26 @@ mpiPi_publishResults (int report_style)
         
     do
     {
-	snprintf (file, 256, "%s.rank%d.%d.mpiP",
-	          mpiPi.appName,mpiPi.rank, mpiPi.procID
+	  snprintf (file, 256, "%s.rank%d.%d.mpiP",
+	          mpiPi.appName,mpiPi.rank,mpiPi.procID
 	          );
     } while (access(file,F_OK)==0);
 
     fp1 = fopen (file,"w");
 
-    if (fp1 == NULL)
-	{
-	  mpiPi_msg_warn ("Could not open [%s], writing to stdout\n",
-	                  file);
-	  fp1 = stdout;
-	}
+      if (fp1 == NULL)
+    {
+      mpiPi_msg_warn ("Could not open [%s], writing to stdout\n",
+                      file);
+      fp1 = stdout;
     }
+  }
   else{
   //修改部分
     do
     {
         snprintf (file, 256, "%s.rank%d.%d.mpiP",
-                  mpiPi.appName,mpiPi.rank, mpiPi.procID
+                  mpiPi.appName,mpiPi.rank,mpiPi.procID
                   );
     } while (access(file,F_OK)==0);
 
@@ -749,7 +749,6 @@ mpiPi_publishResults (int report_style)
   }
     
   //mpiPi_profile_print (fp, report_style);
-  
   mpiPi_profile_print_trace(fp1);
   
   if (fp != stdout && fp != NULL)
@@ -998,19 +997,27 @@ void mpiPi_update_test(double star, double end , unsigned send_rank,
   
   key.op = op;
   key.rank = rank;
-  key.send_rank=send_rank;
-  key.recv_rank=recv_rank;
+  key.datesize=sendSize;
   //key.startime=star;
   key.cookie =MPIP_CALLSITE_STATS_COOKIE;
   for (i = 0; i < mpiPi.fullStackDepth; i++)
     {
       key.pc[i] = pc[i];
     }
-  csp = (callsite_stats_t *) malloc (sizeof (callsite_stats_t));
-  bzero (csp, sizeof (callsite_stats_t));
-  mpiPi_cs_init(csp, pc, op, rank);
-  h_insert_trace(stat->cs_stats,csp);
-  mpiPi_backtrace(csp->ip);
+  if (NULL == h_search(stat->cs_stats,&key,(void **)&csp))
+  {
+    /* code */
+    csp = (callsite_stats_t *) malloc (sizeof (callsite_stats_t));
+    bzero (csp, sizeof (callsite_stats_t));
+    mpiPi_cs_init(csp, pc, op, rank);
+    h_insert (stat->cs_stats, csp);
+    mpiPi_backtrace(csp->ip);
+  }
+  // csp = (callsite_stats_t *) malloc (sizeof (callsite_stats_t));
+  // bzero (csp, sizeof (callsite_stats_t));
+  // mpiPi_cs_init(csp, pc, op, rank);
+  // h_insert_trace(stat->cs_stats,csp);
+  // mpiPi_backtrace(csp->ip);
   
   /*if(NULL == h_search (stat->cs_stats, &key, (void **) &csp)){
       int size;
@@ -1032,12 +1039,14 @@ void mpiPi_update_test(double star, double end , unsigned send_rank,
     mpiPi.pre_op=op;
   }*/
   
-  if (sendSize > 0)
-  {
-    mpiPi_cs_BW(csp,dur,sendSize);
-  }
-  mpiPi_cs_update(star, end, send_rank, recv_rank,csp, dur, sendSize, ioSize, rmaSize,
+  // if (sendSize > 0)
+  // {
+  //   mpiPi_cs_BW(csp,dur,sendSize);
+  // }
+  mpiPi.call_id++;
+  mpiPi_cs_update(star, end, send_rank, recv_rank,mpiPi.call_id,csp, dur, sendSize, ioSize, rmaSize,
                   mpiPi.messageCountThreshold);
+  
   
 }
 

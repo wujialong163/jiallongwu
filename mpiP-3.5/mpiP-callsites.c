@@ -53,7 +53,7 @@ void mpiPi_cs_init(callsite_stats_t *csp, void *pc[],
   csp->recv_rank = -1;
   csp->startime = -1;
   csp->bw=0;
-
+  csp->next=NULL;
   for (i = 0; i < mpiPi.fullStackDepth; i++)
     {
       csp->pc[i] = pc[i];
@@ -121,28 +121,61 @@ void mpiPi_backtrace(unw_word_t ip[MPIP_CALLPATH_DEPTH_MAX]) {
 }
 
 void mpiPi_cs_update(double star, double end , unsigned send_rank,
-                    unsigned recv_rank,callsite_stats_t *csp, double dur,
+                    unsigned recv_rank,int call_id,callsite_stats_t *csp, double dur,
                      double sendSize, double ioSize, double rmaSize,
                      double threshold)
 {
   csp->count++;
   csp->cumulativeTime += dur;
-
-
-  if (csp->count<=1)
+  if (csp->count >1)
   {
-    csp->startime=star;
-    csp->time=dur;
+    mpiP_coll_data* next=NULL;
+    mpiP_coll_data *ptr=NULL;
+    ptr=(mpiP_coll_data *)malloc(sizeof(mpiP_coll_data));
+    ptr->call_id=call_id;
+    ptr->recv_rank=recv_rank;
+    ptr->send_rank=send_rank;
+    ptr->startime=star;
+    ptr->time=dur;
+    ptr->next=NULL;
+    if(csp->next==NULL){
+      csp->next=ptr;
+    }
+    else{
+      next=csp->next;
+      while (next)
+      {
+        if(next->next==NULL){
+          next->next=ptr;
+          break;
+        }
+        else{
+          next=next->next;
+        }
+      }
+      
+    }
   }
   else{
-    csp->time=csp->cumulativeTime;
+    // if (csp->count<=1)
+    //   {
+    //     csp->startime=star;
+    //     csp->time=dur;
+    //   }
+    //   else{
+    //     csp->time=csp->cumulativeTime;
+    //   }
+    csp->call_id=call_id;
+    csp->startime=star;  
+    csp->time=dur;
+    csp->datesize=sendSize;
+    csp->endtime=end;
+    csp->send_rank=send_rank;
+    csp->recv_rank=recv_rank;
   }
-  //csp->startime=star;  
-  //csp->time=dur;
-  csp->datesize=sendSize;
-  csp->endtime=end;
-  csp->send_rank=send_rank;
-  csp->recv_rank=recv_rank;
+  
+
+  
   
 
   assert (csp->cumulativeTime >= 0);

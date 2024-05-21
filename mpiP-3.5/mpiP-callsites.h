@@ -30,11 +30,12 @@ typedef struct _callsite_stats
   double datesize;
   double bw;
   double delay;
+  struct mpiP_coll_data *next;
   //char * filepath;
   unw_word_t ip[MPIP_CALLPATH_DEPTH_MAX];
   //sp *mpi_sp_data;
 
-  int linenum;
+  int call_id;
 
   unsigned op;
   unsigned rank;
@@ -63,6 +64,16 @@ typedef struct _callsite_stats
   long cookie;
 }callsite_stats_t;
 
+typedef struct mpiP_coll_data
+{
+  int call_id;
+  double startime;
+  double time;
+  unsigned send_rank;
+  unsigned recv_rank;
+  struct mpiP_coll_data *next;
+}mpiP_coll_data;
+
 
 /*
  * Simple callsite structure management routines
@@ -72,7 +83,7 @@ void mpiPi_cs_init(callsite_stats_t *csp, void *pc[],
 void mpiPi_cs_reset_stat(callsite_stats_t *csp);
 void mpiPi_cs_merge(callsite_stats_t *dst, callsite_stats_t *src);
 void mpiPi_cs_update(double star, double end , unsigned send_rank,
-                    unsigned recv_rank,callsite_stats_t *csp, double dur,
+                    unsigned recv_rank,int coll_id,callsite_stats_t *csp, double dur,
                      double sendSize, double ioSize, double rmaSize,
                      double threshold);
 void mpiPi_backtrace(unw_word_t ip[MPIP_CALLPATH_DEPTH_MAX]);

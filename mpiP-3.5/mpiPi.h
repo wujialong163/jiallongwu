@@ -61,6 +61,8 @@ extern clock_t mpiP_start,mpiP_end;
 
 typedef char mpiPi_hostname_t[MPIPI_HOSTNAME_LEN_MAX];
 
+
+
 typedef struct callsite_src_id_cache_entry_t
 {
   int id;			/* unique id for this src code/stack location */
@@ -142,7 +144,7 @@ typedef struct _mpiPi_t
   int rank;
   int size;
   int collectorRank;
-  unsigned pre_op;
+  int call_id;
 #ifndef ENABLE_API_ONLY
   MPI_Comm comm;
   mpiPi_hostname_t hostname;

@@ -62,7 +62,7 @@ extern int MPI_Pcontrol (const int flag, ...);
 extern int mpi_pcontrol_ (int *flag, ...);
 extern void mpiPi_profile_print (FILE * fp, int report_style);
 
-extern void mpiPi_profile_print_test(FILE * fp);
+extern void mpiPi_profile_print_trace(FILE * fp);
 
 extern char *GetBaseAppName (char *rawName);
 #if defined(mips)

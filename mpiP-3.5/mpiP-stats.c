@@ -99,8 +99,7 @@ trd_pc_comparator (const void *p1, const void *p2)
 #define express(f) {if ((csp_1->f) > (csp_2->f)) {return 1;} if ((csp_1->f) < (csp_2->f)) {return -1;}}
   express (op);
   express (rank);
-  express (recv_rank);
-  express (send_rank);
+  express (datesize);
   //express (startime)
 
   for (i = 0; i < mpiPi.fullStackDepth; i++)

@@ -2961,29 +2961,55 @@ mpiPi_profile_print_trace(FILE * fp)
 	  fprintf(fp,"]\n");
   }*/
   	for(int i=0;i<ac;i++){
-        if (av[i]->send_rank == -1)
-        {
-          fprintf(fp, "%s|%lld|%s|%s|%lf|%lf|%lf|%lf|%lf|\n",
-	  	  &(mpiPi.lookup[av[i]->op - mpiPi_BASE].name[0]),av[i]->count,"Comm_word","Comm_word",
-	  	  av[i]->startime /1000 ,av[i]->endtime / 1000,av[i]->time / 1000, av[i]->datesize, av[i]->bw);
+      // switch (mpiPi.lookup[av[i]->op - mpiPi_BASE].op)
+      // {
+      // case mpiPi_MPI_Send:
+      // case mpiPi_MPI_Isend:
+      //   fprintf(fp,"{\"args\":{},\"cat\":\"arrow\",\"id\":%d,\"name\":\"arrow\",\"ph\":\"s\",\"pid\":0,\"tid\":%d,\"ts\":%lf},\n",
+      //           i,mpiPi.rank,av[i]->startime /1000);
+      //     break;
+      // case mpiPi_MPI_Recv:
+      // case mpiPi_MPI_Irecv:
+      //       fprintf(fp,"{\"args\":{},\"bp\":\"e\",\"cat\":\"arrow\",\"id\":%d,\"name\":\"arrow\",\"ph\":\"f\",\"pid\":0,\"tid\":%d,\"ts\":%lf},\n",
+      //       i,mpiPi.rank,av[i]->startime /1000);
+      //       break;
+      // }
+
+      // fprintf(fp,"{\"args\":{\"MPI\":{\"%s\":0}},\"cat\":\"ptp\",\"dur\":%lf,\"name\":\"%s\",\"ph\":\"X\",\"pid\":0,\"tid\":%d,\"ts\":%lf}"
+      //   ,&(mpiPi.lookup[av[i]->op - mpiPi_BASE].name[0]),av[i]->time / 1000,&(mpiPi.lookup[av[i]->op - mpiPi_BASE].name[0]),mpiPi.rank,av[i]->startime /1000);
+        // if (av[i]->send_rank == -1)
+        // {
+        //   fprintf(fp, "%s|%lld|%s|%s|%lf|%lf|%lf|%lf|%lf|\n",
+	  	  // &(mpiPi.lookup[av[i]->op - mpiPi_BASE].name[0]),av[i]->count,"Comm_word","Comm_word",
+	  	  // av[i]->startime /1000 ,av[i]->endtime / 1000,av[i]->time / 1000, av[i]->datesize, av[i]->bw);
+        // }
+        if(av[i]->next==NULL){
+  	  	  fprintf(fp, "%s|%d|%d|%d|%lf|%lf|%lf|%lf|\n",
+	  	  &(mpiPi.lookup[av[i]->op - mpiPi_BASE].name[0]),av[i]->call_id,av[i]->send_rank,av[i]->recv_rank,
+	  	  av[i]->startime /1000 ,av[i]->endtime / 1000,av[i]->time / 1000, av[i]->datesize);
         }
         else{
-  	  	  fprintf(fp, "%s|%lld|%d|%d|%lf|%lf|%lf|%lf|%lf|\n",
-	  	  &(mpiPi.lookup[av[i]->op - mpiPi_BASE].name[0]),av[i]->count,av[i]->send_rank,av[i]->recv_rank,
-	  	  av[i]->startime /1000 ,av[i]->endtime / 1000,av[i]->time / 1000, av[i]->datesize, av[i]->bw);
+          fprintf(fp, "%s|%d|%d|%d|%lf|%lf|%lf|%lf|\n",
+	  	  &(mpiPi.lookup[av[i]->op - mpiPi_BASE].name[0]),av[i]->call_id,av[i]->send_rank,av[i]->recv_rank,
+	  	  av[i]->startime /1000 ,av[i]->endtime / 1000,av[i]->time / 1000, av[i]->datesize);
+          for(mpiP_coll_data *j=av[i]->next;j!=NULL;j=j->next){
+            fprintf(fp, "%d|%d|%d|%lf|%lf|\n",
+	  	  j->call_id,j->send_rank,j->recv_rank,
+	  	  j->startime /1000 ,j->time / 1000);
+          }
         }
-	for (int j=0 ; j < MPIP_CALLPATH_DEPTH_MAX;j++){
-    unw_word_t pc,bioc;
-    pc =  av[i]->ip[j];
-    fprintf(fp,"%lx |",pc);
-	}
-	fprintf(fp,"\n");
+    // for (int j=0 ; j < MPIP_CALLPATH_DEPTH_MAX;j++){
+    //   unw_word_t pc,bioc;
+    //   pc =  av[i]->ip[j];
+    //   fprintf(fp,"%lx |",pc);
+    // }
   }
+  fprintf(fp, "%s|0|0|0|0|0|0|0|0|\n","MPI_Finalize");
   //report_end_time
-  mpiPi_GETTIME(&report_end_time);
+  // mpiPi_GETTIME(&report_end_time);
   //report_end_time = mpiPi_GETTIMEDIFF(&report_end_time,&mpiPi.startime);
-  fprintf(fp, "%-15lf|%-15lf",
-  		mpiPi.startime /1000,report_end_time/1000);
+  // fprintf(fp, "%-15lf|%-15lf",
+  // 		mpiPi.startime /1000,report_end_time/1000);
 }
 
 void

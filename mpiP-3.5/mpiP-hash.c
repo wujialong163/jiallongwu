@@ -164,9 +164,6 @@ h_search (h_t * ht, void *key, void **ptr)
       for (het_index = ht->table[tableIndex];
            het_index != NULL; het_index = het_index->next)
         {
-          // callsite_stats_t *P;
-          // P=(callsite_stats_t *)(het_index->ptr);
-          // printf("%ld\n",P->cookie);
           if (ht->hc (het_index->ptr, key) == 0 )
             {
               *ptr = het_index->ptr;
