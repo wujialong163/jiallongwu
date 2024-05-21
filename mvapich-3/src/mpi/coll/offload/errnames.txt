@@ -1,1 +1,0 @@
-**mvp_sharp_devname:Unable to get the device name. Rerun with MVP_SHARP_HCA_NAME and MVP_SHARP_PORT set.
