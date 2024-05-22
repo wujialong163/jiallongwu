@@ -1,6 +1,0 @@
-**mvp_iov_overflow: invalid offset for iovec
-**mvp_iov_overflow %d %d: invalid offset %d for iovec with count %d
-**mvp_shared_buf_full: send queue has no free buffers
-**mvp_loadrecviov:failure occured while loading the receive I/O vector
-**mvp_rtspkt:failure occured while attempting to send MVAPICH RTS packet
-**send_self:failure occured while attempting to send message to self
