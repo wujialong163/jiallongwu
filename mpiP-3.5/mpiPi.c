@@ -1043,9 +1043,10 @@ void mpiPi_update_test(double star, double end , unsigned send_rank,
   // {
   //   mpiPi_cs_BW(csp,dur,sendSize);
   // }
-  mpiPi.call_id++;
+  
   mpiPi_cs_update(star, end, send_rank, recv_rank,mpiPi.call_id,csp, dur, sendSize, ioSize, rmaSize,
                   mpiPi.messageCountThreshold);
+  mpiPi.call_id++;
   
   
 }

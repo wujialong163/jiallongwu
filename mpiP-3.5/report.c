@@ -2918,7 +2918,7 @@ mpiPi_coll_print_all_callsite_rma_info (FILE * fp)
 void
 mpiPi_profile_print_trace(FILE * fp)
 {
-  int ac;
+  int ac,count=0;
   mpiPi_TIME report_end_time;
   callsite_stats_t **av;
   char *time;
@@ -2984,18 +2984,21 @@ mpiPi_profile_print_trace(FILE * fp)
 	  	  // av[i]->startime /1000 ,av[i]->endtime / 1000,av[i]->time / 1000, av[i]->datesize, av[i]->bw);
         // }
         if(av[i]->next==NULL){
-  	  	  fprintf(fp, "%s|%d|%d|%d|%lf|%lf|%lf|%lf|\n",
-	  	  &(mpiPi.lookup[av[i]->op - mpiPi_BASE].name[0]),av[i]->call_id,av[i]->send_rank,av[i]->recv_rank,
-	  	  av[i]->startime /1000 ,av[i]->endtime / 1000,av[i]->time / 1000, av[i]->datesize);
+  	  	  fprintf(fp, "%d|%d|%d|%lf|%lf|%lf|%s|\n",
+	  	  av[i]->call_id,av[i]->send_rank,av[i]->recv_rank,
+	  	  av[i]->startime ,av[i]->time, av[i]->datesize,&(mpiPi.lookup[av[i]->op - mpiPi_BASE].name[0]));
+        count++;
         }
         else{
-          fprintf(fp, "%s|%d|%d|%d|%lf|%lf|%lf|%lf|\n",
-	  	  &(mpiPi.lookup[av[i]->op - mpiPi_BASE].name[0]),av[i]->call_id,av[i]->send_rank,av[i]->recv_rank,
-	  	  av[i]->startime /1000 ,av[i]->endtime / 1000,av[i]->time / 1000, av[i]->datesize);
+          fprintf(fp, "%d|%d|%d|%lf|%lf|%lf|%s|\n",
+	  	  av[i]->call_id,av[i]->send_rank,av[i]->recv_rank,
+	  	  av[i]->startime ,av[i]->time, av[i]->datesize,&(mpiPi.lookup[av[i]->op - mpiPi_BASE].name[0]));
+        count++;
           for(mpiP_coll_data *j=av[i]->next;j!=NULL;j=j->next){
             fprintf(fp, "%d|%d|%d|%lf|%lf|\n",
 	  	  j->call_id,j->send_rank,j->recv_rank,
-	  	  j->startime /1000 ,j->time / 1000);
+	  	  j->startime ,j->time);
+        count++;
           }
         }
     // for (int j=0 ; j < MPIP_CALLPATH_DEPTH_MAX;j++){
@@ -3004,7 +3007,7 @@ mpiPi_profile_print_trace(FILE * fp)
     //   fprintf(fp,"%lx |",pc);
     // }
   }
-  fprintf(fp, "%s|0|0|0|0|0|0|0|0|\n","MPI_Finalize");
+  fprintf(fp, "%d|0|0|0|0|0|%s|\n",count,"MPI_Finalize");
   //report_end_time
   // mpiPi_GETTIME(&report_end_time);
   //report_end_time = mpiPi_GETTIMEDIFF(&report_end_time,&mpiPi.startime);
